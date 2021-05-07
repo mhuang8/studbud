@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/mhuang8/studbud/issues"
   },
-  "homepage": "https://github.com/mhuang8/studbud#readme"
+  "homepage": "https://github.com/mhuang8/studbud#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
