@@ -1,12 +1,64 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <title>studbud</title>
-        <link href="style.css" rel="stylesheet" type="text/css" />
-    </head>
-    <body>
-        <h1>Studbud</h1>
-    </body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>StudBud</title>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <main>
+    <!----------------- HOME PAGE ------------------->
+
+    <!----------------- TASK LIST ------------------->
+    <section id = "tasklist-page">
+      <h2> Task List </h2>
+      <div id ="taskform-box">
+      <form id="taskform">
+      <!-- Task input --> 
+      <!-- MAKE ALL INPUT REQUIRED--> 
+        <label for="task"></label>
+        <input placeholder = "New Task" type="text" name="task" id="taskInput" >
+      <!-- Date input -->
+        <label for="dueDate"></label>
+        <input placeholder = "Due Date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="dueDate" id="dueDateInput">
+       
+        
+      <!-- Time input -->
+        <label for="completionTime"></label>
+        <input placeholder = "Completion Time" type="text" onfocus="(this.type='time')" onblur="(this.type='text')" name="completionTime" id="completionTimeInput">
+      
+        <label for="estimatedTime"></label>
+        <input placeholder = "Mins To Complete" type="text" onfocus="(this.type='number')" onblur="(this.type='text')" name="estimatedTime" id="estimatedTimeInput">
+        
+        <!-- Priority -->
+        <label for="priority"></label>
+        <select name="prority" id="priorityInput" required >
+          <option value="" disabled selected hidden>Task Priority</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+        
+
+        <button type="submit" id="tasklistButton">+ Task</button>
+      </form>
+      <ul id = "tasklist">
+      <div id = "tasklist-labels">
+        <h3>To-do</h3>
+        <h3>Due Date</h3>
+        <h3>Completion Time</h3>
+        <h3>Mins to Complete</h3>
+        <h3>Task Priority</h3>
+      </div>
+      </ul>
+      
+      </div>
+    </section>
+
+    </main>
+    <script src="script.js"></script>
+  </body>
 </html>
