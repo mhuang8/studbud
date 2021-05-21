@@ -1,9 +1,12 @@
 const express = require('express');
 const app = express();
 
-app.use(express.static('public'));
+//serve static files out of the 'dist' folder
+app.use(express.static(__dirname + '/dist'));
+
+//serve the index.html when users access the root directory using res.sendFile()
 app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/public/index.html')
+    res.sendFile(__dirname + '/dist/index.html')
    })
 
    let server = app.listen(8888, function(){
