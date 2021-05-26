@@ -1,173 +1,357 @@
 /*--------------Base Styles--------------*/
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+	scroll-behavior: smooth;
+	font-size: 100%;
+  height: 100%;
+  background-color: #EEF2F9;
+}
+
+body {
+  width:100%;
+  height: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  font-family: 'Lato', sans-serif;
+  color: #242424;
+  padding-left:180px;
+}
+
+#studbud{
+  padding: 4rem 3rem;
+}
+#tasklist, #kanbanboard, #stopwatch, #flowtime, #resourcelist {
+  padding: 2.7rem 1.3rem;
+}
+
+
+main button{
+  color: white;
+  background-color: #6182EB;
+  border: none;
+  padding: 0.9rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+main button:hover{
+  background-color: rgb(77, 109, 214);
+}
+
+ul{
+  list-style: none;
+}
+
+
+
+/*--------------Typography--------------*/
+h1 {
+  font-weight: 800;
+  font-size: 3rem;
+  padding:0.3rem 0;
+}
+
+h2 {
+  font-weight: 800;
+  font-size: 1.7rem;
+  color: #6182EB;
+}
+
+h3{
+  font-weight: 800;
+  font-size: 1.5rem;
+  padding: 0.9rem 0;
+}
+
+h4{
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding: 0.6rem 0;
+}
+
+p {
+  font-size: 1rem;
+  padding: 0.3rem 0;
+}
+/*----------------LAYOUT--------------*/
+.page-container:not(#tasklist){
+  display:none;
+}
+
+/*---------------Navigation---------------*/
+nav.horizontal-nav{
+  width:100%;
+  height: 2.2rem;
+  background-color: #6182EB;
+  box-shadow: 0px 3px 10px 0px rgba(9, 9, 14, 0.15);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+.horizontal-nav-links{
+  display:flex;
+  justify-content: space-between;
+}
+.horizontal-nav-links li{
+  padding: 0.45rem 1.9rem;
   
-  html {
-      scroll-behavior: smooth;
-      font-size: 100%;
-    background-color: #EEF2F9;
-  }
-  
-  body {
-    width:100%;
-    height: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    font-family: 'Lato', sans-serif;
-    color: #242424;
-  }
-  
-  section{
-    padding: 10px 30px;
-  }
-  
-  button{
-    color: white;
-    background-color: #6182EB;
-    border: none;
-    padding: 15px;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 600;
-    border-radius: 30px;
-    cursor: pointer;
-  }
-  
-  button:hover{
-    background-color: rgb(77, 109, 214);
-  }
-  
-  ul{
-    list-style: none;
-  }
-  
-  /*--------------Typography--------------*/
-  h1 {
-    font-weight: 700;
-    font-size: 2rem;
-    padding:30px 0px;
-  }
-  
-  h2 {
-    font-weight: 700;
-    font-size: 1.7rem;
-    padding: 20px 0px;
-    color: rgb(63, 63, 63);
-  }
-  
-  h3{
-    font-weight: 600;
-    font-size: 1.1rem;
-    padding: 15px 0px;
-   
-  }
-  
-  p {
-    font-size: 1.05rem;
-    padding: 5px 0px;
-  }
-  
-  /*--------------Task list--------------*/
-  
-  #taskform-box{
-    background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0px 5px 16px 0px rgba(0,0,0,0.1);
-    border-radius: 15px;
-    padding:30px 40px;
-  }
-  
-  #taskform{
-    display:flex;
-    flex-wrap: wrap;
-    width:100%;
-  }
-  
-  input,select{
-    padding:15px;
-    height: 50px;
-    margin: 5px;
-    border: 2px solid #9CC2F4;
-    font-size: 0.9rem;
-    border-radius: 10px;
-    box-shadow: 1px 2px 5px 0px rgba(179, 181, 192, 0.1);
-  }
-  
-  input:focus, select:focus{
-    outline: none;
-    border-radius: 10px;
-    border: 2px solid rgb(77, 109, 214);
-  }
-  
-  select:invalid { color: rgb(117, 117, 117); }
-  
-  /*---individual input boxes---*/
-  form #taskInput{
-    flex:4;
-    flex-basis:35%;
-  }
-  
-  form #tasklistButton{
-    font-size: 1.2em;
-    text-align: center;
-    height: 50px;
-    padding: 10px 20px;
-    margin: 5px;
-    border-radius: 30px;
-  }
-  
-  /*---html content added through js---*/
-  #tasklist-labels{
-    padding: 0px 15px;
-    display:flex;
-    width: 100%;
-    color: rgb(104, 110, 129);
-  }
-  
-  #tasklist-labels h3:first-child{
-    flex-basis:40%;
-  
-  }
-  #tasklist-labels h3{
-    flex-basis:14%;
-  }
-  #tasklist{
-    padding: 10px 0px;
-    margin: 5px;
-  }
-  
-  #newTaskItem{
-    background-color: #E2EDF7;
-    padding: 10px 15px;
-    margin: 15px 0px;
-    border-radius: 10px;
-    display:flex;
-    align-items: center;
-  }
-  
-  #newTaskItem label{
-    flex-basis:40%;
-    padding: 0px 10px;
-  }
-  #newTaskItem p{
-    flex-basis:14%;
-  }
-  
-  #taskCheckboxInput{
-    height: 0.5rem;
-    width: 0.5rem;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -o-appearance: none;
-    appearance: none;
-    border: 3px solid #859DE6;
-    border-radius: 10px;
-    transition-duration: 0.2s;
-    background-color: #FFFFFF;
-    cursor: pointer;
-  }
-  #taskCheckboxInput:checked{
-    background-color: rgb(175, 188, 235);
-  }
-  
+}
+
+.horizontal-nav-links a{
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+nav.vertical-nav{
+  width: 180px;
+  height: 100vh;
+  background-color: #383839;
+  display:flex;
+  flex-direction: row;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-top:5rem;
+}
+
+ul.nav-links{
+  flex-direction: column;
+}
+
+.nav-links li{
+  padding: 1rem 1.9rem;
+}
+
+.nav-links a{
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.nav-links a:hover{
+  color: rgb(190, 202, 221);
+}
+
+.nav-links a.active{
+  font-weight:bold;
+  color: #6C9FF4;
+}
+/*-----------------Home Page-----------------*/
+section#home{
+  padding: 30px 40px;
+}
+
+#icon-container {
+  display: inline-flex;
+}
+
+.icon-element{
+  padding-right: 4rem;
+}
+
+/*-----------------Task list-----------------*/
+
+div#taskform-box{
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0px 4px 10px 0px rgba(106, 115, 151, 0.1);
+  border-radius: 15px;
+  padding:30px 40px;
+}
+
+#taskform{
+  display:flex;
+  flex-wrap: wrap;
+  width:100%;
+}
+
+input,select{
+  padding:15px;
+  height: 50px;
+  margin: 5px;
+  border: 2px solid #9CC2F4;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  box-shadow: 1px 2px 5px 0px rgba(179, 181, 192, 0.1);
+}
+
+input:focus, select:focus{
+  outline: none;
+  border-radius: 10px;
+  border: 2px solid rgb(77, 109, 214);
+}
+
+select:invalid { color: rgb(117, 117, 117); }
+
+/**---individual input boxes---**/
+form #taskInput{
+  flex:4;
+  flex-basis:35%;
+}
+
+form #tasklistButton{
+  font-size: 1.2em;
+  text-align: center;
+  height: 50px;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 30px;
+}
+
+/**---html content added through js---**/
+/* #tasklist-labels{
+  padding: 0px 15px;
+  display:flex;
+  width: 100%;
+  color: rgb(104, 110, 129);
+}
+
+#tasklist-labels h3:first-child{
+  flex-basis:40%;
+
+}
+#tasklist-labels h3{
+  flex-basis:14%;
+}
+/**---*/
+table{
+  margin-top: 10px;
+  border-spacing: 0 10px; 
+  border-collapse: separate; 
+  width:100%;
+}
+
+#tasklistTable th{
+  color: rgb(92, 97, 114);
+}
+
+
+ #tasklistTable th, #tasklistTable td {
+  padding: 10px 20px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.newTaskItem{
+  background-color: #E2EDF7;
+}
+
+td label{
+  display: flex;
+  align-items: center;
+}
+
+td{
+  border: solid 1px transparent;
+  border-style: solid none;
+}
+.dueDate {
+  display: none;
+}
+td:first-child{
+  border-left-style: solid;
+  border-top-left-radius: 10px; 
+  border-bottom-left-radius: 10px;
+}
+
+td:last-child {
+  border-right-style: solid;
+  border-bottom-right-radius: 10px; 
+  border-top-right-radius: 10px; 
+}
+
+.taskCheckboxInput, .taskCheckboxInput:focus{
+  height: 0.5rem;
+  width: 0.5rem;
+  margin-right: 0.8rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: 3px solid #859DE6;
+  border-radius: 10px;
+  transition-duration: 0.2s;
+  background-color: #FFFFFF;
+  cursor: pointer;
+}
+
+.taskCheckboxInput:checked{
+  background-color: rgb(214, 214, 214);
+}
+
+
+/*----------------Kanban Board------------------*/
+#kanbanForm{
+  padding: 0.2rem 0 0.5rem 0;
+}
+
+#board-container{
+  display:flex;
+}
+
+#boardColumn{
+  background-color: rgb(218, 221, 245);
+  box-shadow: 0px 3px 8px 0px rgba(85, 92, 121, 0.1);
+  border-radius: 10px;
+  padding:15px;
+  flex-basis: 25%;
+}
+
+.kanban-card{
+  background-color: #FFFFFF;
+  padding: 10px 15px;
+  margin: 15px 0px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 6px 0px rgba(172, 172, 172, 0.1);
+}
+
+.kanbanPriority{
+  background-color: #5598F5;
+  color:#FFFFFF;
+  width:5rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 5px;
+}
+
+/*----------------Music Player------------------*/
+nav button{
+  background-color: Transparent;
+  border: none;
+  outline:none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+nav .fa{
+  font-size:1.1rem;
+  color: #ffffff;
+}
+
+.modal-box {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.3); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  box-shadow: 0px 3px 15px 0px rgba(87, 87, 87, 0.1);
+  margin: 2.7rem 1rem; /* 15% from the top and centered */
+  float: right;
+  padding: 20px;
+  border-radius:20px;
+  width: 40%; 
+}

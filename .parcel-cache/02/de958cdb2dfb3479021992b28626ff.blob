@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>StudBud</title>
+    <link href="56eb84a177caffcd43eab7cd84454bf0" rel="stylesheet" type="text/css">
+    <link href="e7bda89d4302105751bca79dfc6e79ec" rel="stylesheet">
+    <link rel="stylesheet" href="90710941ef62ba6b47e950a43f4d0592">
+  </head>
+
+  <body>
+    <nav class="horizontal-nav">
+      <ul class="horizontal-nav-links"> 
+        <li><a href="#studbud">Studbud</a></li>
+        <li><button id="musicBtn"><i class="fa">&#xf001;</i></button></li>
+      </ul>
+    </nav>
+    <nav class="vertical-nav">
+      <ul class="nav-links">
+      <!--change the href later-->
+        <li><a href="#home">Home</a></li>
+        <li><a href="#tasklist" class="active">Task List</a></li>
+        <li><a href="#kanbanboard">Kanban Board</a></li>
+        <li><a href="#stopwatch">Stopwatch</a></li>
+        <li><a href="#flowtime">Flow Time Tracker</a></li>
+      </ul>
+    </nav>
+
+    <main>
+    <!----------------MUSIC PLAYER------------------->
+    <div id="musicModal" class="modal-box">
+      <div class="modal-content">
+        <h4>Music Player</h4>
+      </div>
+    </div>
+    <!----------------- HOME PAGE ------------------->
+    <section id="studbud" class="page-container">
+      <h1> StudBud </h1>
+      <h2> Your Personal Study Toolkit </h2>
+      <p>StudBud is a collection of productivity tools to help language learners manage their study and work flow efficiently. Use these tools to manage your tasks, time and content. </p>
+
+      <h3>Plan</h3>
+      <p>Use the Task List and Kanban Board to manage your study tasks, set goals or to build a flexible schedule.</p>
+
+      <h3>Time</h3>
+      <p>Use the Stopwatch and Flow Time Tracker to manage your time and visually track your learning progress.</p>
+
+      <h3>Store</h3>
+      <p>Use the Resource List to store and organise your study resources for easy access anytime.</p>
+
+
+    </section>
+    <!----------------- TASK LIST ------------------->
+    <section id="tasklist" class="page-container">
+      <h2> Task List </h2>
+      <div id="taskform-box">
+      <form id="taskform">
+      <!-- Task input --> 
+      <!-- MAKE ALL INPUT REQUIRED--> 
+        <label for="task"></label>
+        <input placeholder="New Task" type="text" name="task" id="taskInput">
+      <!-- Date input -->
+        <label for="dueDate"></label>
+        <input placeholder="Due Date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="dueDate" id="dueDateInput">
+       
+        
+      <!-- Time input -->
+        <label for="completionTime"></label>
+        <input placeholder="Completion Time" type="text" onfocus="(this.type='time')" onblur="(this.type='text')" name="completionTime" id="completionTimeInput">
+      
+        <label for="estimatedTime"></label>
+        <input placeholder="Mins To Complete" type="text" onfocus="(this.type='number')" onblur="(this.type='text')" name="estimatedTime" id="estimatedTimeInput">
+        
+        <!-- Priority -->
+        <label for="priority"></label>
+        <select name="prority" id="priorityInput" required="">
+          <option value="" disabled="" selected="" hidden="">Task Priority</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+        
+
+        <button type="submit" id="tasklistButton">+ Task</button>
+      </form>
+      <!---<ul id = "tasklist">
+      <div id = "tasklist-labels">
+        <h3>To-do</h3>
+        <h3>Due Date</h3>
+        <h3>Completion Time</h3>
+        <h3>Mins to Complete</h3>
+        <h3>Task Priority</h3>
+      </div>
+      </ul>
+      -->
+
+      <table id="tasklistTable">
+        <tr id="tasklistHeadings">
+          <th style="e5374ad650bf364a940035300104cc85">To-do</th>
+          <th style="301059c8311db86873a4b65d9cbbce16">Due Date</th>
+          <th style="bdd9740ea58f453f89c6cc426f7d09a8">Completion Time</th>
+          <th style="f456a78d693aad4ec398139050733fc2">Mins to Complete</th>
+          <th style="59bfea025c0bbcb25c9bd4a73acd32fb">Task Priority</th>
+          <th style="c0526a5ddf43f0f7a29479062d35b17b"></th>
+        </tr>
+
+      </table>
+      
+      </div>
+    </section>
+    <!----------------- KANBAN BOARD------------------->
+    <section id="kanbanboard" class="page-container">
+      <h2> Kanban Board </h2>
+      <div id="board-container">
+        <div id="boardColumn">
+          <h4> To-do </h4>
+        </div>
+      </div>
+
+    </section>
+
+    </main>
+    <script src="1a606c1073155c9f135f542a1c44c524"></script>
+  </body>
+</html>

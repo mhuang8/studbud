@@ -6,15 +6,63 @@
     <title>StudBud</title>
     <link href="style.css" rel="stylesheet" type="text/css"/>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
-    <main>
-    <!----------------- HOME PAGE ------------------->
+    <nav class ="horizontal-nav">
+      <ul class="horizontal-nav-links"> 
+        <li><a href="#studbud">Studbud</a></li>
+        <li><button id="musicBtn"><i class="fa">&#xf001;</i></button></li>
+      </ul>
+    </nav>
+    <nav class="vertical-nav">
+      <ul class="nav-links">
+        <li><a href="#tasklist" class = "active">Task List</a></li>
+        <li><a href="#kanbanboard">Kanban Board</a></li>
+        <li><a href="#stopwatch">Stopwatch</a></li>
+        <li><a href="#flowtime">Flow Time Tracker</a></li>
+        <li><a href="#resourcelist">Resource List</a></li>
+      </ul>
+    </nav>
 
+    <main>
+    <!----------------MUSIC PLAYER------------------->
+    <div id="musicModal" class="modal-box">
+      <div class="modal-content">
+        <h4>Music Player</h4>
+      </div>
+    </div>
+    <!----------------- HOME PAGE ------------------->
+    <section id="studbud" class = "page-container">
+      <h1> StudBud </h1>
+      <h2> Your Personal Study Toolkit </h2>
+      <div id ="introduction-text">
+        <p>StudBud is a collection of productivity tools to help language learners manage their study and work flow efficiently. Use these tools to manage your tasks, time and content. </p>
+      </div> 
+
+      <div id = "icon-container">
+        <div class = "icon-element">
+          <h3>Plan</h3>
+          <p>Use the Task List and Kanban Board to manage your study tasks, set goals or to build a flexible schedule.</p>
+        </div>
+
+        <div class = "icon-element">
+          <h3>Time</h3>
+          <p>Use the Stopwatch and Flow Time Tracker to manage your time and visually track your learning progress.</p>
+        </div>
+
+        <div class = "icon-element">
+          <h3>Store</h3>
+          <p>Use the Resource List to store and organise your study resources for easy access anytime.</p>
+        </div>
+      </div>
+
+
+    </section>
     <!----------------- TASK LIST ------------------->
-    <section id = "tasklist-page">
-      <h2> Task List </h2>
+    <section id = "tasklist" class = "page-container">
+      <h3> Task List </h3>
       <div id ="taskform-box">
       <form id="taskform">
       <!-- Task input --> 
@@ -43,19 +91,69 @@
         </select>
         
 
-        <button type="submit" id="tasklistButton">+ Task</button>
+        <button type="submit" id="tasklistButton"><p>+ Task</p></button>
       </form>
-      <ul id = "tasklist">
-      <div id = "tasklist-labels">
-        <h3>To-do</h3>
-        <h3>Due Date</h3>
-        <h3>Completion Time</h3>
-        <h3>Mins to Complete</h3>
-        <h3>Task Priority</h3>
-      </div>
-      </ul>
+
+      <table id = "tasklistTable">
+        <tr id = "tasklistHeadings">
+          <th style="width:40%;">To-do</th>
+          <th style="width:12%">Due Date</th>
+          <th style="width:12%">Completion Time</th>
+          <th style="width:12%">Mins to Complete</th>
+          <th style="width:12%">Task Priority</th>
+          <th style="width:9%"></th>
+        </tr>
+
+      </table>
       
       </div>
+    </section>
+    <!----------------- KANBAN BOARD------------------->
+    <section id = "kanbanboard" class = "page-container">
+      <h3> Kanban Board </h3>
+      <!-- Board Name Input -->
+      
+      <form id="kanbanForm">
+        <input style="width:30%" placeholder = "New Board Name" type="text" name="board-name" id="boardNameInput" >
+        <button type="submit" id="kanbanButton">+ Board</button>
+      </form>
+
+      <div id = "board-container">
+        <div id = "boardColumn">
+          <h4> To-do </h4>
+        </div>
+      </div>
+
+    </section>
+    <!----------------- stopwatch------------------->
+    <section id = "stopwatch" class = "page-container">
+      <h3> Stopwatch </h3>
+      <div id =counter>
+
+      </div>
+      <div style="display: inline-flex">
+        <button id = "startCounter"> Start </button>
+        <button id = "stopCounter"> Stop </button>
+        <button id = "resetCounter"> Reset </button>
+        <select name="" id="studyType">
+          <option value="Vocab">Vocab</option>
+          <option value="Textbook">Textbook</option>
+          <option value="Reading">Reading</option>
+        </select>
+      </div>
+    </section>
+
+    <!-----------------FLOW TIME------------------->
+    <section id = "flowtime" class = "page-container">
+      <h3> Flow Time Tracker </h3>
+      <div id = "vocabTimer"></div>
+      <div id = "textbookTimer"></div>
+      <div id = "readingTimer"></div>
+    </section>
+
+    <!-----------------RESOURCE LIST------------------->
+    <section id = "resourcelist" class = "page-container">
+      <h3> Resource List </h3>
     </section>
 
     </main>

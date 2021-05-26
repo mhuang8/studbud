@@ -1,0 +1,162 @@
+//Variables for HTML elements using DOM selection
+const $aba770e9ce7dbb561d9a46041b248abf$var$form = document.getElementById("taskform");
+const $aba770e9ce7dbb561d9a46041b248abf$var$button = document.querySelector("#taskform > button");
+var $aba770e9ce7dbb561d9a46041b248abf$var$taskInput = document.getElementById("taskInput");
+var $aba770e9ce7dbb561d9a46041b248abf$var$dueDateInput = document.getElementById("dueDateInput");
+var $aba770e9ce7dbb561d9a46041b248abf$var$completionTimeInput = document.getElementById("completionTimeInput");
+var $aba770e9ce7dbb561d9a46041b248abf$var$estimatedTimeInput = document.getElementById("estimatedTimeInput");
+var $aba770e9ce7dbb561d9a46041b248abf$var$priorityInput = document.getElementById("priorityInput");
+var $aba770e9ce7dbb561d9a46041b248abf$var$tasklist = document.getElementById("tasklistTable");
+var $aba770e9ce7dbb561d9a46041b248abf$var$boardColumn = document.getElementById("boardColumn");
+///NAVIGATION
+//------Modular code:THIS SECTION IN NAVIGATION.JS file in components folder
+class $aba770e9ce7dbb561d9a46041b248abf$var$Navigation {
+    constructor(links, pages){
+        this.links = links;
+        this.pages = pages;
+        this.currentPage = null;
+    }
+    getLinks() {
+        console.log(this.links);
+    }
+    setPage(pageId) {
+        this.currentPage = pageId;
+        console.log(this.currentPage);
+        //change the page within the html
+        this.links.forEach((link)=>{
+            link.classList.remove('active');
+            if (this.getHash(link) === pageId) link.classList.add('active');
+        });
+        this.pages.forEach((page)=>{
+            page.style.display = 'none';
+        });
+        document.getElementById(pageId).style.display = "block";
+    }
+    getHash(link) {
+        return link.href.split("#")[1];
+    }
+}
+//export default Navigation;
+//---------------------------------
+//import Navigation from './components/navigation';
+const $aba770e9ce7dbb561d9a46041b248abf$var$links = document.querySelectorAll('nav > ul > li > a');
+const $aba770e9ce7dbb561d9a46041b248abf$var$pages = document.querySelectorAll('.page-container');
+var $aba770e9ce7dbb561d9a46041b248abf$var$nav = new $aba770e9ce7dbb561d9a46041b248abf$var$Navigation($aba770e9ce7dbb561d9a46041b248abf$var$links, $aba770e9ce7dbb561d9a46041b248abf$var$pages);
+$aba770e9ce7dbb561d9a46041b248abf$var$nav.getLinks();
+$aba770e9ce7dbb561d9a46041b248abf$var$nav.links.forEach(function(link) {
+    link.addEventListener('click', function() {
+        //console.log(nav.getHash(link));
+        let pageId = $aba770e9ce7dbb561d9a46041b248abf$var$nav.getHash(link);
+        $aba770e9ce7dbb561d9a46041b248abf$var$nav.setPage(pageId);
+    });
+});
+///TASK LIST + KANBAN BOARD
+//event listener for when button clicked
+//OR button.addEventListener("click", function(event) {
+$aba770e9ce7dbb561d9a46041b248abf$var$form.addEventListener("submit", function(event) {
+    //make sure none of the browser function will happen automatically
+    event.preventDefault();
+    //takes the user input
+    let task = $aba770e9ce7dbb561d9a46041b248abf$var$taskInput.value;
+    let dueDate = $aba770e9ce7dbb561d9a46041b248abf$var$dueDateInput.value;
+    let completionTime = $aba770e9ce7dbb561d9a46041b248abf$var$completionTimeInput.value;
+    let estimatedTime = $aba770e9ce7dbb561d9a46041b248abf$var$estimatedTimeInput.value;
+    let priorityRating = $aba770e9ce7dbb561d9a46041b248abf$var$priorityInput.options[$aba770e9ce7dbb561d9a46041b248abf$var$priorityInput.selectedIndex].value;
+    //add it as a task using addTask function
+    $aba770e9ce7dbb561d9a46041b248abf$var$addTask(task, dueDate, completionTime, estimatedTime, priorityRating, false);
+    //console out for debugging
+    console.log($aba770e9ce7dbb561d9a46041b248abf$var$taskListArray);
+});
+//empty array to store tasks
+var $aba770e9ce7dbb561d9a46041b248abf$var$taskListArray = [];
+//The function creates the object & pushes it to an array 
+function $aba770e9ce7dbb561d9a46041b248abf$var$addTask(taskDescription, dueDate, completionTime, estimatedTime, priorityRating, completionStatus) {
+    let d = new Date();
+    let dateCreated = d.getFullYear();
+    let task = {
+        taskDescription: taskDescription,
+        dueDate: dueDate,
+        dateCreated: dateCreated,
+        completionTime: completionTime,
+        estimatedTime: estimatedTime,
+        priorityRating: priorityRating,
+        completionStatus: completionStatus
+    };
+    //add the task to the array
+    $aba770e9ce7dbb561d9a46041b248abf$var$taskListArray.push(task);
+    ///return task;
+    $aba770e9ce7dbb561d9a46041b248abf$var$renderTask(task);
+    //calling function for kanban board
+    $aba770e9ce7dbb561d9a46041b248abf$var$renderKanban(task);
+}
+//ADD the task to the screen via HTML
+//pulling the task as a complete object rather than individual parts
+function $aba770e9ce7dbb561d9a46041b248abf$var$renderTask(task) {
+    //create html elements
+    let item = document.createElement("tr");
+    item.setAttribute("class", "newTaskItem");
+    let cell1 = document.createElement("td");
+    cell1.innerHTML += "<label for=taskCheckbox><input type=checkbox name=taskCheckbox class=taskCheckboxInput><strong>" + task.taskDescription + "</strong>" + "</label>";
+    let cell2 = document.createElement("td");
+    cell2.innerHTML += "<p>" + task.dueDate + "</p>";
+    let cell3 = document.createElement("td");
+    cell3.innerHTML += "<p>" + task.completionTime + "</p>";
+    let cell4 = document.createElement("td");
+    cell4.innerHTML += "<p>" + task.estimatedTime + ' ' + 'min' + "</p>";
+    let cell5 = document.createElement("td");
+    cell5.innerHTML += "<p>" + task.priorityRating + "</p>";
+    let cell6 = document.createElement("td");
+    item.append(cell1, cell2, cell3, cell4, cell5, cell6);
+    tasklistTable.appendChild(item);
+    //Extra task DOM elements - further user interaction e.g delete
+    let delButton = document.createElement("button");
+    //create a textNode
+    let delButtonText = document.createTextNode("Delete");
+    //get the text appended to button element
+    delButton.appendChild(delButtonText);
+    //append whole button to the item created
+    cell6.appendChild(delButton);
+    //Event Listeners for DOM elements
+    delButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        item.remove();
+    });
+    //Clear the input form
+    $aba770e9ce7dbb561d9a46041b248abf$var$form.reset();
+    //Setting the style colours depending on priority rating
+    var newTaskItem = document.getElementsByClassName("newTaskItem");
+    var taskCheckboxInput = document.getElementsByClassName("taskCheckboxInput");
+    //Iteration: changed the colours to appropriately correlate with the priority (pink = high, blue = low)
+    if (task.priorityRating === "Low") {
+        newTaskItem[newTaskItem.length - 1].style.backgroundColor = "#E2EDF7";
+        taskCheckboxInput[taskCheckboxInput.length - 1].style.border = "solid #8CB7F2";
+    } else if (task.priorityRating === "Medium") {
+        newTaskItem[newTaskItem.length - 1].style.backgroundColor = "#FCF4DD";
+        taskCheckboxInput[taskCheckboxInput.length - 1].style.border = "solid #F7D382";
+    } else if (task.priorityRating === "High") {
+        newTaskItem[newTaskItem.length - 1].style.backgroundColor = "#F7D7E7";
+        taskCheckboxInput[taskCheckboxInput.length - 1].style.border = "solid #EAA0D3";
+    }
+//}
+}
+///KANBAN BOARD
+function $aba770e9ce7dbb561d9a46041b248abf$var$renderKanban(task) {
+    let card = document.createElement("div");
+    card.setAttribute("class", "kanban-card");
+    card.innerHTML = "<div class = kanbanPriority><p>" + task.priorityRating + "</p>" + "<div>";
+    card.innerHTML += "<h4>" + task.taskDescription + "</h4>";
+    card.innerHTML += "<p><strong>" + task.dueDate + "<strong>" + "</p>";
+    card.innerHTML += "<p>" + task.completionTime + "</p>";
+    $aba770e9ce7dbb561d9a46041b248abf$var$boardColumn.appendChild(card);
+}
+///MUSIC PLAYER
+var $aba770e9ce7dbb561d9a46041b248abf$var$musicModal = document.getElementById("musicModal");
+var $aba770e9ce7dbb561d9a46041b248abf$var$musicBtn = document.getElementById("musicBtn");
+// When the user clicks on the button, open the modal
+$aba770e9ce7dbb561d9a46041b248abf$var$musicBtn.onclick = function() {
+    $aba770e9ce7dbb561d9a46041b248abf$var$musicModal.style.display = "block";
+};
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == $aba770e9ce7dbb561d9a46041b248abf$var$musicModal) $aba770e9ce7dbb561d9a46041b248abf$var$musicModal.style.display = "none";
+};
