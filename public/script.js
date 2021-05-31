@@ -1,4 +1,5 @@
 //Variables for HTML elements using DOM selection
+//tasklist
 const form = document.getElementById("taskform");
 const button = document.querySelector("#taskform > button");
 var taskInput = document.getElementById("taskInput");
@@ -6,13 +7,24 @@ var dueDateInput = document.getElementById("dueDateInput");
 var completionTimeInput = document.getElementById("completionTimeInput");
 var estimatedTimeInput = document.getElementById("estimatedTimeInput");
 var priorityInput = document.getElementById("priorityInput");
-
+//kanban
 var tasklist = document.getElementById("tasklistTable");
 var boardColumn = document.getElementById("boardColumn");
+//stopwatch
 
+//music player
 var musicModal = document.getElementById("musicModal");
 var musicBtn = document.getElementById("musicBtn");
-
+const musicContainer = document.querySelector('.music-container');
+const prevBtn = document.querySelector('#prevBtn');
+const playBtn= document.querySelector('#playBtn');
+const nextBtn= document.querySelector('#nextBtn');
+const audioTrack = document.querySelector('#audioTrack')
+const progressContainer = document.querySelector('.progress-container');
+const progressBar = document.querySelector('.progress-bar');
+const songTitle = document.getElementById("songTitle")
+const songArtist = document.getElementById("songArtist")
+const songCover = document.getElementById("songCover")
 
 
 ///NAVIGATION
@@ -68,7 +80,7 @@ nav.links.forEach(function(link){
   })
 })
 
-///TASK LIST + KANBAN BOARD
+///TASK LIST 
 //event listener for when button clicked
 //OR button.addEventListener("click", function(event) {
 form.addEventListener("submit", function(event){
@@ -316,3 +328,104 @@ window.onclick = function(event) {
     musicModal.style.display = "none";
   }
 }
+
+//Song titles
+//source
+  //https://www.youtube.com/watch?v=l1-MURE3kfc&ab_channel=BgHBeatsBgHBeats
+  //https://www.youtube.com/watch?v=t9r4cHSnjq4&ab_channel=LuKremBoLuKremBo
+  //https://www.youtube.com/watch?v=r6-8FEYuEYg&ab_channel=ZeekyBeatsZeekyBeats
+const songs = ['Imagine', 'Bored', 'Fresh Air', 'Rose'];
+const artists = ['BgH Beats', 'LuKremBo', 'Zeeky Beats', 'LuKremBo'];
+let songIndex = 1;
+let artistIndex = 1;
+
+//load song into DOM
+loadSong(songs[songIndex], artists[artistIndex]);
+
+//Function: update song details (title, artist, audio, cover img)
+function loadSong(song, artist) {
+  songTitle.innerText = song
+  songArtist.innerText = artist
+  audioTrack.src = `music/${song}.mp3`
+  songCover.src = `images/${song}.jpg`
+}
+
+function playSong(){
+  musicContainer.classList.add('play');
+  playBtn.querySelector('i.fas').classList.remove('fa-play');
+  playBtn.querySelector('i.fas').classList.add('fa-pause');
+
+  audioTrack.play();
+}
+
+function pauseSong(){
+  musicContainer.classList.remove('play');
+  playBtn.querySelector('i.fas').classList.remove('fa-pause');
+  playBtn.querySelector('i.fas').classList.add('fa-play');
+
+  audioTrack.pause();
+}
+
+function prevSong(){
+  songIndex--
+  artistIndex--
+  if(songIndex < 0) {
+    songIndex = songs.length -1
+  }
+  if(artistIndex < 0) {
+    artistIndex = artists.length -1
+  }
+
+  loadSong(songs[songIndex], artists[artistIndex]);
+  playSong();
+}
+
+function nextSong(){
+  songIndex++
+  artistIndex++
+  if(songIndex > songs.length - 1 ) {
+    songIndex = 0
+  }
+  if(artistIndex > artists.length - 1) {
+    artistIndex = 0
+  }
+  
+  loadSong(songs[songIndex], artists[artistIndex]);
+  playSong();
+}
+
+//update the progress bar as song plays
+function updateProgress(e) {
+  //console.log(e.srcElement.currentTime)
+  const {duration, currentTime} = e.srcElement
+  const progressPercent = (currentTime/duration) * 100
+  progressBar.style.width = `${progressPercent}%`
+}
+
+//when users click on progress bar, jumps to that part of song
+function setProgress(e) {
+  const width = this.clientWidth;
+  const clickX = e.offsetX;
+  const duration = audioTrack.duration
+
+  audioTrack.currentTime = (clickX / width) * duration
+
+}
+
+//event listeners
+playBtn.addEventListener('click', () => {
+  const isPlaying = musicContainer.classList.contains('play')
+
+  if(isPlaying) {
+    pauseSong()
+  } else {
+    playSong()
+  }
+})
+
+//Change songs 
+prevBtn.addEventListener('click', prevSong)
+nextBtn.addEventListener('click', nextSong)
+audioTrack.addEventListener('timeupdate', updateProgress)
+progressContainer.addEventListener('click', setProgress)
+audioTrack.addEventListener('ended', nextSong)

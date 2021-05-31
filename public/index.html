@@ -6,7 +6,7 @@
     <title>StudBud</title>
     <link href="style.css" rel="stylesheet" type="text/css"/>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   </head>
 
   <body>
@@ -30,7 +30,36 @@
     <!----------------MUSIC PLAYER------------------->
     <div id="musicModal" class="modal-box">
       <div class="modal-content">
-        <h4>Music Player</h4>
+        <div class = "music-container">
+          <div class = "img-container">
+            <img src = "images/Imagine.jpg" alt ="music-cover" id ="songCover" />
+          </div>
+          
+
+          <div class = "music-container-right">
+            <div class = "music-info">
+              <h4 id = "songTitle"> Imagine </h4>
+              <p id = "songArtist">BgH Beats</p>
+              <div class = "progress-container">
+                <div class = "progress-bar"></div>
+              </div>
+            </div>
+
+            <audio src = "music/Imagine.mp3" id = "audioTrack"></audio>
+
+            <div class="music-controls">
+              <button id="prevBtn" class ="action-btn">
+                <i class="fas fa-backward"></i>
+              </button>
+              <button id="playBtn" class ="action-btn action-btn-big">
+                <i class="fas fa-play"></i>
+              </button>
+              <button id="nextBtn" class ="action-btn">
+                <i class="fas fa-forward"></i>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <!----------------- HOME PAGE ------------------->
@@ -38,23 +67,24 @@
       <h1> StudBud </h1>
       <h2> Your Personal Study Toolkit </h2>
       <div id ="introduction-text">
-        <p>StudBud is a collection of productivity tools to help language learners manage their study and work flow efficiently. Use these tools to manage your tasks, time and content. </p>
+        <p>StudBud is a collection of productivity tools to help language students and learners manage their study and work efficiently. Use these tools to manage your tasks, time and content. Enjoy some calming music as you study to boost your focus and productivity. </p>
       </div> 
-
+      
       <div id = "icon-container">
         <div class = "icon-element">
           <h3>Plan</h3>
-          <p>Use the Task List and Kanban Board to manage your study tasks, set goals or to build a flexible schedule.</p>
+          <p>Use the <span style="color:#727CD6;"><strong>Task List</strong></span> to keep track of your study tasks or set goals. Access the <span style="color:#727CD6;"><strong>Kanban Board</strong></span> to manage these tasks and build a flexible schedule. Embrace organisation and develop positive language study routines.</p>
         </div>
 
         <div class = "icon-element">
           <h3>Time</h3>
-          <p>Use the Stopwatch and Flow Time Tracker to manage your time and visually track your learning progress.</p>
+          <p>Use the <span style="color:#F7A610;"><strong>Stopwatch</strong></span> to track your time spent on different categories of language learning. View your total tracked study time in the <span style="color:#F7A610;"><strong>Flow Time Tracker</strong></span> and use the results to reflect on your progressive study effort. </p>
         </div>
 
+        <!--adapted the reading list into a resource list to suit the needs of my users-->
         <div class = "icon-element">
           <h3>Store</h3>
-          <p>Use the Resource List to store and organise your study resources for easy access anytime.</p>
+          <p>Use the <span style="color:#DA6EA4;"><strong>Resource List</strong></span> to store and organise your study resources for easy access anytime. Build a library of your favourite online language content for future reference. </p>
         </div>
       </div>
 
@@ -91,7 +121,7 @@
         </select>
         
 
-        <button type="submit" id="tasklistButton"><p>+ Task</p></button>
+        <button type="submit" id="tasklistButton">+ Task</button>
       </form>
 
       <table id = "tasklistTable">
@@ -128,19 +158,20 @@
     <!----------------- stopwatch------------------->
     <section id = "stopwatch" class = "page-container">
       <h3> Stopwatch </h3>
-      <div id =counter>
-
-      </div>
-      <div style="display: inline-flex">
-        <button id = "startCounter"> Start </button>
-        <button id = "stopCounter"> Stop </button>
-        <button id = "resetCounter"> Reset </button>
+      <div id = "stopwatch-box">
         <select name="" id="studyType">
           <option value="Vocab">Vocab</option>
           <option value="Textbook">Textbook</option>
           <option value="Reading">Reading</option>
         </select>
+        <div id ="counter">
+        </div >
+        <div style="display: inline-flex">
+          <button id = "startCounter"> Start </button>
+          <button id = "stopCounter"> Stop </button>
+          <button id = "resetCounter"> Reset </button>
       </div>
+    </div>
     </section>
 
     <!-----------------FLOW TIME------------------->
