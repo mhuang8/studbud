@@ -10,6 +10,8 @@ var priorityInput = document.getElementById("priorityInput");
 //kanban
 var tasklist = document.getElementById("tasklistTable");
 var boardColumn = document.getElementById("boardColumn");
+var boardNameInput = document.getElementById("boardNameInput");
+const kanbanBtn = document.getElementById("kanbanBtn");
 //stopwatch
 
 //music player
@@ -212,7 +214,7 @@ function renderKanban(task){
 const startCounterButton = document.getElementById("startCounter");
 const stopCounterButton = document.getElementById("stopCounter")
 const resetCounterButton = document.getElementById("resetCounter")
-const selectStudyTypeInput = document.getElementById("studyType")
+const selectStudyTypeInput = document.getElementById("studyTypeInput")
 
 let timePassed = 0;
 let timerInterval = null
@@ -314,6 +316,14 @@ startCounterButton.addEventListener("click", function(event){
   startCounterButton.disabled = false;
 
  })
+
+///FLOW TIME TRACKER
+ //user adds own study type
+
+ //delete button
+
+
+
 ///MUSIC PLAYER
 
 

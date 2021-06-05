@@ -25,7 +25,7 @@ body {
   padding: 4rem 3rem;
 }
 #tasklist, #kanbanboard, #stopwatch, #flowtime, #resourcelist {
-  padding: 2.7rem 1.3rem;
+  padding: 3rem 1.8rem;
 }
 
 main button{
@@ -41,6 +41,7 @@ main button{
 
 main button:hover{
   background-color: rgb(77, 109, 214);
+  transition: background-color 0.2s;
 }
 
 ul{
@@ -334,6 +335,70 @@ td:last-child {
   width: 100%;
   text-align: center;
 }
+
+#stopwatchButtonsContainer{
+  display: flex;
+  justify-content: center;
+
+}
+#stopwatchButtonsContainer button{
+  width: 10rem;
+  height: 4.5rem;
+  margin: 2rem 1rem;
+  font-size: 1.4rem;
+  border-radius: 3rem;
+}
+
+#startCounter{
+  background-color: #6182EB;
+  color:#ffffff;
+  border: 0.25rem solid #6182EB;
+}
+#startCounter:hover{
+  background-color: #ffffff;
+  color:#6182EB;
+  box-shadow: 1px 3px 6px 0px rgba(85, 95, 156, 0.15);
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+#stopCounter{
+  background-color: #DA6EA4;
+  color:#ffffff;
+  border: 0.25rem solid #DA6EA4;
+}
+#stopCounter:hover{
+  background-color: #ffffff;
+  color:#DA6EA4;
+  box-shadow: 1px 3px 6px 0px rgba(168, 102, 136, 0.15);
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+#resetCounter{
+  background-color: #f5ad2a;
+  color:#ffffff;
+  border: 0.25rem solid #f5ad2a;
+}
+#resetCounter:hover{
+  background-color: #ffffff;
+  color:#f5ad2a;
+  box-shadow: 1px 3px 6px 0px rgba(184, 153, 97, 0.15);
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+/*----------------Flow Time Tracker------------------*/
+.flowTimeTask{
+  background-color: #FFFFFF;
+  
+}
+
+#flowTimeTable th{
+  padding: 0.6rem 1.2rem;
+  text-align: left;
+  vertical-align: middle;
+}
+#flowTimeTable td {
+  padding: 1.25rem;
+}
+
 /*----------------Music Player------------------*/
 nav button{
   background-color: Transparent;
@@ -388,11 +453,11 @@ nav .fa{
   left:50%;
   bottom: 50%;
   border-radius: 50%;
-  transform: translate(-50%, 10%);
+  transform: translate(-50%, 40%);
 }
 .img-container img{
-  width: 8rem;
-  height: 8rem;
+  width: 8.5rem;
+  height: 8.5rem;
   border-radius: 50%;
   object-fit: cover;
 
@@ -458,11 +523,13 @@ nav .fa{
   font-size: 1.5rem;
   cursor: pointer;
   margin: 0 0.9rem;
+  padding: 0.7rem 0.9rem;
 }
 
 .action-btn:hover{
   background-color: #ffffff;
   color:rgb(107, 133, 211);
+  transition: color 0.2s;
 }
 
 .action-btn-big{

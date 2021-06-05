@@ -145,7 +145,7 @@
       
       <form id="kanbanForm">
         <input style="width:30%" placeholder = "New Board Name" type="text" name="board-name" id="boardNameInput" >
-        <button type="submit" id="kanbanButton">+ Board</button>
+        <button type="submit" id="kanbanBtn">+ Board</button>
       </form>
 
       <div id = "board-container">
@@ -155,31 +155,54 @@
       </div>
 
     </section>
-    <!----------------- stopwatch------------------->
+    <!----------------- STOPWATCH------------------->
     <section id = "stopwatch" class = "page-container">
       <h3> Stopwatch </h3>
       <div id = "stopwatch-box">
-        <select name="" id="studyType">
-          <option value="Vocab">Vocab</option>
-          <option value="Textbook">Textbook</option>
+        <label for="studyType"><strong>Study Type: </strong></label>
+        <select name="studyType" id="studyTypeInput">
+          <option value="Vocab">Vocab Practice</option>
+          <option value="Textbook">Textbook Study</option>
           <option value="Reading">Reading</option>
         </select>
-        <div id ="counter">
-        </div >
-        <div style="display: inline-flex">
+        <div id ="counter"></div>
+
+        <div id = "stopwatchButtonsContainer">
           <button id = "startCounter"> Start </button>
           <button id = "stopCounter"> Stop </button>
           <button id = "resetCounter"> Reset </button>
+        </div>
       </div>
-    </div>
     </section>
 
     <!-----------------FLOW TIME------------------->
     <section id = "flowtime" class = "page-container">
       <h3> Flow Time Tracker </h3>
-      <div id = "vocabTimer"></div>
-      <div id = "textbookTimer"></div>
-      <div id = "readingTimer"></div>
+
+      <form id="flowTimeForm">
+        <input style="width:30%" placeholder = "New Study Type" type="text" name="studyType" id="studyTypeInput" >
+        <button type="submit" id="flowTimeButton">+</button>
+      </form>
+
+      <table id = "flowTimeTable">
+        <tr class = "flowTimeHeading">
+          <th>Study Type</th>
+          <th>Total Study Time</th>
+        </tr>
+        <tr class = "flowTimeTask">
+          <td>Vocab Practice</td>
+          <td id = "vocabTimer"></td>
+        </tr>
+        <tr class = "flowTimeTask">
+          <td>Textbook Study</td>
+          <td id = "textbookTimer"></td>
+        </tr>
+        <tr class = "flowTimeTask">
+          <td>Reading</td>
+          <td id = "readingTimer"></td>
+        </tr>
+
+      </table>
     </section>
 
     <!-----------------RESOURCE LIST------------------->
