@@ -48,6 +48,36 @@ ul{
   list-style: none;
 }
 
+/*------Base Input Styles--------*/
+input,select{
+  padding:15px;
+  height: 50px;
+  margin: 5px;
+  border: 2px solid #9CC2F4;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  box-shadow: 1px 2px 5px 0px rgba(179, 181, 192, 0.1);
+}
+
+textarea{
+  font-family: 'Lato', sans-serif;
+  padding:15px;
+  height: 80px;
+  margin: 5px;
+  border: 2px solid #9CC2F4;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  box-shadow: 1px 2px 5px 0px rgba(179, 181, 192, 0.1);
+
+}
+
+input:focus, select:focus,textarea:focus{
+  outline: none;
+  border-radius: 10px;
+  border: 2px solid rgb(77, 109, 214);
+}
+
+select:invalid { color: rgb(117, 117, 117); }
 
 
 /*--------------Typography--------------*/
@@ -80,6 +110,27 @@ p {
   padding: 0.3rem 0;
   color: #383839;
 }
+
+
+nav i{
+  font-size: 1rem;
+  padding: 0 0.3rem;
+  
+}
+
+.fa-columns{
+  font-size: 0.9rem;
+}
+
+.fa-toolbox{
+  font-size: 0.9rem;
+  transform: translate(0, -5%);
+}
+
+#studbud .fa-toolbox{
+  font-size: 2.9rem;
+}
+
 /*----------------LAYOUT--------------*/
 .page-container:not(#tasklist){
   display:none;
@@ -101,7 +152,7 @@ nav.horizontal-nav{
   justify-content: space-between;
 }
 .horizontal-nav-links li{
-  padding: 0.45rem 1.9rem;
+  padding: 0.45rem 1.6rem;
   
 }
 
@@ -111,6 +162,11 @@ nav.horizontal-nav{
   font-size: 0.9rem;
   font-weight: 700;
 }
+
+.horizontal-nav-links a:hover{
+  color: rgb(227, 234, 245);
+}
+
 
 nav.vertical-nav{
   width: 180px;
@@ -129,7 +185,7 @@ ul.nav-links{
 }
 
 .nav-links li{
-  padding: 1rem 1.9rem;
+  padding: 1rem 1.6rem;
 }
 
 .nav-links a{
@@ -173,24 +229,6 @@ div#taskform-box{
   flex-wrap: wrap;
   width:100%;
 }
-
-input,select{
-  padding:15px;
-  height: 50px;
-  margin: 5px;
-  border: 2px solid #9CC2F4;
-  font-size: 0.9rem;
-  border-radius: 10px;
-  box-shadow: 1px 2px 5px 0px rgba(179, 181, 192, 0.1);
-}
-
-input:focus, select:focus{
-  outline: none;
-  border-radius: 10px;
-  border: 2px solid rgb(77, 109, 214);
-}
-
-select:invalid { color: rgb(117, 117, 117); }
 
 /**---individual input boxes---**/
 form #taskInput{
@@ -290,27 +328,38 @@ td:last-child {
 
 
 /*----------------Kanban Board------------------*/
+ 
 #kanbanForm{
   padding: 0.2rem 0 0.5rem 0;
 }
 
 #board-container{
   display:flex;
+  overflow-x: scroll;
 }
 
-#boardColumn{
-  background-color: rgb(218, 221, 245);
+.boardColumn{
+  background-color: #d2d7f5;
   box-shadow: 0px 3px 8px 0px rgba(85, 92, 121, 0.1);
-  border-radius: 10px;
-  padding:15px;
+  border-radius: 0.4rem;
+  padding:0.9rem;
+  margin: 0 0.3rem;
   flex-basis: 25%;
+  flex-flow: column;
+  min-width: 7.5rem;
+  height: 100%;
+  transition: all 0.2s linear;
 }
 
-.kanban-card{
+.boardColumn:nth-child(2n){
+  background-color: rgb(209, 222, 243, 0.9);
+}
+
+.kanbanCard{
   background-color: #FFFFFF;
-  padding: 10px 15px;
-  margin: 15px 0px;
-  border-radius: 10px;
+  padding: 0.9rem;
+  margin: 0.9rem 0;
+  border-radius: 0.4rem;
   box-shadow: 0px 3px 6px 0px rgba(172, 172, 172, 0.1);
 }
 
@@ -385,9 +434,20 @@ td:last-child {
   transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
 }
 /*----------------Flow Time Tracker------------------*/
+#todayDate{
+  background-color:#a3b2e6;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 0.8rem 1.2rem;
+  border-radius: 0.4rem;
+}
+
+#flowTimeTable{
+  border-spacing: 0 8px; 
+}
+
 .flowTimeTask{
   background-color: #FFFFFF;
-  
 }
 
 #flowTimeTable th{
@@ -411,6 +471,10 @@ nav button{
 nav .fa{
   font-size:1.1rem;
   color: #ffffff;
+}
+
+nav .fa:hover{
+  color: rgb(227, 234, 245);
 }
 
 .modal-box {

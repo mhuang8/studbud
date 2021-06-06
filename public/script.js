@@ -7,9 +7,10 @@ var dueDateInput = document.getElementById("dueDateInput");
 var completionTimeInput = document.getElementById("completionTimeInput");
 var estimatedTimeInput = document.getElementById("estimatedTimeInput");
 var priorityInput = document.getElementById("priorityInput");
-//kanban
 var tasklist = document.getElementById("tasklistTable");
-var boardColumn = document.getElementById("boardColumn");
+//kanban
+var boardContainer = document.getElementById("board-container");
+var toDoColumn = document.getElementById("toDoColumn");
 var boardNameInput = document.getElementById("boardNameInput");
 const kanbanBtn = document.getElementById("kanbanBtn");
 //stopwatch
@@ -29,7 +30,7 @@ const songArtist = document.getElementById("songArtist")
 const songCover = document.getElementById("songCover")
 
 
-///NAVIGATION
+///NAVIGATION ---------------------------------------------------
   //------Modular code:THIS SECTION IN NAVIGATION.JS file in components folder
 class Navigation{
   constructor(links, pages){
@@ -82,7 +83,7 @@ nav.links.forEach(function(link){
   })
 })
 
-///TASK LIST 
+///TASK LIST -------------------------------------------------------
 //event listener for when button clicked
 //OR button.addEventListener("click", function(event) {
 form.addEventListener("submit", function(event){
@@ -196,21 +197,69 @@ function renderTask(task){
   }
 
 
-///KANBAN BOARD
+///KANBAN BOARD ---------------------------------------------------
+const cardItems = document.querySelectorAll('.kanbanCard');
+const boardColumn = document.querySelectorAll('.boardColumn');
 
+//render kanban board
+function renderKanbanBoard(boardName){
+  let board = document.createElement("div");
+  board.setAttribute("class", "boardColumn");
+  board.innerHTML += "<h4>" + boardName + "</h4>";
+
+  //append the board to the container
+  boardContainer.appendChild(board);
+}
+
+//render kanban card
 function renderKanban(task){
   let card = document.createElement("div");
-  card.setAttribute("class", "kanban-card");
+  card.setAttribute("class", "kanbanCard");
+  card.setAttribute("draggable", "true");
 
   card.innerHTML = "<div class = kanbanPriority>" +"<p>" + task.priorityRating + "</p>" + "<div>"
-  card.innerHTML += "<h4>" + task.taskDescription + "</h4>"
+  card.innerHTML += "<h4 contenteditable=true>" + task.taskDescription + "</h4>"
   card.innerHTML += "<p>" + "<strong>" + task.dueDate + "<strong>" + "</p>"
   card.innerHTML += "<p>" + task.completionTime + "</p>"
 
-  boardColumn.appendChild(card);
+  //append the card to the To-Do Board 
+  toDoColumn.appendChild(card);
 }
 
-///STOPWATCH
+kanbanBtn.addEventListener("click", function(event){
+  let boardName = boardNameInput.value; 
+  renderKanbanBoard(boardName); 
+})
+
+//drag and drop functionality
+let draggedItem = null;
+
+for (let i = 0; i < cardItems.length; i++){
+  const cardItem = cardItems[i];
+
+  cardItem.addEventListener('dragstart', function(){
+    console.log('dragstart');
+    draggedItem  = cardItem;
+    setTimeout(function(){
+      cardItem.style.display = 'none';
+    }, 0)
+    
+  });
+
+  cardItem.addEventListener('dragend', function(){
+    console.log('dragend');
+    setTimeout(function(){
+      draggedItem.style.display = 'block';
+      draggedItem = null;
+    }, 0);
+  })
+
+  for (let j = 0; j < boardColumn.length; j++){
+    const boardItem = boardColumn[j];
+  }
+}
+
+///STOPWATCH ----------------------------------------------------
 const startCounterButton = document.getElementById("startCounter");
 const stopCounterButton = document.getElementById("stopCounter")
 const resetCounterButton = document.getElementById("resetCounter")
@@ -317,15 +366,31 @@ startCounterButton.addEventListener("click", function(event){
 
  })
 
-///FLOW TIME TRACKER
+///FLOW TIME TRACKER --------------------------------------------------
  //user adds own study type
+
+ //Show today's date
+ var todayDate = document.getElementById("todayDate");
+ 
+ todayDate.innerHTML= (formatDate(new Date())); 
+
+ function formatDate (date){
+   var months = [
+     "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+   ]
+
+   var day = date.getDate();
+   var monthIndex = date.getMonth();
+   var year = date.getFullYear();
+
+   return '<strong>' + "Today:" + ' ' + day + ' ' + months[monthIndex] + ' ' + year + '</strong>';
+ }
 
  //delete button
 
 
 
-///MUSIC PLAYER
-
+///MUSIC PLAYER ---------------------------------------------------
 
 // When the user clicks on the button, open the modal
 musicBtn.onclick = function() {
