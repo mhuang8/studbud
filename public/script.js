@@ -29,6 +29,9 @@ const songTitle = document.getElementById("songTitle")
 const songArtist = document.getElementById("songArtist")
 const songCover = document.getElementById("songCover")
 
+//resource list
+var resourceModal = document.getElementById("resourceModal");
+var addResourceBtn = document.getElementById("addResourceBtn");
 
 ///NAVIGATION ---------------------------------------------------
   //------Modular code:THIS SECTION IN NAVIGATION.JS file in components folder
@@ -340,12 +343,18 @@ function startTimer() {
 startCounterButton.addEventListener("click", function(event){
   startCounterButton.disabled = true;
   startTimer();
+
+  //record the start time in flow time tracker
+  formatFlowTime();
+
+  
  })
 
 //  stop button should re-render all latest updates form local storage and stop timer and update local storage
  stopCounterButton.addEventListener("click", (e) => {
   clearInterval(timerInterval)
   startCounterButton.disabled = false;
+  //local storage
   const timerData = {
     Vocab: vocab,
     Textbook: textbook,
@@ -386,6 +395,24 @@ startCounterButton.addEventListener("click", function(event){
    return '<strong>' + "Today:" + ' ' + day + ' ' + months[monthIndex] + ' ' + year + '</strong>';
  }
 
+ //get current time
+ var currentTime = document.getElementById("currentTime");
+
+ function formatFlowTime() {
+   var today = new Date();
+   var time = today.getHours() + ":" + today.getMinutes();
+   //store to local storage using key/value
+   let key = "time" + (localStorage.length + 1).toString();
+   window.localStorage.setItem(key, JSON.stringify(time));
+   //get from local storage
+   let timeData = JSON.parse(window.localStorage.getItem('time'));
+
+   currentTime.innerHTML = "<div>" + timeData + "</div>"
+ }
+
+ 
+
+ 
  //delete button
 
 
@@ -401,6 +428,9 @@ musicBtn.onclick = function() {
 window.onclick = function(event) {
   if (event.target == musicModal) {
     musicModal.style.display = "none";
+  }
+  else if (event.target == resourceModal) {
+    resourceModal.style.display = "none";
   }
 }
 
@@ -504,3 +534,12 @@ nextBtn.addEventListener('click', nextSong)
 audioTrack.addEventListener('timeupdate', updateProgress)
 progressContainer.addEventListener('click', setProgress)
 audioTrack.addEventListener('ended', nextSong)
+
+///RESOURCE LIST ---------------------------------------------------
+
+//open modal
+addResourceBtn.onclick = function() {
+  resourceModal.style.display = "block";
+}
+
+// close modal

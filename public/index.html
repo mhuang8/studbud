@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width">
     <title>StudBud</title>
     <link href="style.css" rel="stylesheet" type="text/css"/>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   </head>
 
   <body>
+    <!-----------------------NAVIGATION---------------------->
     <nav class ="horizontal-nav">
       <ul class="horizontal-nav-links"> 
         <li><a href="#studbud">Studbud <i class="fas fa-toolbox"></i></a></li>
@@ -66,23 +68,32 @@
     <section id="studbud" class = "page-container">
       <h1> StudBud <i class="fas fa-toolbox"></i></h1> 
       <h2> Your Personal Study Toolkit </h2>
-      <div id ="introduction-text">
-        <p>StudBud is a collection of productivity tools to help language students and learners manage their study and work efficiently. Use these tools to manage your tasks, time and content. Enjoy some calming music as you study to boost your focus and productivity. </p>
+      <div>
+        <p id ="introduction-text">StudBud is a collection of productivity tools to help language students and learners manage their study and work efficiently. Use these tools to manage your tasks, time and content. Enjoy some calming music as you study to boost your focus and productivity. </p>
       </div> 
       
       <div id = "icon-container">
-        <div class = "icon-element">
+        <div class = "icon-col">
+          <figure class= "icon-box">
+              <img class ="icon" src="images/plan-icon.png" alt="pencil and notebook icon" width = "130px">
+          </figure>
           <h3>Plan</h3>
           <p>Use the <span style="color:#727CD6;"><strong>Task List</strong></span> to keep track of your study tasks or set goals. Access the <span style="color:#727CD6;"><strong>Kanban Board</strong></span> to manage these tasks and build a flexible schedule. Embrace organisation and develop positive language study routines.</p>
         </div>
 
-        <div class = "icon-element">
+        <div class = "icon-col">
+          <figure class= "icon-box">
+            <img class ="icon" src="images/time-icon.png" alt="clock icon" width = "130px">
+          </figure>
           <h3>Time</h3>
           <p>Use the <span style="color:#F7A610;"><strong>Stopwatch</strong></span> to track your time spent on different categories of language learning. View your total tracked study time in the <span style="color:#F7A610;"><strong>Flow Time Tracker</strong></span> and use the results to reflect on your progressive study effort. </p>
         </div>
 
         <!--adapted the reading list into a resource list to suit the needs of my users-->
-        <div class = "icon-element">
+        <div class = "icon-col">
+          <figure class= "icon-box">
+            <img class ="icon" src="images/store-icon.png" alt="list and maginifying glass icon" width = "130px">
+          </figure>
           <h3>Store</h3>
           <p>Use the <span style="color:#DA6EA4;"><strong>Resource List</strong></span> to store and organise your study resources for easy access anytime. Build a library of your favourite online language content for future reference. </p>
         </div>
@@ -186,6 +197,7 @@
       <h3> Flow Time Tracker </h3>
 
       <div id = "todayDate"></div>
+      <div id = "currentTime"></div>
 
       <table id = "flowTimeTable">
         <tr class = "flowTimeHeading">
@@ -216,22 +228,27 @@
     <!-----------------RESOURCE LIST------------------->
     <section id = "resourcelist" class = "page-container">
       <h3> Resource List </h3>
-
+      <div>
+        <li><a href="#Read">Read</a></li>
+        <li><a href="#Watch">Watch</a></li>
+        <li><a href="#Listen">Listen</a></li>
+      </div>
       <button type="submit" id="addResourceBtn">+ Resource</button>
-      <div id="resourceModal" class="resource-modal-box">
-        <div class="resource-modal-content">
 
+      <div id="resourceModal" class="modal-box">
+        <div class="resource-modal-content">
+          <form id="resourceForm">
+            <h4>New Resource</h4>
+            <input placeholder = "Resource Name" type="text" name="resource-name" id="resourceNameInput">
+            <textarea placeholder = "Description (optional)" type="text" name="resource-description" id="resourceDescriptionInput" rows="3"></textarea>
+            <input placeholder = "Resource Link" type="url" name="resource-link" id="resourceLinkInput">
+    
+            <button type="submit" id="resourceBtn">Add</button>
+          </form>
         </div>
       </div>
 
       <!-- Resource Item Input-->
-      <form id="resourceForm">
-        <input placeholder = "Resource Name" type="text" name="resource-name" id="resourceNameInput">
-        <textarea placeholder = "Description" type="text" name="resource-description" id="resourceDescriptionInput" rows="2"></textarea>
-        <input placeholder = "Resource Link" type="url" name="resource-link" id="resourceLinkInput">
-
-        <button type="submit" id="resourceBtn">Add Resource</button>
-      </form>
     </section>
 
     </main>
