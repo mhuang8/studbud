@@ -231,8 +231,7 @@ section#home{
 }
 
 .icon-col{
-  padding-right: 4rem;
-  width: 30%;
+  width: 25%;
 }
 
 .icon-box{
@@ -366,6 +365,10 @@ td:last-child {
   padding: 0.2rem 0 0.5rem 0;
 }
 
+#boardNameInput{
+  width:40%;
+}
+
 #board-container{
   display:flex;
   overflow-x: scroll;
@@ -375,25 +378,38 @@ td:last-child {
   background-color: #d2d7f5;
   box-shadow: 0px 3px 8px 0px rgba(85, 92, 121, 0.1);
   border-radius: 0.4rem;
-  padding:0.9rem;
+  padding: 1.2rem 0.9rem 0.9rem 0.9rem;
   margin: 0 0.3rem;
   flex-basis: 25%;
   flex-flow: column;
   min-width: 7.5rem;
   height: 100%;
   transition: all 0.2s linear;
+  position: relative;
 }
 
 .boardColumn:nth-child(2n){
-  background-color: rgb(209, 222, 243, 0.9);
+  background-color: #d1def3;
 }
 
-.kanbanCard{
+.boardBarDecoration{
+  background-color: #868FDE;
+  width:100%;
+  height: 1rem;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: 0.4rem 0.4rem 0 0;
+}
+
+
+#kanbanCard{
   background-color: #FFFFFF;
   padding: 0.9rem;
   margin: 0.9rem 0;
   border-radius: 0.4rem;
   box-shadow: 0px 3px 6px 0px rgba(172, 172, 172, 0.1);
+  cursor: move;
 }
 
 .kanbanPriority{
@@ -658,4 +674,56 @@ nav .fa:hover{
 
 
 
+/*---------------------Responsive CSS-----------------------*/
+@media screen and (max-width: 700px) {
+  html{
+    width:100%;
+  }
 
+  body {
+    display: block;
+    min-height: 200px;
+    padding:0px;
+  }
+  section{
+    display:block;
+    text-align: center;
+  }
+  /*nav*/
+  .horizontal-nav-links li:first-child{
+    transform: translate(20%, 0%);
+    margin: 0 auto;
+  }
+
+  /*home*/
+  #icon-container{
+    flex-direction:column;
+  }
+  .icon-col{
+    width:100%;
+    margin: 0 auto;
+    padding-top: 3rem;
+  }
+  .icon-box{
+    margin: 0 auto;
+  }
+  #introduction-text{
+    width:100%;
+  }
+
+  /*task list*/
+  #taskform{
+    flex-direction: column;
+  }
+
+  /*kanban*/
+  #board-container{
+    flex-direction: column;
+  }
+  .boardColumn{
+    margin: 1rem 0;
+  }
+  #boardNameInput{
+    width:70%;
+  }
+}

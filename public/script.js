@@ -34,7 +34,7 @@ var resourceModal = document.getElementById("resourceModal");
 var addResourceBtn = document.getElementById("addResourceBtn");
 
 ///NAVIGATION ---------------------------------------------------
-  //------Modular code:THIS SECTION IN NAVIGATION.JS file in components folder
+//------Modular code:THIS SECTION IN NAVIGATION.JS file in components folder----//
 class Navigation{
   constructor(links, pages){
     this.links = links;
@@ -48,7 +48,7 @@ class Navigation{
 
   setPage(pageId){
     this.currentPage = pageId;
-    console.log(this.currentPage);
+    //console.log(this.currentPage);
     //change the page within the html
     this.links.forEach((link)=> {
       link.classList.remove('active');
@@ -68,10 +68,9 @@ class Navigation{
   }
 }
 //export default Navigation;
-
 //---------------------------------
-
 //import Navigation from './components/navigation';
+
 const links = document.querySelectorAll('nav > ul > li > a');
 const pages = document.querySelectorAll('.page-container');
 
@@ -127,7 +126,6 @@ function addTask(taskDescription, dueDate, completionTime,estimatedTime, priorit
   renderTask(task);
   //calling function for kanban board
   renderKanban(task);
-
 }
 
 
@@ -180,15 +178,14 @@ function renderTask(task){
   //Setting the style colours depending on priority rating
   var newTaskItem = document.getElementsByClassName("newTaskItem");
   var taskCheckboxInput = document.getElementsByClassName("taskCheckboxInput");
-
   //Iteration: changed the colours to appropriately correlate with the priority (pink = high, blue = low)
     if (task.priorityRating  === "Low"){
       newTaskItem[newTaskItem.length-1].style.backgroundColor = "#E2EDF7";
       taskCheckboxInput[taskCheckboxInput.length-1].style.border = "solid #8CB7F2";
       //taskCheckboxInput.addEventListener("click", function(event){
         //askCheckboxInput.style.backgroundColor = "solid #F7D7E7";
-      }
     
+    }
     else if(task.priorityRating  === "Medium"){
       newTaskItem[newTaskItem.length-1].style.backgroundColor = "#FCF4DD";
       taskCheckboxInput[taskCheckboxInput.length-1].style.border = "solid #F7D382";
@@ -200,15 +197,19 @@ function renderTask(task){
   }
 
 
-///KANBAN BOARD ---------------------------------------------------
-const cardItems = document.querySelectorAll('.kanbanCard');
-const boardColumn = document.querySelectorAll('.boardColumn');
+///KANBAN BOARD ---------------------------------------------------------
+const kanbanCard = document.querySelector('#kanbanCard');
+const boardColumns = document.querySelectorAll('.boardColumn');
+var kanbanPriority = document.getElementsByClassName("kanbanPriority");
+var boardBarDecoration = document.querySelectorAll('.boardBarDecoration');
+var cardArray = [];
 
-//render kanban board
+//render kanban board 
 function renderKanbanBoard(boardName){
   let board = document.createElement("div");
   board.setAttribute("class", "boardColumn");
-  board.innerHTML += "<h4>" + boardName + "</h4>";
+  board.innerHTML += "<div class='boardBarDecoration'>" + "</div>"
+  board.innerHTML += "<h4 contenteditable='true'>" + boardName + "</h4>";
 
   //append the board to the container
   boardContainer.appendChild(board);
@@ -217,50 +218,103 @@ function renderKanbanBoard(boardName){
 //render kanban card
 function renderKanban(task){
   let card = document.createElement("div");
-  card.setAttribute("class", "kanbanCard");
+  card.setAttribute("id", "kanbanCard");
   card.setAttribute("draggable", "true");
 
   card.innerHTML = "<div class = kanbanPriority>" +"<p>" + task.priorityRating + "</p>" + "<div>"
-  card.innerHTML += "<h4 contenteditable=true>" + task.taskDescription + "</h4>"
-  card.innerHTML += "<p>" + "<strong>" + task.dueDate + "<strong>" + "</p>"
-  card.innerHTML += "<p>" + task.completionTime + "</p>"
-
+  card.innerHTML += "<h4>" + task.taskDescription + "</h4>"
+  card.innerHTML += "<p>" + "<i class='far fa-calendar-check'>" + "</i>" + ' ' + "<strong>" + task.dueDate + "<strong>" + ' ' + '(' + task.completionTime + ')' + "</p>"
+  card.innerHTML += "<p>" + task.estimatedTime + ' ' + 'min' + "</p>";
+  cardArray.push(card);
   //append the card to the To-Do Board 
   toDoColumn.appendChild(card);
+
+  if (task.priorityRating  === "Low"){
+    kanbanPriority[kanbanPriority.length-1].style.backgroundColor = "#5598F5";
+  }
+  else if(task.priorityRating  === "Medium"){
+    kanbanPriority[kanbanPriority.length-1].style.backgroundColor = "#F8BF53";
+  }
+  else if(task.priorityRating  === "High"){
+    kanbanPriority[kanbanPriority.length-1].style.backgroundColor = "#EB68A9";
+  }
 }
 
+//add a new board when user submits the form
 kanbanBtn.addEventListener("click", function(event){
   let boardName = boardNameInput.value; 
   renderKanbanBoard(boardName); 
 })
 
-//drag and drop functionality
+//DRAG AND DROP functionality
 let draggedItem = null;
 
-for (let i = 0; i < cardItems.length; i++){
-  const cardItem = cardItems[i];
+/*for (var i of cardItems){
+  i.addEventListener('dragstart', dragStart);
+}
 
-  cardItem.addEventListener('dragstart', function(){
-    console.log('dragstart');
-    draggedItem  = cardItem;
+function dragStart() {
+  console.log('dragstart');
+  draggedItem  = i;
+  setTimeout(function(){
+    i.style.display = 'none';
+  }, 0)
+}*/
+
+/*for (let i = 0; i < cardArray.length; i++){
+const cardItem = cardArray[i];*/
+
+/*for (let i = 0; i < cardArray.length; i++){
+const cardItem = cardArray[i];*/
+document.body.addEventListener('dragstart', function (event) {
+  if( event.target.id == 'kanbanCard' ) {
+    draggedItem  = event.target;
+    console.log('dragstart')
     setTimeout(function(){
-      cardItem.style.display = 'none';
+      event.target.style.display = 'none';
     }, 0)
-    
+  };
+});
+
+document.body.addEventListener('dragend', function (event) {
+  if( event.target.id == 'kanbanCard' ) {
+    console.log('dragend')
+    setTimeout(function(){
+      event.target.style.display = 'block';
+      draggedItem  = null;
+    }, 0)
+  };
+});
+
+for (let j = 0; j< boardColumns.length; j++){
+  const boardColumn = boardColumns[j];
+
+  boardColumn.addEventListener('dragover', function (event) {
+    event.preventDefault();
+    console.log('dragover')
   });
 
-  cardItem.addEventListener('dragend', function(){
+  boardColumn.addEventListener('dragenter', function (event) {
+    event.preventDefault();
+    console.log('dragenter')
+  });
+
+  boardColumn.addEventListener('drop', function (event) {
+    console.log('drop');
+    this.append(draggedItem);
+    
+  });
+}
+
+  /*cardItem.addEventListener('dragend', function(){
     console.log('dragend');
     setTimeout(function(){
       draggedItem.style.display = 'block';
       draggedItem = null;
     }, 0);
-  })
+  })*/
 
-  for (let j = 0; j < boardColumn.length; j++){
-    const boardItem = boardColumn[j];
-  }
-}
+//}
 
 ///STOPWATCH ----------------------------------------------------
 const startCounterButton = document.getElementById("startCounter");
@@ -339,14 +393,12 @@ function startTimer() {
   }, 1000)
 }
 
-
 startCounterButton.addEventListener("click", function(event){
   startCounterButton.disabled = true;
   startTimer();
 
   //record the start time in flow time tracker
   formatFlowTime();
-
   
  })
 
@@ -397,18 +449,48 @@ startCounterButton.addEventListener("click", function(event){
 
  //get current time
  var currentTime = document.getElementById("currentTime");
-
+ var vocabFlowTime = document.getElementById("vocabFlowTime")
+ var textbookFlowTime = document.getElementById("textbookFlowTime")
+ var readingFlowTime = document.getElementById("readingFlowTime")
+ var timeIndex = 0;
+ 
  function formatFlowTime() {
    var today = new Date();
-   var time = today.getHours() + ":" + today.getMinutes();
+   //var time = today.getHours() + ":" + today.getMinutes();
+   
+   var time;
+   if(today.getMinutes() < 10){
+    time = today.getHours() + ":0" + today.getMinutes();
+   }
+   else if(today.getMinutes() >= 10){
+    time = today.getHours() + ":" + today.getMinutes();
+   }
+  
    //store to local storage using key/value
-   let key = "time" + (localStorage.length + 1).toString();
+   let key = "time" + (timeIndex + 1).toString();
+   timeIndex = timeIndex + 1;
    window.localStorage.setItem(key, JSON.stringify(time));
-   //get from local storage
-   let timeData = JSON.parse(window.localStorage.getItem('time'));
 
-   currentTime.innerHTML = "<div>" + timeData + "</div>"
- }
+   //get from local storage
+   let timeData = JSON.parse(window.localStorage.getItem(key));
+   if (selectStudyTypeInput.value == "Vocab") {
+    var vocabStartTime = document.createElement ("tr")
+    vocabStartTime.innerHTML = "<p>" + timeData + "</p>"
+    vocabFlowTime.appendChild (vocabStartTime);
+   } 
+   else if (selectStudyTypeInput.value == "Textbook") {
+    var textbookStartTime = document.createElement ("tr")
+    textbookStartTime.innerHTML = "<p>" + timeData + "</p>"
+    textbookFlowTime.appendChild (textbookStartTime);
+   } 
+   else if (selectStudyTypeInput.value == "Reading") {
+    var readingStartTime = document.createElement ("tr")
+    readingStartTime.innerHTML = "<p>" + timeData + "</p>"
+    readingFlowTime.appendChild (readingStartTime);
+   }
+  }
+   //currentTime.innerHTML = "<div>" + timeData + "</div>"
+ 
 
  
 
@@ -424,6 +506,7 @@ musicBtn.onclick = function() {
   musicModal.style.display = "block";
 }
 
+//APPLIES TO MUSIC PLAYER AND RESOURCE LIST
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   if (event.target == musicModal) {

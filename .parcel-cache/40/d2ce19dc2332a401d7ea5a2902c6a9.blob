@@ -1,0 +1,28 @@
+//------Modular code:THIS SECTION IN NAVIGATION.JS file in components folder
+class $a800c35920c7f688f9a6a8903974e2f9$var$Navigation {
+    constructor(links, pages){
+        this.links = links;
+        this.pages = pages;
+        this.currentPage = null;
+    }
+    getLinks() {
+        console.log(this.links);
+    }
+    setPage(pageId) {
+        this.currentPage = pageId;
+        //console.log(this.currentPage);
+        //change the page within the html
+        this.links.forEach((link)=>{
+            link.classList.remove('active');
+            if (this.getHash(link) === pageId) link.classList.add('active');
+        });
+        this.pages.forEach((page)=>{
+            page.style.display = 'none';
+        });
+        document.getElementById(pageId).style.display = "block";
+    }
+    getHash(link) {
+        return link.href.split("#")[1];
+    }
+}
+var $a800c35920c7f688f9a6a8903974e2f9$export$9099ad97b570f7c = $a800c35920c7f688f9a6a8903974e2f9$var$Navigation;

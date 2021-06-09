@@ -113,7 +113,7 @@
       <!-- Date input -->
         <label for="dueDate"></label>
         <input placeholder = "Due Date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="dueDate" id="dueDateInput">
-       
+        
         
       <!-- Time input -->
         <label for="completionTime"></label>
@@ -155,18 +155,21 @@
 
       <!-- Board Name Input -->
       <form id="kanbanForm">
-        <input style="width:30%" placeholder = "New Board Name" type="text" name="board-name" id="boardNameInput" >
+        <input placeholder = "New Board Name" type="text" name="board-name" id="boardNameInput" >
         <button type="submit" id="kanbanBtn">+ Board</button>
       </form>
 
       <div id = "board-container">
         <div class = "boardColumn" id = "toDoColumn">
+          <div class ="boardBarDecoration"></div>
           <h4 contenteditable="true"> To-do </h4>
         </div>
         <div class = "boardColumn">
+          <div class ="boardBarDecoration"></div>
           <h4 contenteditable="true"> In Progress </h4>
         </div>
         <div class = "boardColumn">
+          <div class ="boardBarDecoration"></div>
           <h4 contenteditable="true"> Done </h4>
         </div>
       </div>
@@ -178,16 +181,16 @@
       <div id = "stopwatch-box">
         <label for="studyType"><strong>Study Type: </strong></label>
         <select name="studyType" id="studyTypeInput">
-          <option value="Vocab">Vocab Practice</option>
-          <option value="Textbook">Textbook Study</option>
+          <option value="Vocab">Vocab</option>
+          <option value="Textbook">Textbook</option>
           <option value="Reading">Reading</option>
         </select>
         <div id ="counter"></div>
 
         <div id = "stopwatchButtonsContainer">
-          <button id = "startCounter"> Start </button>
-          <button id = "stopCounter"> Stop </button>
-          <button id = "resetCounter"> Reset </button>
+          <button id = "startCounter"> Start <i class="fas fa-play"></i></button>
+          <button id = "stopCounter"> Stop <i class="fas fa-pause"></i></button>
+          <button id = "resetCounter"> Reset <i class="fas fa-redo-alt"></i></button>
         </div>
       </div>
     </section>
@@ -204,15 +207,15 @@
           <th style="width:60%">Study Type</th>
           <th>Total Study Time</th>
         </tr>
-        <tr class = "flowTimeTask">
+        <tr class = "flowTimeTask" id = "vocabFlowTime">
           <td>Vocab Practice</td>
           <td id = "vocabTimer"></td>
         </tr>
-        <tr class = "flowTimeTask">
+        <tr class = "flowTimeTask" id = "textbookFlowTime">
           <td>Textbook Study</td>
           <td id = "textbookTimer"></td>
         </tr>
-        <tr class = "flowTimeTask">
+        <tr class = "flowTimeTask" id = "readingFlowTime">
           <td>Reading</td>
           <td id = "readingTimer"></td>
         </tr>
@@ -237,6 +240,7 @@
 
       <div id="resourceModal" class="modal-box">
         <div class="resource-modal-content">
+          <!-- Resource Item Input-->
           <form id="resourceForm">
             <h4>New Resource</h4>
             <input placeholder = "Resource Name" type="text" name="resource-name" id="resourceNameInput">
@@ -248,7 +252,6 @@
         </div>
       </div>
 
-      <!-- Resource Item Input-->
     </section>
 
     </main>
