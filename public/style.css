@@ -18,7 +18,6 @@ body {
   margin: 0 auto;
   font-family: 'Lato', sans-serif;
   color: #242424;
-  padding-left:180px;
 }
 
 section{
@@ -144,8 +143,12 @@ nav i{
   display:none;
 }
 
+.sub-page-container:not(#read){
+  display:none;
+}
+
 /*---------------Navigation---------------*/
-nav.horizontal-nav{
+nav#horizontal-nav{
   width:100%;
   height: 2.2rem;
   background-color: #6182EB;
@@ -176,8 +179,8 @@ nav.horizontal-nav{
 }
 
 
-nav.vertical-nav{
-  width: 180px;
+nav#vertical-nav{
+  width: 0;
   height: 100%;
   background-color: #383839;
   display:flex;
@@ -185,10 +188,13 @@ nav.vertical-nav{
   position: fixed;
   left: 0;
   top: 0;
+  overflow-x: hidden;
   padding-top:5rem;
+  transition: 0.5s;
 }
 
 ul.nav-links{
+  display:flex;
   flex-direction: column;
 }
 
@@ -200,6 +206,7 @@ ul.nav-links{
   color: #FFFFFF;
   text-decoration: none;
   font-size: 0.9rem;
+  transition: 0.3s;
 }
 .nav-links a:hover{
   color: rgb(190, 202, 221);
@@ -208,6 +215,11 @@ ul.nav-links{
 .nav-links a.active{
   font-weight:bold;
   color: #6C9FF4;
+}
+
+#main{
+  transition: margin-left .5s;
+  
 }
 /*-----------------Home Page-----------------*/
 section#home{
@@ -254,6 +266,8 @@ div#taskform-box{
   box-shadow: 0px 4px 10px 0px rgba(106, 115, 151, 0.1);
   border-radius: 1rem;
   padding:1.9rem 2.5rem;
+  overflow:auto;
+
 }
 
 #taskform{
@@ -302,11 +316,17 @@ table{
 
 #tasklistTable th{
   color: rgb(92, 97, 114);
+  
 }
 
+.taskHeadingCell{
+  padding: 0.625rem 1.25rem;
+  text-align: left;
+  vertical-align: middle;
+}
 
- #tasklistTable th, #tasklistTable td {
-  padding: 10px 20px;
+.newTaskItem td {
+  padding: 0.625rem 1.25rem;
   text-align: left;
   vertical-align: middle;
 }
@@ -392,6 +412,10 @@ td:last-child {
   background-color: #d1def3;
 }
 
+.boardColumn:nth-child(2n) .boardBarDecoration{
+  background-color: #6C9FF4;
+}
+
 .boardBarDecoration{
   background-color: #868FDE;
   width:100%;
@@ -426,6 +450,7 @@ td:last-child {
   background-color: #ffffff;
   border-radius: 1rem;
   box-shadow: 0px 4px 10px 0px rgba(106, 115, 151, 0.1);
+  overflow: auto;
 }
 #counter{
   color: #383839;
@@ -483,6 +508,12 @@ td:last-child {
   transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
 }
 /*----------------Flow Time Tracker------------------*/
+#flowtime-box{
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
 #todayDate{
   background-color:#a3b2e6;
   color: #FFFFFF;
@@ -491,7 +522,7 @@ td:last-child {
   border-radius: 0.4rem;
 }
 
-#flowTimeTable{
+.flowTimeTable{
   border-spacing: 0 8px; 
 }
 
@@ -499,15 +530,29 @@ td:last-child {
   background-color: #FFFFFF;
 }
 
-#flowTimeTable th{
+.flowTimeTable th{
   padding: 0.6rem 1.2rem;
   text-align: left;
   vertical-align: middle;
 }
-#flowTimeTable td {
+.flowTimeTable td {
   padding: 1.25rem;
 }
 
+.flowTimeFiller th {
+  padding: 0;
+  color: transparent;
+}
+
+#flowTimeForm #studyTypeInput{
+  width:30%;
+}
+
+#pixela-container{
+  background-color: #FFFFFF;
+  border-radius: 1rem;
+  text-align: center;
+}
 /*----------------Music Player------------------*/
 nav button{
   background-color: Transparent;
@@ -651,14 +696,71 @@ nav .fa:hover{
 }
 
 /*---------------------Resource List-----------------------*/
+#resource-page-container{
+  display:flex;
+}
+
+.resource-nav li {
+  padding: 1rem 0rem;
+}
+
+
+.resource-nav .nav-links{
+  position: relative;
+}
+
+
+.resource-nav{
+  width: 10rem;
+}
+
+.resource-nav a{
+  color: #717171;
+  font-weight: 900;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.resource-nav a:hover{
+  color: #383839;
+}
+
+#resource-page-container a.active{
+  color: #DA6EA4;
+  font-weight: 900;
+}
+
+.resource-nav a:after {    
+  content: "";
+  display: block;
+  height: 2px;
+  left: 0%;
+  position: absolute;
+  background: #383839;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+.resource-nav a:hover:after { 
+  width: 70%; 
+  left: 0; 
+}
+
+#resource-page-container a.active:after{
+  background: #DA6EA4;
+}
+
+
 .resource-modal-content {
   background-color: #ffffff;
   box-shadow: 0px 3px 15px 0px rgba(87, 87, 87, 0.1);
   margin: 12% auto;
-  transform: translate(6%, 0);
+  
   padding: 1.7rem;
   border-radius:1rem;
   width: 50%;
+}
+.sub-page-container{
+  flex:1;
 }
 
 #resourceForm{
@@ -672,7 +774,53 @@ nav .fa:hover{
   margin: 0.5rem;
 }
 
+.resourceCardContainer{
+  display:flex;
+  flex-wrap: wrap;
+}
 
+#resourceCard{
+  background-color: #FFFFFF;
+  border-radius: 1rem;
+  padding: 1.2rem 1.6rem;
+  margin: 1.3rem 2rem 0 0;
+  width: 20rem;
+  position: relative;
+  display:inline-block;
+  overflow: auto;
+  
+  
+}
+
+.resourceHyperLink{
+  font-size: 3rem;
+  color:rgb(77, 109, 214);
+}
+
+.resourceHyperLink:hover{
+  color:rgb(57, 85, 177);
+}
+
+#delResourceBtn{
+  float:right;
+  padding: 0.6rem 0.7rem;
+  position:absolute;
+  right:1.2rem;
+  top: 1.2rem;
+}
+
+.openAllLinksBtn{
+  background-color: #ecad38;
+  margin: 0 0.5rem;
+}
+
+.openAllLinksBtn:hover{
+  background-color: #e79c10;
+}
+
+#delResourceBtn{
+  background-color: #3e3e3f;
+}
 
 /*---------------------Responsive CSS-----------------------*/
 @media screen and (max-width: 700px) {
@@ -684,18 +832,18 @@ nav .fa:hover{
     display: block;
     min-height: 200px;
     padding:0px;
+    width:100%;
   }
   section{
     display:block;
     text-align: center;
   }
   /*nav*/
-  .horizontal-nav-links li:first-child{
-    transform: translate(20%, 0%);
-    margin: 0 auto;
-  }
+  
 
   /*home*/
+  #studbud{padding: 4.5rem 3rem;}
+
   #icon-container{
     flex-direction:column;
   }
@@ -716,6 +864,44 @@ nav .fa:hover{
     flex-direction: column;
   }
 
+  div#taskform-box{
+    padding: 1.8rem;
+  }
+
+  .taskHeadingCell{
+    padding:0.625rem;
+  }
+
+  .newTaskItem td{
+    padding: 0.625rem;
+  }
+
+  #minsHeading,
+  #priorityHeading,
+  #spacingHeading{
+    display:none;
+  }
+
+  .newTaskItem td:nth-child(4),
+  .newTaskItem td:nth-child(5),
+  .newTaskItem td:nth-child(6),
+  .newTaskItem button{
+    display:none;
+  }
+
+  .newTaskItem td:nth-child(3){
+    border-bottom-right-radius:10px;
+    border-top-right-radius:10px;
+  }
+
+  .taskCheckboxInput{
+    padding:0.5rem;
+    margin-right:0.4rem;
+    border-radius: 0.4rem;
+  }
+  
+
+
   /*kanban*/
   #board-container{
     flex-direction: column;
@@ -726,4 +912,95 @@ nav .fa:hover{
   #boardNameInput{
     width:70%;
   }
+
+  #kanbanCard{
+    text-align: left;
+  }
+
+  /*stopwatch*/
+  #stopwatch-box{
+    padding:1.8rem;
+  }
+
+  #counter{
+    font-size: 3.2rem;
+    margin: 3rem 0;
+  }
+
+  #stopwatchButtonsContainer{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #stopwatchButtonsContainer button{
+    margin: 1rem auto;
+  }
+
+  /*flow time*/
+  .flowTimeTable th,
+  .flowTimeTable td{
+    font-size: 13px;
+    padding: 0.6rem;
+  }
+  .flowTimeHeading th:last-child{
+    display:none;
+  }
+
+  .flowTimeFiller th:last-child{
+    display:none;
+  }
+
+  #flowTimeForm{
+    margin: 1rem 0;
+  }
+
+  #flowTimeForm #studyTypeInput{
+    width:70%;
+  }
+
+  /*resource list*/
+  ul.nav-links {
+    align-items:flex-start;
+  }
+
+  .resource-nav{
+    width:5rem;
+    padding: 0 0.5rem;
+  }
+
+  .resource-nav li{
+    padding:1rem 0;
+  }
+
+  .resource-nav a:hover:after { 
+    width: 100%;
+  }
+  .resourceCardContainer{
+    justify-content: center;
+  }
+
+  #resourceCard{
+    width:90%;
+    margin: 1rem 0;
+  }
+
+  #button-row button{
+    margin:1rem 0.7rem;
+    width:9rem;
+  }
+
+  .resource-modal-content{
+    width:90%;
+    margin:40% auto;
+  }
+
+ /*music player*/
+ .modal-content{
+   float:none;
+ }
+
+ .music-container{
+   flex-wrap:wrap;
+   justify-content: center;
+ }
 }

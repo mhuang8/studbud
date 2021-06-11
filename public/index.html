@@ -12,13 +12,14 @@
 
   <body>
     <!-----------------------NAVIGATION---------------------->
-    <nav class ="horizontal-nav">
+    <nav id ="horizontal-nav" class = "main-nav">
       <ul class="horizontal-nav-links"> 
+        <li><button id="hamburgerMenu"><i class="fa fa-bars"></i></button></li>
         <li><a href="#studbud">Studbud <i class="fas fa-toolbox"></i></a></li>
         <li><button id="musicBtn"><i class="fa">&#xf001;</i></button></li>
       </ul>
     </nav>
-    <nav class="vertical-nav">
+    <nav id="vertical-nav" class = "main-nav">
       <ul class="nav-links">
         <li><a href="#tasklist" class = "active"><i class="fas fa-check-square"></i> Task List</a></li>
         <li><a href="#kanbanboard"><i class="fas fa-columns"></i> Kanban Board</a></li>
@@ -28,7 +29,7 @@
       </ul>
     </nav>
 
-    <main>
+    <main id = "main">
     <!----------------MUSIC PLAYER------------------->
     <div id="musicModal" class="modal-box">
       <div class="modal-content">
@@ -137,12 +138,12 @@
 
       <table id = "tasklistTable">
         <tr id = "tasklistHeadings">
-          <th style="width:40%">To-do</th>
-          <th style="width:12%">Due Date</th>
-          <th style="width:12%">Completion Time</th>
-          <th style="width:12%">Mins to Complete</th>
-          <th style="width:12%">Task Priority</th>
-          <th style="width:9%"></th>
+          <th class = "taskCell" style="width:40%">To-do</th>
+          <th class = "taskCell" style="width:12%">Due Date</th>
+          <th class = "taskCell" style="width:12%">Completion Time</th>
+          <th class = "taskCell" style="width:12%" id="minsHeading">Mins to Complete</th>
+          <th class = "taskCell" style="width:12%" id="priorityHeading">Task Priority</th>
+          <th class = "taskCell" style="width:9%" id="spacingHeading"></th>
         </tr>
 
       </table>
@@ -155,7 +156,7 @@
 
       <!-- Board Name Input -->
       <form id="kanbanForm">
-        <input placeholder = "New Board Name" type="text" name="board-name" id="boardNameInput" >
+        <input placeholder = "New Board Name" type="text" name="board-name" id="boardNameInput" required>
         <button type="submit" id="kanbanBtn">+ Board</button>
       </form>
 
@@ -198,60 +199,129 @@
     <!-----------------FLOW TIME------------------->
     <section id = "flowtime" class = "page-container">
       <h3> Flow Time Tracker </h3>
+      <div id ="flowtime-box">
+        <div id = "todayDate"></div>
+        <div id = "currentTime"></div>
 
-      <div id = "todayDate"></div>
-      <div id = "currentTime"></div>
+        <!--ITERATION & REFLECTION: After researching more about the Flow Time Tracker method, the tool was iterated to include more study data types to meet the needs of the method. -->
+        <table class = "flowTimeTable" id ="vocabTable">
+          <tr class = "flowTimeHeading">
+            <th width="20%">Study Type</th>
+            <th width="20%">Total Study Time</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Break Time</th>
+            <th>Interrupted</th>
+          </tr>
+          <tr class = "flowTimeTask vocabFlowTime">
+            <td rowspan="10"><strong>Vocab</strong></td>
+            <td rowspan="10" id = "vocabTimer"></td>
 
-      <table id = "flowTimeTable">
-        <tr class = "flowTimeHeading">
-          <th style="width:60%">Study Type</th>
-          <th>Total Study Time</th>
-        </tr>
-        <tr class = "flowTimeTask" id = "vocabFlowTime">
-          <td>Vocab Practice</td>
-          <td id = "vocabTimer"></td>
-        </tr>
-        <tr class = "flowTimeTask" id = "textbookFlowTime">
-          <td>Textbook Study</td>
-          <td id = "textbookTimer"></td>
-        </tr>
-        <tr class = "flowTimeTask" id = "readingFlowTime">
-          <td>Reading</td>
-          <td id = "readingTimer"></td>
-        </tr>
+          </tr>
+        </table>
 
-      </table>
-      
-      <form id="flowTimeForm">
-        <input style="width:30%" placeholder = "New Study Type" type="text" name="studyType" id="studyTypeInput" >
-        <button type="submit" id="flowTimeButton">+</button>
-      </form>
+        <table class = "flowTimeTable" id ="textbookTable">
+          <!--filler headings for the purpose of alignment-->
+          <tr class = "flowTimeFiller">
+            <th width="20%">Study Type</th>
+            <th width="20%">Total Study Time</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Break Time</th>
+            <th>Interrupted</th>
+          </tr>
+          <tr class = "flowTimeTask textbookFlowTime">
+            <td rowspan="10"><strong>Textbook Study</strong></td>
+            <td rowspan="10" id = "textbookTimer"></td>
+          </tr>
+        </table>
+
+        <table class = "flowTimeTable" id ="readingTable">
+          <tr class = "flowTimeFiller">
+            <th width="20%">Study Type</th>
+            <th width="20%">Total Study Time</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Break Time</th>
+            <th>Interrupted</th>
+          </tr>
+          <tr class = "flowTimeTask readingFlowTime">
+            <td rowspan="10"><strong>Reading</strong></td>
+            <td rowspan="10" id = "readingTimer"></td>
+          </tr>
+        </table>
+        
+        <!--Additional future functionality would be to have the JS of this input form functioning for users to be able to add new study types, which would be added to both the flow time tracker and stopwatch-->
+        <form id="flowTimeForm">
+          <input placeholder = "New Study Type" type="text" name="studyType" id="studyTypeInput" >
+          <button type="button" id="flowTimeButton">+</button>
+        </form>
+
+        <br>
+        <!--REFLECTION: A feature that I had intended to implement was a visualisation of the flow time data using the Pixela API. However, upon experimentation and reflection, I found that data visualisation using an external API was a little too complex and beyond the scope of my web development abilities thus far - which is why a filler image has been used here. However, this would be a potential future functionality that I would like to implement after developing my understanding of API's. -->
+        <h4>Study Log</h4>
+        <div id = "pixela-container">
+          <img src = "images/pixela-img.png" alt ="pixel data visualisation" id ="pixela-img" width = "95%"/>
+        </div>
+
+      </div>
     </section>
 
     <!-----------------RESOURCE LIST------------------->
     <section id = "resourcelist" class = "page-container">
       <h3> Resource List </h3>
-      <div>
-        <li><a href="#Read">Read</a></li>
-        <li><a href="#Watch">Watch</a></li>
-        <li><a href="#Listen">Listen</a></li>
-      </div>
-      <button type="submit" id="addResourceBtn">+ Resource</button>
+      <div id = "resource-page-container">
+      <nav class="resource-nav">
+        <ul class="nav-links">
+          <li><a href="#read" class = "active" id = "readLink">Read</a></li>
+          <li><a href="#watch" id = "watchLink">Watch</a></li>
+          <li><a href="#listen" id = "listenLink">Listen</a></li>
+        </ul>
+      </nav>
 
       <div id="resourceModal" class="modal-box">
         <div class="resource-modal-content">
-          <!-- Resource Item Input-->
+        <!-- Resource Item Input-->
           <form id="resourceForm">
             <h4>New Resource</h4>
             <input placeholder = "Resource Name" type="text" name="resource-name" id="resourceNameInput">
-            <textarea placeholder = "Description (optional)" type="text" name="resource-description" id="resourceDescriptionInput" rows="3"></textarea>
             <input placeholder = "Resource Link" type="url" name="resource-link" id="resourceLinkInput">
-    
-            <button type="submit" id="resourceBtn">Add</button>
+            <textarea placeholder = "Description or Notes" name="resource-description" form="resourceForm" id="resourceDescriptionInput" rows="3"></textarea>
+            
+            <button type="submit" id="submitResourceBtn">Add</button>
           </form>
         </div>
       </div>
 
+      <div id = "read" class = "sub-page-container">
+        <div id = "button-row">
+          <button type="button" id="addReadResourceBtn" onclick= "openResourceModal()">+ New Resource</button>
+          <button type="button" class="openAllLinksBtn" onclick= "openReadLinks()">Open All Read Resources</button>
+        </div>
+        <div class = "resourceCardContainer" id = "readPage">
+
+        </div>
+      </div>
+
+      <div id = "watch" class = "sub-page-container">
+        <div id = "button-row">
+          <button type="button" id="addWatchResourceBtn" onclick= "openResourceModal()">+ New Resource</button>
+          <button type="button" class="openAllLinksBtn" onclick= "openWatchLinks()">Open All Watch Resources</button>
+        </div>
+
+        <div class = "resourceCardContainer" id = "watchPage"></div>
+      </div>
+
+      <div id = "listen" class = "sub-page-container">
+        <div id = "button-row">
+          <button type="button" id="addListenResourceBtn" onclick= "openResourceModal()">+ New Resource</button>
+          <button type="button" class ="openAllLinksBtn" onclick= "openListenLinks()">Open All Listen Resources</button>
+        </div>
+
+        <div class = "resourceCardContainer" id = "listenPage"></div>
+      </div>
+
+    </div>
     </section>
 
     </main>

@@ -12,7 +12,6 @@ var tasklist = document.getElementById("tasklistTable");
 var boardContainer = document.getElementById("board-container");
 var toDoColumn = document.getElementById("toDoColumn");
 var boardNameInput = document.getElementById("boardNameInput");
-const kanbanBtn = document.getElementById("kanbanBtn");
 //stopwatch
 
 //music player
@@ -31,7 +30,18 @@ const songCover = document.getElementById("songCover")
 
 //resource list
 var resourceModal = document.getElementById("resourceModal");
-var addResourceBtn = document.getElementById("addResourceBtn");
+const addReadResourceBtn = document.getElementById("addReadResourceBtn");
+const addWatchResourceBtn = document.getElementById("addWatchResourceBtn");
+const addListenResourceBtn = document.getElementById("addListenResourceBtn");
+const submitResourceBtn = document.getElementById("submitResourceBtn");
+const readLink = document.getElementById("readLink");
+const watchLink = document.getElementById("watchLink");
+const listenLink = document.getElementById("listenLink");
+const readPage = document.getElementById("readPage");
+const watchPage = document.getElementById("watch");
+const listenPage = document.getElementById("listen");
+const resourceForm = document.getElementById("resourceForm");
+
 
 ///NAVIGATION ---------------------------------------------------
 //------Modular code:THIS SECTION IN NAVIGATION.JS file in components folder----//
@@ -71,7 +81,7 @@ class Navigation{
 //---------------------------------
 //import Navigation from './components/navigation';
 
-const links = document.querySelectorAll('nav > ul > li > a');
+const links = document.querySelectorAll('.main-nav > ul > li > a');
 const pages = document.querySelectorAll('.page-container');
 
 var nav = new Navigation(links, pages);
@@ -82,6 +92,51 @@ nav.links.forEach(function(link){
     //console.log(nav.getHash(link));
     let pageId = nav.getHash(link);
     nav.setPage(pageId)
+  })
+})
+//NAV collapse-------
+hamburgerMenu = document.getElementById("hamburgerMenu")
+verticalNav = document.getElementById("vertical-nav")
+
+function openNav() {
+  document.getElementById("vertical-nav").style.width = "11.25rem";
+  document.getElementById("main").style.marginLeft = "11.25rem";
+
+  verticalNav.classList.add('open');
+  hamburgerMenu.querySelector('i.fa').classList.remove('fa-bars');
+  hamburgerMenu.querySelector('i.fa').classList.add('fa-times');
+}
+
+function closeNav() {
+  document.getElementById("vertical-nav").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
+
+  verticalNav.classList.remove('open');
+  hamburgerMenu.querySelector('i.fa').classList.remove('fa-times');
+  hamburgerMenu.querySelector('i.fa').classList.add('fa-bars');
+}
+
+hamburgerMenu.addEventListener('click', () => {
+  var isOpen = verticalNav.classList.contains('open')
+
+  if(isOpen) {
+    closeNav();
+  } 
+  else{
+    openNav();
+  }
+})
+
+//RESOURCE LIST NAV---------------------------------
+const subLinks = document.querySelectorAll('.resource-nav > ul > li > a');
+const subPages = document.querySelectorAll('.sub-page-container');
+
+var resourceNav = new Navigation(subLinks, subPages);
+
+resourceNav.links.forEach((link) => {
+  link.addEventListener('click', function(){
+    let pageId = resourceNav.getHash(link);
+    resourceNav.setPage(pageId);
   })
 })
 
@@ -184,7 +239,6 @@ function renderTask(task){
       taskCheckboxInput[taskCheckboxInput.length-1].style.border = "solid #8CB7F2";
       //taskCheckboxInput.addEventListener("click", function(event){
         //askCheckboxInput.style.backgroundColor = "solid #F7D7E7";
-    
     }
     else if(task.priorityRating  === "Medium"){
       newTaskItem[newTaskItem.length-1].style.backgroundColor = "#FCF4DD";
@@ -202,7 +256,7 @@ const kanbanCard = document.querySelector('#kanbanCard');
 const boardColumns = document.querySelectorAll('.boardColumn');
 var kanbanPriority = document.getElementsByClassName("kanbanPriority");
 var boardBarDecoration = document.querySelectorAll('.boardBarDecoration');
-var cardArray = [];
+const kanbanForm = document.getElementById("kanbanForm");
 
 //render kanban board 
 function renderKanbanBoard(boardName){
@@ -225,7 +279,6 @@ function renderKanban(task){
   card.innerHTML += "<h4>" + task.taskDescription + "</h4>"
   card.innerHTML += "<p>" + "<i class='far fa-calendar-check'>" + "</i>" + ' ' + "<strong>" + task.dueDate + "<strong>" + ' ' + '(' + task.completionTime + ')' + "</p>"
   card.innerHTML += "<p>" + task.estimatedTime + ' ' + 'min' + "</p>";
-  cardArray.push(card);
   //append the card to the To-Do Board 
   toDoColumn.appendChild(card);
 
@@ -238,11 +291,13 @@ function renderKanban(task){
   else if(task.priorityRating  === "High"){
     kanbanPriority[kanbanPriority.length-1].style.backgroundColor = "#EB68A9";
   }
+  console.log(kanbanPriority);
 }
 
 //add a new board when user submits the form
-kanbanBtn.addEventListener("click", function(event){
+kanbanForm.addEventListener("submit", function(event){
   let boardName = boardNameInput.value; 
+  event.preventDefault();
   renderKanbanBoard(boardName); 
 })
 
@@ -393,12 +448,30 @@ function startTimer() {
   }, 1000)
 }
 
+var startKey;
+var endKey;
+var today = new Date();
+
 startCounterButton.addEventListener("click", function(event){
   startCounterButton.disabled = true;
   startTimer();
 
-  //record the start time in flow time tracker
-  formatFlowTime();
+  //get start time for flow time tracker
+   //var time = today.getHours() + ":" + today.getMinutes();
+   
+   var time;
+   if(today.getMinutes() < 10){
+    time = today.getHours() + ":0" + today.getMinutes();
+   }
+   else if(today.getMinutes() >= 10){
+    time = today.getHours() + ":" + today.getMinutes();
+   }
+  
+   //store to local storage using key/value
+   startKey = "startTime" + (startTimeIndex + 1).toString();
+   startTimeIndex = startTimeIndex + 1;
+   window.localStorage.setItem(startKey, JSON.stringify(time));
+
   
  })
 
@@ -417,8 +490,24 @@ startCounterButton.addEventListener("click", function(event){
   document.getElementById("textbookTimer").innerHTML = formatTime(timerData["Textbook"])
   document.getElementById("readingTimer").innerHTML = formatTime(timerData["Reading"])
   
+  //get end time for flow time tracker
+  var time;
+   if(today.getMinutes() < 10){
+    time = today.getHours() + ":0" + today.getMinutes();
+   }
+   else if(today.getMinutes() >= 10){
+    time = today.getHours() + ":" + today.getMinutes();
+   }
+  
+   //store to local storage using key/value
+   endKey = "endTime" + (endTimeIndex + 1).toString();
+   endTimeIndex = endTimeIndex + 1;
+   window.localStorage.setItem(endKey, JSON.stringify(time));
 
+   //record the start and time in flow time tracker
+   formatFlowTime();
  })
+
  resetCounterButton.addEventListener("click", (e) => {
   timePassed = 0
   clearInterval(timerInterval)
@@ -428,11 +517,10 @@ startCounterButton.addEventListener("click", function(event){
  })
 
 ///FLOW TIME TRACKER --------------------------------------------------
- //user adds own study type
 
- //Show today's date
  var todayDate = document.getElementById("todayDate");
  
+ //Show today's date by calling formatDate function
  todayDate.innerHTML= (formatDate(new Date())); 
 
  function formatDate (date){
@@ -449,55 +537,49 @@ startCounterButton.addEventListener("click", function(event){
 
  //get current time
  var currentTime = document.getElementById("currentTime");
- var vocabFlowTime = document.getElementById("vocabFlowTime")
- var textbookFlowTime = document.getElementById("textbookFlowTime")
- var readingFlowTime = document.getElementById("readingFlowTime")
- var timeIndex = 0;
- 
- function formatFlowTime() {
-   var today = new Date();
-   //var time = today.getHours() + ":" + today.getMinutes();
-   
-   var time;
-   if(today.getMinutes() < 10){
-    time = today.getHours() + ":0" + today.getMinutes();
-   }
-   else if(today.getMinutes() >= 10){
-    time = today.getHours() + ":" + today.getMinutes();
-   }
-  
-   //store to local storage using key/value
-   let key = "time" + (timeIndex + 1).toString();
-   timeIndex = timeIndex + 1;
-   window.localStorage.setItem(key, JSON.stringify(time));
+ var vocabFlowTime = document.getElementsByClassName("vocabFlowTime")
+ var textbookFlowTime = document.getElementsByClassName("textbookFlowTime")
+ var readingFlowTime = document.getElementsByClassName("readingFlowTime")
+ var flowTimeTable = document.getElementsByClassName("flowTimeTable")
+ var startTimeIndex = 0;
+ var endTimeIndex = 0;
 
-   //get from local storage
-   let timeData = JSON.parse(window.localStorage.getItem(key));
+ function formatFlowTime() {
+   //get time from local storage
+   let startTimeData = JSON.parse(window.localStorage.getItem(startKey));
+   let endTimeData = JSON.parse(window.localStorage.getItem(endKey));
+   
    if (selectStudyTypeInput.value == "Vocab") {
     var vocabStartTime = document.createElement ("tr")
-    vocabStartTime.innerHTML = "<p>" + timeData + "</p>"
-    vocabFlowTime.appendChild (vocabStartTime);
+    vocabStartTime.setAttribute("class", "vocabFlowTime");
+    vocabStartTime.innerHTML = "<td>" + startTimeData + "</td>"
+    var vocabEndTime = document.createElement ("td")
+    vocabEndTime.innerHTML = "<td>" + endTimeData + "</td>"
+
+    vocabStartTime.appendChild(vocabEndTime);
+    vocabFlowTime[vocabFlowTime.length-1].parentNode.insertBefore(vocabStartTime, vocabFlowTime[vocabFlowTime.length-1].nextSibling);
    } 
+
    else if (selectStudyTypeInput.value == "Textbook") {
     var textbookStartTime = document.createElement ("tr")
-    textbookStartTime.innerHTML = "<p>" + timeData + "</p>"
-    textbookFlowTime.appendChild (textbookStartTime);
+    textbookStartTime.innerHTML = "<td>" + startTimeData + "</td>"
+    var textbookEndTime = document.createElement ("td")
+    textbookEndTime.innerHTML = "<td>" + endTimeData + "</td>"
+
+    textbookStartTime.appendChild(textbookEndTime);
+    textbookFlowTime[textbookFlowTime.length-1].parentNode.insertBefore(textbookStartTime, textbookFlowTime[textbookFlowTime.length-1].nextSibling);
    } 
    else if (selectStudyTypeInput.value == "Reading") {
     var readingStartTime = document.createElement ("tr")
-    readingStartTime.innerHTML = "<p>" + timeData + "</p>"
-    readingFlowTime.appendChild (readingStartTime);
+    readingStartTime.innerHTML = "<p>" + startTimeData + "</p>"
+    var readingEndTime = document.createElement ("td")
+    readingEndTime.innerHTML = "<td>" + endTimeData + "</td>"
+
+    readingStartTime.appendChild(readingEndTime);
+    readingFlowTime[readingFlowTime.length-1].parentNode.insertBefore(readingStartTime, readingFlowTime[readingFlowTime.length-1].nextSibling);
+
    }
   }
-   //currentTime.innerHTML = "<div>" + timeData + "</div>"
- 
-
- 
-
- 
- //delete button
-
-
 
 ///MUSIC PLAYER ---------------------------------------------------
 
@@ -619,10 +701,117 @@ progressContainer.addEventListener('click', setProgress)
 audioTrack.addEventListener('ended', nextSong)
 
 ///RESOURCE LIST ---------------------------------------------------
+/*
+var resourceNameInput = document.getElementById("resourceNameInput");
+var resourceDescriptionInput = document.getElementById("resourceDescriptionInput");
+//open modal */
 
-//open modal
-addResourceBtn.onclick = function() {
+function openResourceModal(){
+  resourceModal.style.display = "block"
+}
+/*
+addReadResourceBtn.onclick = function() {
   resourceModal.style.display = "block";
 }
 
-// close modal
+addWatchResourceBtn.onclick = function() {
+  resourceModal.style.display = "block";
+}
+
+addListenResourceBtn.onclick = function() {
+  resourceModal.style.display = "block";
+}*/
+var resourceName = document.getElementById("resourceNameInput")
+var resourceDescription = document.getElementById("resourceDescriptionInput")
+var resourceLink = document.getElementById("resourceLinkInput")
+var resource = document.getElementById("resourceCard")
+var delResourceBtn = document.getElementById("delResourceBtn")
+
+resourceForm.addEventListener("submit", function(event){
+  event.preventDefault();
+
+  renderResourceCard();
+  resourceModal.style.display = "none";
+  resourceForm.reset();
+})
+
+
+var readLinksArray = [];
+var watchLinksArray = [];
+var listenLinksArray = [];
+
+function renderResourceCard(){
+  let link = resourceLink.value;
+
+  let resourceCard = document.createElement("div");
+  resourceCard.setAttribute("id", "resourceCard");
+
+  let delResource = document.createElement("button");
+  delResource.setAttribute("id", "delResourceBtn")
+  delResource.setAttribute("type", "button");
+  
+  delResource.innerHTML = "<i class='fas fa-trash'>" + "</i>"
+  resourceCard.appendChild(delResource);
+  
+  let a = document.createElement('a');
+  a.setAttribute("href",link);
+  a.setAttribute("target","_blank");
+  a.setAttribute("class","resourceHyperLink");
+  a.innerHTML = "<h4>" + resourceName.value + "</h4>";
+  resourceCard.appendChild(a);
+
+  //resourceCard.innerHTML += "<h4>" + resourceName.value + "</h4>"
+  resourceCard.innerHTML += "<p>" + resourceDescription.value + "</p>"
+  //resourceCard.innerHTML +=  "<a href = link>" + "link" + "</a>"
+
+  if (readLink.className  == "active"){
+    readPage.appendChild(resourceCard);
+    readLinksArray.push(link);
+    console.log(readLinksArray);
+  }
+  else if (watchLink.className  == "active"){
+    watchPage.appendChild(resourceCard);
+    watchLinksArray.push(link);
+    console.log(watchLinksArray);
+  }
+  else if (listenLink.className  == "active"){
+    listenPage.appendChild(resourceCard);
+    listenLinksArray.push(link);
+    console.log(listenLinksArray);
+  }
+
+  delResource.addEventListener("click", function(event){
+    event.preventDefault();
+    resourceCard.remove();
+    console.log("delete")
+  })
+
+  /*
+  function deleteResource() {
+    resource.remove();
+    console.log("delete")
+  }*/
+}
+
+//NOTE TO MARKER: Please disable Chrome pop-up blocks in order for this button to work successfully in opening all links together. The pop-up block may appear upon use for the first time.
+function openReadLinks(){
+  for (let i = 0; i < readLinksArray.length; i++){
+    window.open(readLinksArray[i], '_blank');
+  }
+}
+
+function openWatchLinks(){
+  for (let i = 0; i < watchLinksArray.length; i++){
+    window.open(watchLinksArray[i], '_blank');
+  }
+}
+
+function openListenLinks(){
+  for (let i = 0; i < listenLinksArray.length; i++){
+    window.open(listenLinksArray[i], '_blank');
+  }
+}
+
+
+
+
