@@ -1,0 +1,221 @@
+///CONTENT MANAGEMENT TOOLS - Music Player & Resource/Reading List 
+//Variables for HTML elements using DOM selection:
+//music player----
+var $d7575244b9b86ad0301e2055ea5ca904$var$musicModal = document.getElementById("musicModal");
+var $d7575244b9b86ad0301e2055ea5ca904$var$musicBtn = document.getElementById("musicBtn");
+const $d7575244b9b86ad0301e2055ea5ca904$var$musicContainer = document.querySelector(".music-container");
+const $d7575244b9b86ad0301e2055ea5ca904$var$prevBtn = document.querySelector("#prevBtn");
+const $d7575244b9b86ad0301e2055ea5ca904$var$playBtn = document.querySelector("#playBtn");
+const $d7575244b9b86ad0301e2055ea5ca904$var$nextBtn = document.querySelector("#nextBtn");
+const $d7575244b9b86ad0301e2055ea5ca904$var$audioTrack = document.querySelector("#audioTrack");
+const $d7575244b9b86ad0301e2055ea5ca904$var$progressContainer = document.querySelector(".progress-container");
+const $d7575244b9b86ad0301e2055ea5ca904$var$progressBar = document.querySelector(".progress-bar");
+const $d7575244b9b86ad0301e2055ea5ca904$var$songTitle = document.getElementById("songTitle");
+const $d7575244b9b86ad0301e2055ea5ca904$var$songArtist = document.getElementById("songArtist");
+const $d7575244b9b86ad0301e2055ea5ca904$var$songCover = document.getElementById("songCover");
+//resource list----
+var $d7575244b9b86ad0301e2055ea5ca904$var$resourceModal = document.getElementById("resourceModal");
+const $d7575244b9b86ad0301e2055ea5ca904$var$addReadResourceBtn = document.getElementById("addReadResourceBtn");
+const $d7575244b9b86ad0301e2055ea5ca904$var$addWatchResourceBtn = document.getElementById("addWatchResourceBtn");
+const $d7575244b9b86ad0301e2055ea5ca904$var$addListenResourceBtn = document.getElementById("addListenResourceBtn");
+const $d7575244b9b86ad0301e2055ea5ca904$var$submitResourceBtn = document.getElementById("submitResourceBtn");
+const $d7575244b9b86ad0301e2055ea5ca904$var$readLink = document.getElementById("readLink");
+const $d7575244b9b86ad0301e2055ea5ca904$var$watchLink = document.getElementById("watchLink");
+const $d7575244b9b86ad0301e2055ea5ca904$var$listenLink = document.getElementById("listenLink");
+const $d7575244b9b86ad0301e2055ea5ca904$var$readPage = document.getElementById("readPage");
+const $d7575244b9b86ad0301e2055ea5ca904$var$watchPage = document.getElementById("watch");
+const $d7575244b9b86ad0301e2055ea5ca904$var$listenPage = document.getElementById("listen");
+const $d7575244b9b86ad0301e2055ea5ca904$var$resourceForm = document.getElementById("resourceForm");
+const $d7575244b9b86ad0301e2055ea5ca904$var$openAllLinksBtn = document.getElementById("openAllLinksBtn");
+const $d7575244b9b86ad0301e2055ea5ca904$var$readLinksBtn = document.getElementById("readLinksBtn");
+const $d7575244b9b86ad0301e2055ea5ca904$var$watchLinksBtn = document.getElementById("watchLinksBtn");
+const $d7575244b9b86ad0301e2055ea5ca904$var$listenLinksBtn = document.getElementById("listenLinksBtn");
+var $d7575244b9b86ad0301e2055ea5ca904$var$resourceName = document.getElementById("resourceNameInput");
+var $d7575244b9b86ad0301e2055ea5ca904$var$resourceDescription = document.getElementById("resourceDescriptionInput");
+var $d7575244b9b86ad0301e2055ea5ca904$var$resourceLink = document.getElementById("resourceLinkInput");
+var $d7575244b9b86ad0301e2055ea5ca904$var$resource = document.getElementById("resourceCard");
+///MUSIC PLAYER ---------------------------------------------------
+// When the user clicks on the button, open the modal
+$d7575244b9b86ad0301e2055ea5ca904$var$musicBtn.addEventListener("click", function() {
+    $d7575244b9b86ad0301e2055ea5ca904$var$musicModal.style.display = "block";
+});
+//MODAL APPLIES TO MUSIC PLAYER AND RESOURCE LIST
+// When the user clicks anywhere outside of the modal, close it
+window.addEventListener("click", function(event) {
+    if (event.target == $d7575244b9b86ad0301e2055ea5ca904$var$musicModal) $d7575244b9b86ad0301e2055ea5ca904$var$musicModal.style.display = "none";
+    else if (event.target == $d7575244b9b86ad0301e2055ea5ca904$var$resourceModal) $d7575244b9b86ad0301e2055ea5ca904$var$resourceModal.style.display = "none";
+});
+//Song titles
+//sources (royalty free):
+//https://www.youtube.com/watch?v=l1-MURE3kfc&ab_channel=BgHBeatsBgHBeats
+//https://www.youtube.com/watch?v=t9r4cHSnjq4&ab_channel=LuKremBoLuKremBo
+//https://www.youtube.com/watch?v=r6-8FEYuEYg&ab_channel=ZeekyBeatsZeekyBeats
+//https://www.youtube.com/watch?v=XIhyti2Qa74&ab_channel=LuKremBoLuKremBoVerified
+const $d7575244b9b86ad0301e2055ea5ca904$var$songs = [
+    "Imagine",
+    "Bored",
+    "Fresh Air",
+    "Rose"
+];
+const $d7575244b9b86ad0301e2055ea5ca904$var$artists = [
+    "BgH Beats",
+    "LuKremBo",
+    "Zeeky Beats",
+    "LuKremBo"
+];
+let $d7575244b9b86ad0301e2055ea5ca904$var$songIndex = 1;
+let $d7575244b9b86ad0301e2055ea5ca904$var$artistIndex = 1;
+//load song into DOM
+$d7575244b9b86ad0301e2055ea5ca904$var$loadSong($d7575244b9b86ad0301e2055ea5ca904$var$songs[$d7575244b9b86ad0301e2055ea5ca904$var$songIndex], $d7575244b9b86ad0301e2055ea5ca904$var$artists[$d7575244b9b86ad0301e2055ea5ca904$var$artistIndex]);
+//Function: update song details (title, artist, audio, cover img)
+function $d7575244b9b86ad0301e2055ea5ca904$var$loadSong(song, artist) {
+    $d7575244b9b86ad0301e2055ea5ca904$var$songTitle.innerText = song;
+    $d7575244b9b86ad0301e2055ea5ca904$var$songArtist.innerText = artist;
+    $d7575244b9b86ad0301e2055ea5ca904$var$audioTrack.src = `music/${song}.mp3`;
+    $d7575244b9b86ad0301e2055ea5ca904$var$songCover.src = `images/${song}.png`;
+}
+//plays the song and changes the button icon
+function $d7575244b9b86ad0301e2055ea5ca904$var$playSong() {
+    $d7575244b9b86ad0301e2055ea5ca904$var$musicContainer.classList.add("play");
+    $d7575244b9b86ad0301e2055ea5ca904$var$playBtn.querySelector("i.fas").classList.remove("fa-play");
+    $d7575244b9b86ad0301e2055ea5ca904$var$playBtn.querySelector("i.fas").classList.add("fa-pause");
+    $d7575244b9b86ad0301e2055ea5ca904$var$audioTrack.play();
+}
+//pauses the song and changes the button icon
+function $d7575244b9b86ad0301e2055ea5ca904$var$pauseSong() {
+    $d7575244b9b86ad0301e2055ea5ca904$var$musicContainer.classList.remove("play");
+    $d7575244b9b86ad0301e2055ea5ca904$var$playBtn.querySelector("i.fas").classList.remove("fa-pause");
+    $d7575244b9b86ad0301e2055ea5ca904$var$playBtn.querySelector("i.fas").classList.add("fa-play");
+    $d7575244b9b86ad0301e2055ea5ca904$var$audioTrack.pause();
+}
+//when user clicks the prev song button
+function $d7575244b9b86ad0301e2055ea5ca904$var$prevSong() {
+    $d7575244b9b86ad0301e2055ea5ca904$var$songIndex--;
+    $d7575244b9b86ad0301e2055ea5ca904$var$artistIndex--;
+    if ($d7575244b9b86ad0301e2055ea5ca904$var$songIndex < 0) $d7575244b9b86ad0301e2055ea5ca904$var$songIndex = $d7575244b9b86ad0301e2055ea5ca904$var$songs.length - 1;
+    if ($d7575244b9b86ad0301e2055ea5ca904$var$artistIndex < 0) $d7575244b9b86ad0301e2055ea5ca904$var$artistIndex = $d7575244b9b86ad0301e2055ea5ca904$var$artists.length - 1;
+    $d7575244b9b86ad0301e2055ea5ca904$var$loadSong($d7575244b9b86ad0301e2055ea5ca904$var$songs[$d7575244b9b86ad0301e2055ea5ca904$var$songIndex], $d7575244b9b86ad0301e2055ea5ca904$var$artists[$d7575244b9b86ad0301e2055ea5ca904$var$artistIndex]);
+    $d7575244b9b86ad0301e2055ea5ca904$var$playSong();
+}
+//when user clicks the next song button
+function $d7575244b9b86ad0301e2055ea5ca904$var$nextSong() {
+    $d7575244b9b86ad0301e2055ea5ca904$var$songIndex++;
+    $d7575244b9b86ad0301e2055ea5ca904$var$artistIndex++;
+    if ($d7575244b9b86ad0301e2055ea5ca904$var$songIndex > $d7575244b9b86ad0301e2055ea5ca904$var$songs.length - 1) $d7575244b9b86ad0301e2055ea5ca904$var$songIndex = 0;
+    if ($d7575244b9b86ad0301e2055ea5ca904$var$artistIndex > $d7575244b9b86ad0301e2055ea5ca904$var$artists.length - 1) $d7575244b9b86ad0301e2055ea5ca904$var$artistIndex = 0;
+    $d7575244b9b86ad0301e2055ea5ca904$var$loadSong($d7575244b9b86ad0301e2055ea5ca904$var$songs[$d7575244b9b86ad0301e2055ea5ca904$var$songIndex], $d7575244b9b86ad0301e2055ea5ca904$var$artists[$d7575244b9b86ad0301e2055ea5ca904$var$artistIndex]);
+    $d7575244b9b86ad0301e2055ea5ca904$var$playSong();
+}
+//update the progress bar as song plays
+function $d7575244b9b86ad0301e2055ea5ca904$var$updateProgress(e) {
+    //console.log(e.srcElement.currentTime)
+    const { duration: duration , currentTime: currentTime  } = e.srcElement;
+    const progressPercent = currentTime / duration * 100;
+    $d7575244b9b86ad0301e2055ea5ca904$var$progressBar.style.width = `${progressPercent}%`;
+}
+//when users click on progress bar, jumps to that part of song
+function $d7575244b9b86ad0301e2055ea5ca904$var$setProgress(e) {
+    const width = this.clientWidth;
+    const clickX = e.offsetX;
+    const duration = $d7575244b9b86ad0301e2055ea5ca904$var$audioTrack.duration;
+    $d7575244b9b86ad0301e2055ea5ca904$var$audioTrack.currentTime = clickX / width * duration;
+}
+//EVENT LISTENERS
+$d7575244b9b86ad0301e2055ea5ca904$var$playBtn.addEventListener("click", ()=>{
+    const isPlaying = $d7575244b9b86ad0301e2055ea5ca904$var$musicContainer.classList.contains("play");
+    if (isPlaying) $d7575244b9b86ad0301e2055ea5ca904$var$pauseSong();
+    else $d7575244b9b86ad0301e2055ea5ca904$var$playSong();
+});
+//Change songs
+$d7575244b9b86ad0301e2055ea5ca904$var$prevBtn.addEventListener("click", $d7575244b9b86ad0301e2055ea5ca904$var$prevSong);
+$d7575244b9b86ad0301e2055ea5ca904$var$nextBtn.addEventListener("click", $d7575244b9b86ad0301e2055ea5ca904$var$nextSong);
+$d7575244b9b86ad0301e2055ea5ca904$var$audioTrack.addEventListener("timeupdate", $d7575244b9b86ad0301e2055ea5ca904$var$updateProgress);
+$d7575244b9b86ad0301e2055ea5ca904$var$progressContainer.addEventListener("click", $d7575244b9b86ad0301e2055ea5ca904$var$setProgress);
+$d7575244b9b86ad0301e2055ea5ca904$var$audioTrack.addEventListener("ended", $d7575244b9b86ad0301e2055ea5ca904$var$nextSong);
+///RESOURCE LIST ---------------------------------------------------
+/*function openResourceModal() {
+    resourceModal.style.display = "block";
+  }*/ //displays the modal with form when buttons are clicked
+$d7575244b9b86ad0301e2055ea5ca904$var$addReadResourceBtn.addEventListener("click", function() {
+    $d7575244b9b86ad0301e2055ea5ca904$var$resourceModal.style.display = "block";
+});
+$d7575244b9b86ad0301e2055ea5ca904$var$addWatchResourceBtn.addEventListener("click", function() {
+    $d7575244b9b86ad0301e2055ea5ca904$var$resourceModal.style.display = "block";
+});
+$d7575244b9b86ad0301e2055ea5ca904$var$addListenResourceBtn.addEventListener("click", function() {
+    $d7575244b9b86ad0301e2055ea5ca904$var$resourceModal.style.display = "block";
+});
+//formats the card when form is submitted & closes modal
+$d7575244b9b86ad0301e2055ea5ca904$var$resourceForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    $d7575244b9b86ad0301e2055ea5ca904$var$renderResourceCard();
+    $d7575244b9b86ad0301e2055ea5ca904$var$resourceModal.style.display = "none";
+    $d7575244b9b86ad0301e2055ea5ca904$var$resourceForm.reset();
+});
+//arrays for storing links for that page (read,watch,listen)
+var $d7575244b9b86ad0301e2055ea5ca904$var$readLinksArray = [];
+var $d7575244b9b86ad0301e2055ea5ca904$var$watchLinksArray = [];
+var $d7575244b9b86ad0301e2055ea5ca904$var$listenLinksArray = [];
+//formats the resource card to the page using user inputs
+function $d7575244b9b86ad0301e2055ea5ca904$var$renderResourceCard() {
+    let link = $d7575244b9b86ad0301e2055ea5ca904$var$resourceLink.value;
+    let resourceCard = document.createElement("div");
+    resourceCard.setAttribute("id", "resourceCard");
+    resourceCard.innerHTML += "<div class='resourceBarDecoration'></div>";
+    let delResource = document.createElement("button");
+    delResource.setAttribute("class", "delResourceBtn");
+    delResource.setAttribute("type", "button");
+    delResource.innerHTML = "<i class='fa fa-trash'></i>";
+    resourceCard.appendChild(delResource);
+    let editResource = document.createElement("button");
+    editResource.setAttribute("class", "editResourceBtn");
+    editResource.setAttribute("type", "button");
+    editResource.innerHTML = "<i class='fa fa-edit'></i>";
+    resourceCard.appendChild(editResource);
+    resourceCard.innerHTML += "<h4>" + $d7575244b9b86ad0301e2055ea5ca904$var$resourceName.value + "</h4>";
+    resourceCard.innerHTML += "<p>" + $d7575244b9b86ad0301e2055ea5ca904$var$resourceDescription.value + "</p>";
+    let a = document.createElement("a");
+    a.setAttribute("href", link);
+    a.setAttribute("target", "_blank");
+    a.setAttribute("class", "resourceHyperLink");
+    a.innerHTML = "<p>" + link + "</p>";
+    resourceCard.appendChild(a);
+    //adding the card to the page that is active and pushing link input to array
+    if ($d7575244b9b86ad0301e2055ea5ca904$var$readLink.className == "active") {
+        $d7575244b9b86ad0301e2055ea5ca904$var$readPage.appendChild(resourceCard);
+        $d7575244b9b86ad0301e2055ea5ca904$var$readLinksArray.push(link);
+        console.log($d7575244b9b86ad0301e2055ea5ca904$var$readLinksArray);
+    } else if ($d7575244b9b86ad0301e2055ea5ca904$var$watchLink.className == "active") {
+        $d7575244b9b86ad0301e2055ea5ca904$var$watchPage.appendChild(resourceCard);
+        $d7575244b9b86ad0301e2055ea5ca904$var$watchLinksArray.push(link);
+        console.log($d7575244b9b86ad0301e2055ea5ca904$var$watchLinksArray);
+    } else if ($d7575244b9b86ad0301e2055ea5ca904$var$listenLink.className == "active") {
+        $d7575244b9b86ad0301e2055ea5ca904$var$listenPage.appendChild(resourceCard);
+        $d7575244b9b86ad0301e2055ea5ca904$var$listenLinksArray.push(link);
+        console.log($d7575244b9b86ad0301e2055ea5ca904$var$listenLinksArray);
+    }
+    //delete the resource
+    var delResourceBtn = document.getElementsByClassName("delResourceBtn");
+    for(let i = 0; i < delResourceBtn.length; i++)delResourceBtn[i].addEventListener("click", function(event) {
+        event.preventDefault();
+        resourceCard.remove();
+    //console.log("delete");
+    });
+    //delete the link in the resource
+    var editResourceBtn = document.getElementsByClassName("editResourceBtn");
+    for(let i1 = 0; i1 < editResourceBtn.length; i1++)editResourceBtn[i1].addEventListener("click", function(event) {
+        event.preventDefault();
+        a.setAttribute("contenteditable", "true");
+    });
+}
+//Open all read links on that specific page 
+//NOTE TO MARKER: Please disable Chrome pop-up blocks in order for this button to work successfully in opening all links together. The pop-up block may appear upon use for the first time.
+$d7575244b9b86ad0301e2055ea5ca904$var$readLinksBtn.addEventListener("click", function() {
+    for(let i = 0; i < $d7575244b9b86ad0301e2055ea5ca904$var$readLinksArray.length; i++)window.open($d7575244b9b86ad0301e2055ea5ca904$var$readLinksArray[i], "_blank");
+});
+$d7575244b9b86ad0301e2055ea5ca904$var$watchLinksBtn.addEventListener("click", function() {
+    for(let i = 0; i < $d7575244b9b86ad0301e2055ea5ca904$var$watchLinksArray.length; i++)window.open($d7575244b9b86ad0301e2055ea5ca904$var$watchLinksArray[i], "_blank");
+});
+$d7575244b9b86ad0301e2055ea5ca904$var$listenLinksBtn.addEventListener("click", function() {
+    for(let i = 0; i < $d7575244b9b86ad0301e2055ea5ca904$var$listenLinksArray.length; i++)window.open($d7575244b9b86ad0301e2055ea5ca904$var$listenLinksArray[i], "_blank");
+});

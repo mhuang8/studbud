@@ -1,0 +1,665 @@
+//Variables for HTML elements using DOM selection
+//nav
+hamburgerMenu = document.getElementById("hamburgerMenu");
+verticalNav = document.getElementById("vertical-nav");
+//tasklist
+const $aba770e9ce7dbb561d9a46041b248abf$var$form = document.getElementById("taskform");
+const $aba770e9ce7dbb561d9a46041b248abf$var$button = document.querySelector("#taskform > button");
+var $aba770e9ce7dbb561d9a46041b248abf$var$taskInput = document.getElementById("taskInput");
+var $aba770e9ce7dbb561d9a46041b248abf$var$dueDateInput = document.getElementById("dueDateInput");
+var $aba770e9ce7dbb561d9a46041b248abf$var$completionTimeInput = document.getElementById("completionTimeInput");
+var $aba770e9ce7dbb561d9a46041b248abf$var$estimatedTimeInput = document.getElementById("estimatedTimeInput");
+var $aba770e9ce7dbb561d9a46041b248abf$var$priorityInput = document.getElementById("priorityInput");
+var $aba770e9ce7dbb561d9a46041b248abf$var$tasklist = document.getElementById("tasklistTable");
+//kanban
+var $aba770e9ce7dbb561d9a46041b248abf$var$boardContainer = document.getElementById("board-container");
+var $aba770e9ce7dbb561d9a46041b248abf$var$toDoColumn = document.getElementById("toDoColumn");
+var $aba770e9ce7dbb561d9a46041b248abf$var$boardNameInput = document.getElementById("boardNameInput");
+const $aba770e9ce7dbb561d9a46041b248abf$var$kanbanCard = document.querySelector("#kanbanCard");
+const $aba770e9ce7dbb561d9a46041b248abf$var$boardColumns = document.querySelectorAll(".boardColumn");
+var $aba770e9ce7dbb561d9a46041b248abf$var$kanbanPriority = document.getElementsByClassName("kanbanPriority");
+var $aba770e9ce7dbb561d9a46041b248abf$var$boardBarDecoration = document.querySelectorAll(".boardBarDecoration");
+const $aba770e9ce7dbb561d9a46041b248abf$var$kanbanForm = document.getElementById("kanbanForm");
+//stopwatch
+const $aba770e9ce7dbb561d9a46041b248abf$var$startCounterButton = document.getElementById("startCounter");
+const $aba770e9ce7dbb561d9a46041b248abf$var$stopCounterButton = document.getElementById("stopCounter");
+const $aba770e9ce7dbb561d9a46041b248abf$var$resetCounterButton = document.getElementById("resetCounter");
+const $aba770e9ce7dbb561d9a46041b248abf$var$selectStudyTypeInput = document.getElementById("studyTypeInput");
+const $aba770e9ce7dbb561d9a46041b248abf$var$startBreakCounterBtn = document.getElementById("startBreakCounter");
+const $aba770e9ce7dbb561d9a46041b248abf$var$stopBreakCounterBtn = document.getElementById("stopBreakCounter");
+//music player
+var $aba770e9ce7dbb561d9a46041b248abf$var$musicModal = document.getElementById("musicModal");
+var $aba770e9ce7dbb561d9a46041b248abf$var$musicBtn = document.getElementById("musicBtn");
+const $aba770e9ce7dbb561d9a46041b248abf$var$musicContainer = document.querySelector(".music-container");
+const $aba770e9ce7dbb561d9a46041b248abf$var$prevBtn = document.querySelector("#prevBtn");
+const $aba770e9ce7dbb561d9a46041b248abf$var$playBtn = document.querySelector("#playBtn");
+const $aba770e9ce7dbb561d9a46041b248abf$var$nextBtn = document.querySelector("#nextBtn");
+const $aba770e9ce7dbb561d9a46041b248abf$var$audioTrack = document.querySelector("#audioTrack");
+const $aba770e9ce7dbb561d9a46041b248abf$var$progressContainer = document.querySelector(".progress-container");
+const $aba770e9ce7dbb561d9a46041b248abf$var$progressBar = document.querySelector(".progress-bar");
+const $aba770e9ce7dbb561d9a46041b248abf$var$songTitle = document.getElementById("songTitle");
+const $aba770e9ce7dbb561d9a46041b248abf$var$songArtist = document.getElementById("songArtist");
+const $aba770e9ce7dbb561d9a46041b248abf$var$songCover = document.getElementById("songCover");
+//flow time
+var $aba770e9ce7dbb561d9a46041b248abf$var$todayDate = document.getElementById("todayDate");
+var $aba770e9ce7dbb561d9a46041b248abf$var$currentTime = document.getElementById("currentTime");
+var $aba770e9ce7dbb561d9a46041b248abf$var$vocabFlowTime = document.getElementsByClassName("vocabFlowTime");
+var $aba770e9ce7dbb561d9a46041b248abf$var$textbookFlowTime = document.getElementsByClassName("textbookFlowTime");
+var $aba770e9ce7dbb561d9a46041b248abf$var$readingFlowTime = document.getElementsByClassName("readingFlowTime");
+var $aba770e9ce7dbb561d9a46041b248abf$var$flowTimeTable = document.getElementsByClassName("flowTimeTable");
+//resource list
+const $aba770e9ce7dbb561d9a46041b248abf$var$subLinks = document.querySelectorAll(".resource-nav > ul > li > a");
+const $aba770e9ce7dbb561d9a46041b248abf$var$subPages = document.querySelectorAll(".sub-page-container");
+var $aba770e9ce7dbb561d9a46041b248abf$var$resourceModal = document.getElementById("resourceModal");
+const $aba770e9ce7dbb561d9a46041b248abf$var$addReadResourceBtn = document.getElementById("addReadResourceBtn");
+const $aba770e9ce7dbb561d9a46041b248abf$var$addWatchResourceBtn = document.getElementById("addWatchResourceBtn");
+const $aba770e9ce7dbb561d9a46041b248abf$var$addListenResourceBtn = document.getElementById("addListenResourceBtn");
+const $aba770e9ce7dbb561d9a46041b248abf$var$submitResourceBtn = document.getElementById("submitResourceBtn");
+const $aba770e9ce7dbb561d9a46041b248abf$var$readLink = document.getElementById("readLink");
+const $aba770e9ce7dbb561d9a46041b248abf$var$watchLink = document.getElementById("watchLink");
+const $aba770e9ce7dbb561d9a46041b248abf$var$listenLink = document.getElementById("listenLink");
+const $aba770e9ce7dbb561d9a46041b248abf$var$readPage = document.getElementById("readPage");
+const $aba770e9ce7dbb561d9a46041b248abf$var$watchPage = document.getElementById("watch");
+const $aba770e9ce7dbb561d9a46041b248abf$var$listenPage = document.getElementById("listen");
+const $aba770e9ce7dbb561d9a46041b248abf$var$resourceForm = document.getElementById("resourceForm");
+///NAVIGATION ---------------------------------------------------
+//------Modular code:THIS SECTION IN NAVIGATION.JS file in components folder----//
+class $aba770e9ce7dbb561d9a46041b248abf$var$Navigation {
+    constructor(links, pages){
+        this.links = links;
+        this.pages = pages;
+        this.currentPage = null;
+    }
+    getLinks() {
+        console.log(this.links);
+    }
+    setPage(pageId) {
+        this.currentPage = pageId;
+        //console.log(this.currentPage);
+        //change the page within the html
+        this.links.forEach((link)=>{
+            link.classList.remove("active");
+            if (this.getHash(link) === pageId) link.classList.add("active");
+        });
+        this.pages.forEach((page)=>{
+            page.style.display = "none";
+        });
+        document.getElementById(pageId).style.display = "block";
+    }
+    getHash(link) {
+        return link.href.split("#")[1];
+    }
+}
+//export default Navigation;
+//---------------------------------
+//import Navigation from './components/navigation';
+const $aba770e9ce7dbb561d9a46041b248abf$var$links = document.querySelectorAll(".main-nav > ul > li > a");
+const $aba770e9ce7dbb561d9a46041b248abf$var$pages = document.querySelectorAll(".page-container");
+var $aba770e9ce7dbb561d9a46041b248abf$var$nav = new $aba770e9ce7dbb561d9a46041b248abf$var$Navigation($aba770e9ce7dbb561d9a46041b248abf$var$links, $aba770e9ce7dbb561d9a46041b248abf$var$pages);
+$aba770e9ce7dbb561d9a46041b248abf$var$nav.getLinks();
+$aba770e9ce7dbb561d9a46041b248abf$var$nav.links.forEach(function(link) {
+    link.addEventListener("click", function() {
+        //console.log(nav.getHash(link));
+        let pageId = $aba770e9ce7dbb561d9a46041b248abf$var$nav.getHash(link);
+        $aba770e9ce7dbb561d9a46041b248abf$var$nav.setPage(pageId);
+    });
+});
+//NAV collapse-------
+function $aba770e9ce7dbb561d9a46041b248abf$var$openNav() {
+    document.getElementById("vertical-nav").style.width = "11.25rem";
+    document.getElementById("main").style.marginLeft = "11.25rem";
+    verticalNav.classList.add("open");
+    hamburgerMenu.querySelector("i.fa").classList.remove("fa-bars");
+    hamburgerMenu.querySelector("i.fa").classList.add("fa-times");
+}
+function $aba770e9ce7dbb561d9a46041b248abf$var$closeNav() {
+    document.getElementById("vertical-nav").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+    verticalNav.classList.remove("open");
+    hamburgerMenu.querySelector("i.fa").classList.remove("fa-times");
+    hamburgerMenu.querySelector("i.fa").classList.add("fa-bars");
+}
+hamburgerMenu.addEventListener("click", ()=>{
+    var isOpen = verticalNav.classList.contains("open");
+    if (isOpen) $aba770e9ce7dbb561d9a46041b248abf$var$closeNav();
+    else $aba770e9ce7dbb561d9a46041b248abf$var$openNav();
+});
+//RESOURCE LIST NAV---------------------------------
+var $aba770e9ce7dbb561d9a46041b248abf$var$resourceNav = new $aba770e9ce7dbb561d9a46041b248abf$var$Navigation($aba770e9ce7dbb561d9a46041b248abf$var$subLinks, $aba770e9ce7dbb561d9a46041b248abf$var$subPages);
+$aba770e9ce7dbb561d9a46041b248abf$var$resourceNav.links.forEach((link)=>{
+    link.addEventListener("click", function() {
+        let pageId = $aba770e9ce7dbb561d9a46041b248abf$var$resourceNav.getHash(link);
+        $aba770e9ce7dbb561d9a46041b248abf$var$resourceNav.setPage(pageId);
+    });
+});
+///TASK LIST -------------------------------------------------------
+//event listener for when button clicked
+//OR button.addEventListener("click", function(event) {
+$aba770e9ce7dbb561d9a46041b248abf$var$form.addEventListener("submit", function(event) {
+    //make sure none of the browser function will happen automatically
+    event.preventDefault();
+    //takes the user input
+    let task = $aba770e9ce7dbb561d9a46041b248abf$var$taskInput.value;
+    let dueDate = $aba770e9ce7dbb561d9a46041b248abf$var$dueDateInput.value;
+    let completionTime = $aba770e9ce7dbb561d9a46041b248abf$var$completionTimeInput.value;
+    let estimatedTime = $aba770e9ce7dbb561d9a46041b248abf$var$estimatedTimeInput.value;
+    let priorityRating = $aba770e9ce7dbb561d9a46041b248abf$var$priorityInput.options[$aba770e9ce7dbb561d9a46041b248abf$var$priorityInput.selectedIndex].value;
+    //add it as a task using addTask function
+    $aba770e9ce7dbb561d9a46041b248abf$var$addTask(task, dueDate, completionTime, estimatedTime, priorityRating, false);
+    //console out for debugging
+    console.log($aba770e9ce7dbb561d9a46041b248abf$var$taskListArray);
+});
+//empty array to store tasks
+var $aba770e9ce7dbb561d9a46041b248abf$var$taskListArray = [];
+//The function creates the object & pushes it to an array
+function $aba770e9ce7dbb561d9a46041b248abf$var$addTask(taskDescription, dueDate, completionTime, estimatedTime, priorityRating, completionStatus) {
+    let d = new Date();
+    let dateCreated = d.getFullYear();
+    let task = {
+        taskDescription: taskDescription,
+        dueDate: dueDate,
+        dateCreated: dateCreated,
+        completionTime: completionTime,
+        estimatedTime: estimatedTime,
+        priorityRating: priorityRating,
+        completionStatus: completionStatus
+    };
+    //add the task to the array
+    $aba770e9ce7dbb561d9a46041b248abf$var$taskListArray.push(task);
+    ///return task;
+    $aba770e9ce7dbb561d9a46041b248abf$var$renderTask(task);
+    //calling function for kanban board
+    $aba770e9ce7dbb561d9a46041b248abf$var$renderKanban(task);
+}
+//ADD the task to the screen via HTML
+//pulling the task as a complete object rather than individual parts
+function $aba770e9ce7dbb561d9a46041b248abf$var$renderTask(task) {
+    //create html elements
+    let item = document.createElement("tr");
+    item.setAttribute("class", "newTaskItem");
+    let cell1 = document.createElement("td");
+    cell1.innerHTML += "<label for=taskCheckbox><input type=checkbox name=taskCheckbox class=taskCheckboxInput><strong>" + task.taskDescription + "</strong>" + "</label>";
+    let cell2 = document.createElement("td");
+    cell2.innerHTML += "<p>" + task.dueDate + "</p>";
+    let cell3 = document.createElement("td");
+    cell3.innerHTML += "<p>" + task.completionTime + "</p>";
+    let cell4 = document.createElement("td");
+    cell4.innerHTML += "<p>" + task.estimatedTime + " " + "min" + "</p>";
+    let cell5 = document.createElement("td");
+    cell5.innerHTML += "<p>" + task.priorityRating + "</p>";
+    let cell6 = document.createElement("td");
+    item.append(cell1, cell2, cell3, cell4, cell5, cell6);
+    tasklistTable.appendChild(item);
+    //Extra task DOM elements - further user interaction e.g delete
+    let delButton = document.createElement("button");
+    delButton.setAttribute("class", "taskDelBtn");
+    //create a textNode
+    delButton.innerHTML = "<i class='fas fa-trash'></i>";
+    //get the text appended to button element
+    //append whole button to the item created
+    cell6.appendChild(delButton);
+    //Event Listeners for DOM elements
+    delButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        item.remove();
+    });
+    //Clear the input form
+    $aba770e9ce7dbb561d9a46041b248abf$var$form.reset();
+    //Setting the style colours depending on priority rating
+    var newTaskItem = document.getElementsByClassName("newTaskItem");
+    var taskCheckboxInput = document.getElementsByClassName("taskCheckboxInput");
+    //Iteration: changed the colours to appropriately correlate with the priority (pink = high, blue = low)
+    if (task.priorityRating === "Low") {
+        newTaskItem[newTaskItem.length - 1].style.backgroundColor = "#E2EDF7";
+        taskCheckboxInput[taskCheckboxInput.length - 1].style.border = "solid #8CB7F2";
+    //taskCheckboxInput.addEventListener("click", function(event){
+    //askCheckboxInput.style.backgroundColor = "solid #F7D7E7";
+    } else if (task.priorityRating === "Medium") {
+        newTaskItem[newTaskItem.length - 1].style.backgroundColor = "#FCF4DD";
+        taskCheckboxInput[taskCheckboxInput.length - 1].style.border = "solid #F7D382";
+    } else if (task.priorityRating === "High") {
+        newTaskItem[newTaskItem.length - 1].style.backgroundColor = "#F7D7E7";
+        taskCheckboxInput[taskCheckboxInput.length - 1].style.border = "solid #EAA0D3";
+    }
+}
+///KANBAN BOARD ---------------------------------------------------------
+//render kanban board
+function $aba770e9ce7dbb561d9a46041b248abf$var$renderKanbanBoard(boardName) {
+    let board = document.createElement("div");
+    board.setAttribute("class", "boardColumn");
+    board.innerHTML += "<div class='boardBarDecoration'></div>";
+    board.innerHTML += "<h4 contenteditable='true'>" + boardName + "</h4>";
+    //append the board to the container
+    $aba770e9ce7dbb561d9a46041b248abf$var$boardContainer.appendChild(board);
+}
+//render kanban card
+function $aba770e9ce7dbb561d9a46041b248abf$var$renderKanban(task) {
+    let card = document.createElement("div");
+    card.setAttribute("id", "kanbanCard");
+    card.setAttribute("draggable", "true");
+    card.innerHTML = "<div class = kanbanPriority><p>" + task.priorityRating + "</p>" + "<div>";
+    card.innerHTML += "<h4>" + task.taskDescription + "</h4>";
+    card.innerHTML += "<p><i class='far fa-calendar-check'></i> <strong>" + task.dueDate + "<strong>" + " " + "(" + task.completionTime + ")" + "</p>";
+    card.innerHTML += "<p>" + task.estimatedTime + " " + "min" + "</p>";
+    //append the card to the To-Do Board
+    $aba770e9ce7dbb561d9a46041b248abf$var$toDoColumn.appendChild(card);
+    if (task.priorityRating === "Low") $aba770e9ce7dbb561d9a46041b248abf$var$kanbanPriority[$aba770e9ce7dbb561d9a46041b248abf$var$kanbanPriority.length - 1].style.backgroundColor = "#5598F5";
+    else if (task.priorityRating === "Medium") $aba770e9ce7dbb561d9a46041b248abf$var$kanbanPriority[$aba770e9ce7dbb561d9a46041b248abf$var$kanbanPriority.length - 1].style.backgroundColor = "#F8BF53";
+    else if (task.priorityRating === "High") $aba770e9ce7dbb561d9a46041b248abf$var$kanbanPriority[$aba770e9ce7dbb561d9a46041b248abf$var$kanbanPriority.length - 1].style.backgroundColor = "#EB68A9";
+    console.log($aba770e9ce7dbb561d9a46041b248abf$var$kanbanPriority);
+}
+//add a new board when user submits the form
+$aba770e9ce7dbb561d9a46041b248abf$var$kanbanForm.addEventListener("submit", function(event) {
+    let boardName = $aba770e9ce7dbb561d9a46041b248abf$var$boardNameInput.value;
+    event.preventDefault();
+    $aba770e9ce7dbb561d9a46041b248abf$var$renderKanbanBoard(boardName);
+});
+//DRAG AND DROP functionality
+let $aba770e9ce7dbb561d9a46041b248abf$var$draggedItem = null;
+/*for (var i of cardItems){
+  i.addEventListener('dragstart', dragStart);
+}
+
+function dragStart() {
+  console.log('dragstart');
+  draggedItem  = i;
+  setTimeout(function(){
+    i.style.display = 'none';
+  }, 0)
+}*/ /*for (let i = 0; i < cardArray.length; i++){
+const cardItem = cardArray[i];*/ /*for (let i = 0; i < cardArray.length; i++){
+const cardItem = cardArray[i];*/ document.body.addEventListener("dragstart", function(event) {
+    if (event.target.id == "kanbanCard") {
+        $aba770e9ce7dbb561d9a46041b248abf$var$draggedItem = event.target;
+        console.log("dragstart");
+        setTimeout(function() {
+            event.target.style.display = "none";
+        }, 0);
+    }
+});
+document.body.addEventListener("dragend", function(event) {
+    if (event.target.id == "kanbanCard") {
+        console.log("dragend");
+        setTimeout(function() {
+            event.target.style.display = "block";
+            $aba770e9ce7dbb561d9a46041b248abf$var$draggedItem = null;
+        }, 0);
+    }
+});
+for(let j = 0; j < $aba770e9ce7dbb561d9a46041b248abf$var$boardColumns.length; j++){
+    const boardColumn = $aba770e9ce7dbb561d9a46041b248abf$var$boardColumns[j];
+    boardColumn.addEventListener("dragover", function(event) {
+        event.preventDefault();
+        console.log("dragover");
+    });
+    boardColumn.addEventListener("dragenter", function(event) {
+        event.preventDefault();
+        console.log("dragenter");
+    });
+    boardColumn.addEventListener("drop", function(event) {
+        console.log("drop");
+        this.append($aba770e9ce7dbb561d9a46041b248abf$var$draggedItem);
+    });
+}
+/*cardItem.addEventListener('dragend', function(){
+    console.log('dragend');
+    setTimeout(function(){
+      draggedItem.style.display = 'block';
+      draggedItem = null;
+    }, 0);
+  })*/ //}
+///STOPWATCH ----------------------------------------------------
+let $aba770e9ce7dbb561d9a46041b248abf$var$timePassed = 0;
+let $aba770e9ce7dbb561d9a46041b248abf$var$timerInterval = null;
+let $aba770e9ce7dbb561d9a46041b248abf$var$vocab = 0;
+let $aba770e9ce7dbb561d9a46041b248abf$var$textbook = 0;
+let $aba770e9ce7dbb561d9a46041b248abf$var$reading = 0;
+var $aba770e9ce7dbb561d9a46041b248abf$var$stopwatch = document.getElementById("counter");
+var $aba770e9ce7dbb561d9a46041b248abf$var$vocabTimer = document.getElementById("vocabTimer");
+var $aba770e9ce7dbb561d9a46041b248abf$var$textbookTimer = document.getElementById("textbookTimer");
+var $aba770e9ce7dbb561d9a46041b248abf$var$readingTimer = document.getElementById("readingTimer");
+//get data from local storage
+let $aba770e9ce7dbb561d9a46041b248abf$var$timerCounter = JSON.parse(window.localStorage.getItem("timerData"));
+// Initialisation of main stopwatch display
+$aba770e9ce7dbb561d9a46041b248abf$var$stopwatch.innerHTML = `\n<div>\n  ${$aba770e9ce7dbb561d9a46041b248abf$var$formatTime($aba770e9ce7dbb561d9a46041b248abf$var$timePassed)}\n</div>\n`;
+// Initialisation of display in table format
+$aba770e9ce7dbb561d9a46041b248abf$var$vocabTimer.innerHTML = `\n<div>\n  ${$aba770e9ce7dbb561d9a46041b248abf$var$formatTime($aba770e9ce7dbb561d9a46041b248abf$var$timerCounter["Vocab"])}\n</div>\n`;
+$aba770e9ce7dbb561d9a46041b248abf$var$textbookTimer.innerHTML = `\n<div>\n  ${$aba770e9ce7dbb561d9a46041b248abf$var$formatTime($aba770e9ce7dbb561d9a46041b248abf$var$timerCounter["Textbook"])}\n</div>\n`;
+$aba770e9ce7dbb561d9a46041b248abf$var$readingTimer.innerHTML = `\n<div>\n  ${$aba770e9ce7dbb561d9a46041b248abf$var$formatTime($aba770e9ce7dbb561d9a46041b248abf$var$timerCounter["Reading"])}\n</div>\n`;
+//input: time integer
+//output: formatted time
+function $aba770e9ce7dbb561d9a46041b248abf$var$formatTime(time) {
+    let hour = Math.floor(time / 3600);
+    let minutes = Math.floor(time / 60 - hour * 60);
+    let seconds = Math.floor(time % 60);
+    if (seconds < 10) seconds = `0${seconds}`;
+    if (minutes < 10) minutes = `0${minutes}`;
+    if (hour < 10) hour = `0${hour}`;
+    return `${hour}:${minutes}:${seconds}`;
+}
+//Start timer iterates every second and increases variable time passed by 1
+function $aba770e9ce7dbb561d9a46041b248abf$var$startTimer() {
+    $aba770e9ce7dbb561d9a46041b248abf$var$timerInterval = setInterval(()=>{
+        $aba770e9ce7dbb561d9a46041b248abf$var$timePassed += 1;
+        document.getElementById("counter").innerHTML = $aba770e9ce7dbb561d9a46041b248abf$var$formatTime($aba770e9ce7dbb561d9a46041b248abf$var$timePassed);
+        if ($aba770e9ce7dbb561d9a46041b248abf$var$selectStudyTypeInput.value == "Vocab") $aba770e9ce7dbb561d9a46041b248abf$var$vocab += 1;
+        else if ($aba770e9ce7dbb561d9a46041b248abf$var$selectStudyTypeInput.value == "Textbook") $aba770e9ce7dbb561d9a46041b248abf$var$textbook += 1;
+        else if ($aba770e9ce7dbb561d9a46041b248abf$var$selectStudyTypeInput.value == "Reading") $aba770e9ce7dbb561d9a46041b248abf$var$reading += 1;
+    }, 1000);
+}
+var $aba770e9ce7dbb561d9a46041b248abf$var$startKey;
+var $aba770e9ce7dbb561d9a46041b248abf$var$endKey;
+var $aba770e9ce7dbb561d9a46041b248abf$var$breakKey;
+var $aba770e9ce7dbb561d9a46041b248abf$var$today = new Date();
+$aba770e9ce7dbb561d9a46041b248abf$var$startCounterButton.addEventListener("click", function(event) {
+    $aba770e9ce7dbb561d9a46041b248abf$var$startCounterButton.disabled = true;
+    $aba770e9ce7dbb561d9a46041b248abf$var$startTimer();
+    //get start time for flow time tracker
+    //var time = today.getHours() + ":" + today.getMinutes();
+    var time;
+    if ($aba770e9ce7dbb561d9a46041b248abf$var$today.getMinutes() < 10) time = $aba770e9ce7dbb561d9a46041b248abf$var$today.getHours() + ":0" + $aba770e9ce7dbb561d9a46041b248abf$var$today.getMinutes();
+    else if ($aba770e9ce7dbb561d9a46041b248abf$var$today.getMinutes() >= 10) time = $aba770e9ce7dbb561d9a46041b248abf$var$today.getHours() + ":" + $aba770e9ce7dbb561d9a46041b248abf$var$today.getMinutes();
+    //store start time to local storage using key/value
+    $aba770e9ce7dbb561d9a46041b248abf$var$startKey = "startTime" + ($aba770e9ce7dbb561d9a46041b248abf$var$startTimeIndex + 1).toString();
+    $aba770e9ce7dbb561d9a46041b248abf$var$startTimeIndex = $aba770e9ce7dbb561d9a46041b248abf$var$startTimeIndex + 1;
+    window.localStorage.setItem($aba770e9ce7dbb561d9a46041b248abf$var$startKey, JSON.stringify(time));
+});
+$aba770e9ce7dbb561d9a46041b248abf$var$startBreakCounterBtn.addEventListener("click", function(event) {
+    $aba770e9ce7dbb561d9a46041b248abf$var$startBreakCounterBtn.disabled = true;
+    $aba770e9ce7dbb561d9a46041b248abf$var$startTimer();
+});
+$aba770e9ce7dbb561d9a46041b248abf$var$stopBreakCounterBtn.addEventListener("click", function(event) {
+    clearInterval($aba770e9ce7dbb561d9a46041b248abf$var$timerInterval);
+    $aba770e9ce7dbb561d9a46041b248abf$var$startBreakCounterBtn.disabled = false;
+    $aba770e9ce7dbb561d9a46041b248abf$var$breakKey = "breakTime" + ($aba770e9ce7dbb561d9a46041b248abf$var$breakTimeIndex + 1).toString();
+    $aba770e9ce7dbb561d9a46041b248abf$var$breakTimeIndex = $aba770e9ce7dbb561d9a46041b248abf$var$breakTimeIndex + 1;
+    window.localStorage.setItem($aba770e9ce7dbb561d9a46041b248abf$var$breakKey, JSON.stringify($aba770e9ce7dbb561d9a46041b248abf$var$timePassed));
+    $aba770e9ce7dbb561d9a46041b248abf$var$formatBreakTime();
+});
+//stop button re-renders all latest updates from local storage and stop timer and update local storage
+$aba770e9ce7dbb561d9a46041b248abf$var$stopCounterButton.addEventListener("click", (e)=>{
+    clearInterval($aba770e9ce7dbb561d9a46041b248abf$var$timerInterval);
+    $aba770e9ce7dbb561d9a46041b248abf$var$startCounterButton.disabled = false;
+    //store Total study time for flow time tracker
+    const timerData = {
+        Vocab: $aba770e9ce7dbb561d9a46041b248abf$var$vocab,
+        Textbook: $aba770e9ce7dbb561d9a46041b248abf$var$textbook,
+        Reading: $aba770e9ce7dbb561d9a46041b248abf$var$reading
+    };
+    window.localStorage.setItem("timerData", JSON.stringify(timerData));
+    document.getElementById("vocabTimer").innerHTML = $aba770e9ce7dbb561d9a46041b248abf$var$formatTime(timerData["Vocab"]);
+    document.getElementById("textbookTimer").innerHTML = $aba770e9ce7dbb561d9a46041b248abf$var$formatTime(timerData["Textbook"]);
+    document.getElementById("readingTimer").innerHTML = $aba770e9ce7dbb561d9a46041b248abf$var$formatTime(timerData["Reading"]);
+    //get end time for flow time tracker
+    var time;
+    if ($aba770e9ce7dbb561d9a46041b248abf$var$today.getMinutes() < 10) time = $aba770e9ce7dbb561d9a46041b248abf$var$today.getHours() + ":0" + $aba770e9ce7dbb561d9a46041b248abf$var$today.getMinutes();
+    else if ($aba770e9ce7dbb561d9a46041b248abf$var$today.getMinutes() >= 10) time = $aba770e9ce7dbb561d9a46041b248abf$var$today.getHours() + ":" + $aba770e9ce7dbb561d9a46041b248abf$var$today.getMinutes();
+    //store to local storage using key/value
+    $aba770e9ce7dbb561d9a46041b248abf$var$endKey = "endTime" + ($aba770e9ce7dbb561d9a46041b248abf$var$endTimeIndex + 1).toString();
+    $aba770e9ce7dbb561d9a46041b248abf$var$endTimeIndex = $aba770e9ce7dbb561d9a46041b248abf$var$endTimeIndex + 1;
+    window.localStorage.setItem($aba770e9ce7dbb561d9a46041b248abf$var$endKey, JSON.stringify(time));
+    //record the start and time in flow time tracker
+    $aba770e9ce7dbb561d9a46041b248abf$var$formatFlowTime();
+});
+$aba770e9ce7dbb561d9a46041b248abf$var$resetCounterButton.addEventListener("click", (e)=>{
+    $aba770e9ce7dbb561d9a46041b248abf$var$timePassed = 0;
+    clearInterval($aba770e9ce7dbb561d9a46041b248abf$var$timerInterval);
+    document.getElementById("counter").innerHTML = $aba770e9ce7dbb561d9a46041b248abf$var$formatTime($aba770e9ce7dbb561d9a46041b248abf$var$timePassed);
+    $aba770e9ce7dbb561d9a46041b248abf$var$startCounterButton.disabled = false;
+});
+///FLOW TIME TRACKER --------------------------------------------------
+//Show today's date by calling formatDate function
+$aba770e9ce7dbb561d9a46041b248abf$var$todayDate.innerHTML = $aba770e9ce7dbb561d9a46041b248abf$var$formatDate(new Date());
+function $aba770e9ce7dbb561d9a46041b248abf$var$formatDate(date) {
+    var months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December", 
+    ];
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+    return "<strong>Today: " + day + " " + months[monthIndex] + " " + year + "</strong>";
+}
+//get current time
+var $aba770e9ce7dbb561d9a46041b248abf$var$startTimeIndex = 0;
+var $aba770e9ce7dbb561d9a46041b248abf$var$endTimeIndex = 0;
+var $aba770e9ce7dbb561d9a46041b248abf$var$breakTimeIndex = 0;
+var $aba770e9ce7dbb561d9a46041b248abf$var$vocabStartTime;
+var $aba770e9ce7dbb561d9a46041b248abf$var$textbookStartTime;
+var $aba770e9ce7dbb561d9a46041b248abf$var$readingStartTime;
+function $aba770e9ce7dbb561d9a46041b248abf$var$formatBreakTime() {
+    let breakTimeData = JSON.parse(window.localStorage.getItem($aba770e9ce7dbb561d9a46041b248abf$var$breakKey));
+    if ($aba770e9ce7dbb561d9a46041b248abf$var$selectStudyTypeInput.value == "Vocab") {
+        let vocabBreakTime = document.createElement("td");
+        vocabBreakTime.innerHTML = "<td>" + breakTimeData + "</td>";
+        let interruptionInput = document.createElement("td");
+        interruptionInput.innerHTML = "<td><input type=checkbox class=interruptCheckboxInput></td>";
+        $aba770e9ce7dbb561d9a46041b248abf$var$vocabStartTime.append(vocabBreakTime, interruptionInput);
+    } else if ($aba770e9ce7dbb561d9a46041b248abf$var$selectStudyTypeInput.value == "Textbook") {
+        let textbookBreakTime = document.createElement("td");
+        textbookBreakTime.innerHTML = "<td>" + breakTimeData + "</td>";
+        let interruptionInput = document.createElement("td");
+        interruptionInput.innerHTML = "<td><input type=checkbox class=interruptCheckboxInput></td>";
+        $aba770e9ce7dbb561d9a46041b248abf$var$textbookStartTime.append(vocabBreakTime, interruptionInput);
+    } else if ($aba770e9ce7dbb561d9a46041b248abf$var$selectStudyTypeInput.value == "Reading") {
+        let readingBreakTime = document.createElement("td");
+        readingBreakTime.innerHTML = "<td>" + breakTimeData + "</td>";
+        let interruptionInput = document.createElement("td");
+        interruptionInput.innerHTML = "<td><input type=checkbox class=interruptCheckboxInput></td>";
+        $aba770e9ce7dbb561d9a46041b248abf$var$readingStartTime.append(vocabBreakTime, interruptionInput);
+    }
+}
+function $aba770e9ce7dbb561d9a46041b248abf$var$formatFlowTime() {
+    //get time from local storage
+    let startTimeData = JSON.parse(window.localStorage.getItem($aba770e9ce7dbb561d9a46041b248abf$var$startKey));
+    let endTimeData = JSON.parse(window.localStorage.getItem($aba770e9ce7dbb561d9a46041b248abf$var$endKey));
+    //format for Vocab study type
+    if ($aba770e9ce7dbb561d9a46041b248abf$var$selectStudyTypeInput.value == "Vocab") {
+        $aba770e9ce7dbb561d9a46041b248abf$var$vocabStartTime = document.createElement("tr");
+        $aba770e9ce7dbb561d9a46041b248abf$var$vocabStartTime.setAttribute("class", "vocabFlowTime");
+        $aba770e9ce7dbb561d9a46041b248abf$var$vocabStartTime.innerHTML = "<td>" + startTimeData + "</td>";
+        var vocabEndTime = document.createElement("td");
+        vocabEndTime.innerHTML = "<td>" + endTimeData + "</td>";
+        $aba770e9ce7dbb561d9a46041b248abf$var$vocabStartTime.appendChild(vocabEndTime);
+        $aba770e9ce7dbb561d9a46041b248abf$var$vocabFlowTime[$aba770e9ce7dbb561d9a46041b248abf$var$vocabFlowTime.length - 1].parentNode.insertBefore($aba770e9ce7dbb561d9a46041b248abf$var$vocabStartTime, $aba770e9ce7dbb561d9a46041b248abf$var$vocabFlowTime[$aba770e9ce7dbb561d9a46041b248abf$var$vocabFlowTime.length - 1].nextSibling);
+    } else if ($aba770e9ce7dbb561d9a46041b248abf$var$selectStudyTypeInput.value == "Textbook") {
+        $aba770e9ce7dbb561d9a46041b248abf$var$textbookStartTime = document.createElement("tr");
+        $aba770e9ce7dbb561d9a46041b248abf$var$textbookStartTime.innerHTML = "<td>" + startTimeData + "</td>";
+        var textbookEndTime = document.createElement("td");
+        textbookEndTime.innerHTML = "<td>" + endTimeData + "</td>";
+        $aba770e9ce7dbb561d9a46041b248abf$var$textbookStartTime.appendChild(textbookEndTime);
+        $aba770e9ce7dbb561d9a46041b248abf$var$textbookFlowTime[$aba770e9ce7dbb561d9a46041b248abf$var$textbookFlowTime.length - 1].parentNode.insertBefore($aba770e9ce7dbb561d9a46041b248abf$var$textbookStartTime, $aba770e9ce7dbb561d9a46041b248abf$var$textbookFlowTime[$aba770e9ce7dbb561d9a46041b248abf$var$textbookFlowTime.length - 1].nextSibling);
+    } else if ($aba770e9ce7dbb561d9a46041b248abf$var$selectStudyTypeInput.value == "Reading") {
+        $aba770e9ce7dbb561d9a46041b248abf$var$readingStartTime = document.createElement("tr");
+        $aba770e9ce7dbb561d9a46041b248abf$var$readingStartTime.innerHTML = "<p>" + startTimeData + "</p>";
+        var readingEndTime = document.createElement("td");
+        readingEndTime.innerHTML = "<td>" + endTimeData + "</td>";
+        $aba770e9ce7dbb561d9a46041b248abf$var$readingStartTime.appendChild(readingEndTime);
+        $aba770e9ce7dbb561d9a46041b248abf$var$readingFlowTime[$aba770e9ce7dbb561d9a46041b248abf$var$readingFlowTime.length - 1].parentNode.insertBefore($aba770e9ce7dbb561d9a46041b248abf$var$readingStartTime, $aba770e9ce7dbb561d9a46041b248abf$var$readingFlowTime[$aba770e9ce7dbb561d9a46041b248abf$var$readingFlowTime.length - 1].nextSibling);
+    }
+}
+///MUSIC PLAYER ---------------------------------------------------
+// When the user clicks on the button, open the modal
+$aba770e9ce7dbb561d9a46041b248abf$var$musicBtn.onclick = function() {
+    $aba770e9ce7dbb561d9a46041b248abf$var$musicModal.style.display = "block";
+};
+//APPLIES TO MUSIC PLAYER AND RESOURCE LIST
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == $aba770e9ce7dbb561d9a46041b248abf$var$musicModal) $aba770e9ce7dbb561d9a46041b248abf$var$musicModal.style.display = "none";
+    else if (event.target == $aba770e9ce7dbb561d9a46041b248abf$var$resourceModal) $aba770e9ce7dbb561d9a46041b248abf$var$resourceModal.style.display = "none";
+};
+//Song titles
+//source
+//https://www.youtube.com/watch?v=l1-MURE3kfc&ab_channel=BgHBeatsBgHBeats
+//https://www.youtube.com/watch?v=t9r4cHSnjq4&ab_channel=LuKremBoLuKremBo
+//https://www.youtube.com/watch?v=r6-8FEYuEYg&ab_channel=ZeekyBeatsZeekyBeats
+const $aba770e9ce7dbb561d9a46041b248abf$var$songs = [
+    "Imagine",
+    "Bored",
+    "Fresh Air",
+    "Rose"
+];
+const $aba770e9ce7dbb561d9a46041b248abf$var$artists = [
+    "BgH Beats",
+    "LuKremBo",
+    "Zeeky Beats",
+    "LuKremBo"
+];
+let $aba770e9ce7dbb561d9a46041b248abf$var$songIndex = 1;
+let $aba770e9ce7dbb561d9a46041b248abf$var$artistIndex = 1;
+//load song into DOM
+$aba770e9ce7dbb561d9a46041b248abf$var$loadSong($aba770e9ce7dbb561d9a46041b248abf$var$songs[$aba770e9ce7dbb561d9a46041b248abf$var$songIndex], $aba770e9ce7dbb561d9a46041b248abf$var$artists[$aba770e9ce7dbb561d9a46041b248abf$var$artistIndex]);
+//Function: update song details (title, artist, audio, cover img)
+function $aba770e9ce7dbb561d9a46041b248abf$var$loadSong(song, artist) {
+    $aba770e9ce7dbb561d9a46041b248abf$var$songTitle.innerText = song;
+    $aba770e9ce7dbb561d9a46041b248abf$var$songArtist.innerText = artist;
+    $aba770e9ce7dbb561d9a46041b248abf$var$audioTrack.src = `music/${song}.mp3`;
+    $aba770e9ce7dbb561d9a46041b248abf$var$songCover.src = `images/${song}.jpg`;
+}
+function $aba770e9ce7dbb561d9a46041b248abf$var$playSong() {
+    $aba770e9ce7dbb561d9a46041b248abf$var$musicContainer.classList.add("play");
+    $aba770e9ce7dbb561d9a46041b248abf$var$playBtn.querySelector("i.fas").classList.remove("fa-play");
+    $aba770e9ce7dbb561d9a46041b248abf$var$playBtn.querySelector("i.fas").classList.add("fa-pause");
+    $aba770e9ce7dbb561d9a46041b248abf$var$audioTrack.play();
+}
+function $aba770e9ce7dbb561d9a46041b248abf$var$pauseSong() {
+    $aba770e9ce7dbb561d9a46041b248abf$var$musicContainer.classList.remove("play");
+    $aba770e9ce7dbb561d9a46041b248abf$var$playBtn.querySelector("i.fas").classList.remove("fa-pause");
+    $aba770e9ce7dbb561d9a46041b248abf$var$playBtn.querySelector("i.fas").classList.add("fa-play");
+    $aba770e9ce7dbb561d9a46041b248abf$var$audioTrack.pause();
+}
+function $aba770e9ce7dbb561d9a46041b248abf$var$prevSong() {
+    $aba770e9ce7dbb561d9a46041b248abf$var$songIndex--;
+    $aba770e9ce7dbb561d9a46041b248abf$var$artistIndex--;
+    if ($aba770e9ce7dbb561d9a46041b248abf$var$songIndex < 0) $aba770e9ce7dbb561d9a46041b248abf$var$songIndex = $aba770e9ce7dbb561d9a46041b248abf$var$songs.length - 1;
+    if ($aba770e9ce7dbb561d9a46041b248abf$var$artistIndex < 0) $aba770e9ce7dbb561d9a46041b248abf$var$artistIndex = $aba770e9ce7dbb561d9a46041b248abf$var$artists.length - 1;
+    $aba770e9ce7dbb561d9a46041b248abf$var$loadSong($aba770e9ce7dbb561d9a46041b248abf$var$songs[$aba770e9ce7dbb561d9a46041b248abf$var$songIndex], $aba770e9ce7dbb561d9a46041b248abf$var$artists[$aba770e9ce7dbb561d9a46041b248abf$var$artistIndex]);
+    $aba770e9ce7dbb561d9a46041b248abf$var$playSong();
+}
+function $aba770e9ce7dbb561d9a46041b248abf$var$nextSong() {
+    $aba770e9ce7dbb561d9a46041b248abf$var$songIndex++;
+    $aba770e9ce7dbb561d9a46041b248abf$var$artistIndex++;
+    if ($aba770e9ce7dbb561d9a46041b248abf$var$songIndex > $aba770e9ce7dbb561d9a46041b248abf$var$songs.length - 1) $aba770e9ce7dbb561d9a46041b248abf$var$songIndex = 0;
+    if ($aba770e9ce7dbb561d9a46041b248abf$var$artistIndex > $aba770e9ce7dbb561d9a46041b248abf$var$artists.length - 1) $aba770e9ce7dbb561d9a46041b248abf$var$artistIndex = 0;
+    $aba770e9ce7dbb561d9a46041b248abf$var$loadSong($aba770e9ce7dbb561d9a46041b248abf$var$songs[$aba770e9ce7dbb561d9a46041b248abf$var$songIndex], $aba770e9ce7dbb561d9a46041b248abf$var$artists[$aba770e9ce7dbb561d9a46041b248abf$var$artistIndex]);
+    $aba770e9ce7dbb561d9a46041b248abf$var$playSong();
+}
+//update the progress bar as song plays
+function $aba770e9ce7dbb561d9a46041b248abf$var$updateProgress(e) {
+    //console.log(e.srcElement.currentTime)
+    const { duration: duration , currentTime: currentTime  } = e.srcElement;
+    const progressPercent = currentTime / duration * 100;
+    $aba770e9ce7dbb561d9a46041b248abf$var$progressBar.style.width = `${progressPercent}%`;
+}
+//when users click on progress bar, jumps to that part of song
+function $aba770e9ce7dbb561d9a46041b248abf$var$setProgress(e) {
+    const width = this.clientWidth;
+    const clickX = e.offsetX;
+    const duration = $aba770e9ce7dbb561d9a46041b248abf$var$audioTrack.duration;
+    $aba770e9ce7dbb561d9a46041b248abf$var$audioTrack.currentTime = clickX / width * duration;
+}
+//event listeners
+$aba770e9ce7dbb561d9a46041b248abf$var$playBtn.addEventListener("click", ()=>{
+    const isPlaying = $aba770e9ce7dbb561d9a46041b248abf$var$musicContainer.classList.contains("play");
+    if (isPlaying) $aba770e9ce7dbb561d9a46041b248abf$var$pauseSong();
+    else $aba770e9ce7dbb561d9a46041b248abf$var$playSong();
+});
+//Change songs
+$aba770e9ce7dbb561d9a46041b248abf$var$prevBtn.addEventListener("click", $aba770e9ce7dbb561d9a46041b248abf$var$prevSong);
+$aba770e9ce7dbb561d9a46041b248abf$var$nextBtn.addEventListener("click", $aba770e9ce7dbb561d9a46041b248abf$var$nextSong);
+$aba770e9ce7dbb561d9a46041b248abf$var$audioTrack.addEventListener("timeupdate", $aba770e9ce7dbb561d9a46041b248abf$var$updateProgress);
+$aba770e9ce7dbb561d9a46041b248abf$var$progressContainer.addEventListener("click", $aba770e9ce7dbb561d9a46041b248abf$var$setProgress);
+$aba770e9ce7dbb561d9a46041b248abf$var$audioTrack.addEventListener("ended", $aba770e9ce7dbb561d9a46041b248abf$var$nextSong);
+///RESOURCE LIST ---------------------------------------------------
+/*
+var resourceNameInput = document.getElementById("resourceNameInput");
+var resourceDescriptionInput = document.getElementById("resourceDescriptionInput");
+//open modal */ function $aba770e9ce7dbb561d9a46041b248abf$var$openResourceModal() {
+    $aba770e9ce7dbb561d9a46041b248abf$var$resourceModal.style.display = "block";
+}
+/*
+addReadResourceBtn.onclick = function() {
+  resourceModal.style.display = "block";
+}
+
+addWatchResourceBtn.onclick = function() {
+  resourceModal.style.display = "block";
+}
+
+addListenResourceBtn.onclick = function() {
+  resourceModal.style.display = "block";
+}*/ var $aba770e9ce7dbb561d9a46041b248abf$var$resourceName = document.getElementById("resourceNameInput");
+var $aba770e9ce7dbb561d9a46041b248abf$var$resourceDescription = document.getElementById("resourceDescriptionInput");
+var $aba770e9ce7dbb561d9a46041b248abf$var$resourceLink = document.getElementById("resourceLinkInput");
+var $aba770e9ce7dbb561d9a46041b248abf$var$resource = document.getElementById("resourceCard");
+$aba770e9ce7dbb561d9a46041b248abf$var$resourceForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    $aba770e9ce7dbb561d9a46041b248abf$var$renderResourceCard();
+    $aba770e9ce7dbb561d9a46041b248abf$var$resourceModal.style.display = "none";
+    $aba770e9ce7dbb561d9a46041b248abf$var$resourceForm.reset();
+});
+var $aba770e9ce7dbb561d9a46041b248abf$var$readLinksArray = [];
+var $aba770e9ce7dbb561d9a46041b248abf$var$watchLinksArray = [];
+var $aba770e9ce7dbb561d9a46041b248abf$var$listenLinksArray = [];
+function $aba770e9ce7dbb561d9a46041b248abf$var$renderResourceCard() {
+    let link = $aba770e9ce7dbb561d9a46041b248abf$var$resourceLink.value;
+    let resourceCard = document.createElement("div");
+    resourceCard.setAttribute("id", "resourceCard");
+    let delResource = document.createElement("button");
+    delResource.setAttribute("class", "delResourceBtn");
+    delResource.setAttribute("type", "button");
+    delResource.innerHTML = "<i class='fas fa-trash'></i>";
+    resourceCard.appendChild(delResource);
+    let a = document.createElement("a");
+    a.setAttribute("href", link);
+    a.setAttribute("target", "_blank");
+    a.setAttribute("class", "resourceHyperLink");
+    a.innerHTML = "<h4>" + $aba770e9ce7dbb561d9a46041b248abf$var$resourceName.value + "</h4>";
+    resourceCard.appendChild(a);
+    //resourceCard.innerHTML += "<h4>" + resourceName.value + "</h4>"
+    resourceCard.innerHTML += "<p>" + $aba770e9ce7dbb561d9a46041b248abf$var$resourceDescription.value + "</p>";
+    if ($aba770e9ce7dbb561d9a46041b248abf$var$readLink.className == "active") {
+        $aba770e9ce7dbb561d9a46041b248abf$var$readPage.appendChild(resourceCard);
+        $aba770e9ce7dbb561d9a46041b248abf$var$readLinksArray.push(link);
+        console.log($aba770e9ce7dbb561d9a46041b248abf$var$readLinksArray);
+    } else if ($aba770e9ce7dbb561d9a46041b248abf$var$watchLink.className == "active") {
+        $aba770e9ce7dbb561d9a46041b248abf$var$watchPage.appendChild(resourceCard);
+        $aba770e9ce7dbb561d9a46041b248abf$var$watchLinksArray.push(link);
+        console.log($aba770e9ce7dbb561d9a46041b248abf$var$watchLinksArray);
+    } else if ($aba770e9ce7dbb561d9a46041b248abf$var$listenLink.className == "active") {
+        $aba770e9ce7dbb561d9a46041b248abf$var$listenPage.appendChild(resourceCard);
+        $aba770e9ce7dbb561d9a46041b248abf$var$listenLinksArray.push(link);
+        console.log($aba770e9ce7dbb561d9a46041b248abf$var$listenLinksArray);
+    }
+    var delResourceBtn = document.getElementsByClassName("delResourceBtn");
+    for(let i = 0; i < delResourceBtn.length; i++)delResourceBtn[i].addEventListener("click", function(event) {
+        event.preventDefault();
+        resourceCard.remove();
+    //console.log("delete");
+    });
+/*
+  function deleteResource() {
+    resource.remove();
+    console.log("delete")
+  }*/ }
+//NOTE TO MARKER: Please disable Chrome pop-up blocks in order for this button to work successfully in opening all links together. The pop-up block may appear upon use for the first time.
+function $aba770e9ce7dbb561d9a46041b248abf$var$openReadLinks() {
+    for(let i = 0; i < $aba770e9ce7dbb561d9a46041b248abf$var$readLinksArray.length; i++)window.open($aba770e9ce7dbb561d9a46041b248abf$var$readLinksArray[i], "_blank");
+}
+function $aba770e9ce7dbb561d9a46041b248abf$var$openWatchLinks() {
+    for(let i = 0; i < $aba770e9ce7dbb561d9a46041b248abf$var$watchLinksArray.length; i++)window.open($aba770e9ce7dbb561d9a46041b248abf$var$watchLinksArray[i], "_blank");
+}
+function $aba770e9ce7dbb561d9a46041b248abf$var$openListenLinks() {
+    for(let i = 0; i < $aba770e9ce7dbb561d9a46041b248abf$var$listenLinksArray.length; i++)window.open($aba770e9ce7dbb561d9a46041b248abf$var$listenLinksArray[i], "_blank");
+}

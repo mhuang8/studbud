@@ -1,0 +1,216 @@
+///TIME MANAGEMENT TOOLS - Stopwatch & Flow Time Tracker
+//Variables for HTML elements using DOM selection:
+//stopwatch----
+const $10e34f3fee7743dcab98be0df1923b6a$var$startCounterButton = document.getElementById("startCounter");
+const $10e34f3fee7743dcab98be0df1923b6a$var$stopCounterButton = document.getElementById("stopCounter");
+const $10e34f3fee7743dcab98be0df1923b6a$var$resetCounterButton = document.getElementById("resetCounter");
+const $10e34f3fee7743dcab98be0df1923b6a$var$selectStudyTypeInput = document.getElementById("studyTypeInput");
+const $10e34f3fee7743dcab98be0df1923b6a$var$startBreakCounterBtn = document.getElementById("startBreakCounter");
+const $10e34f3fee7743dcab98be0df1923b6a$var$stopBreakCounterBtn = document.getElementById("stopBreakCounter");
+const $10e34f3fee7743dcab98be0df1923b6a$var$breakContainer = document.getElementById("breakContainer");
+var $10e34f3fee7743dcab98be0df1923b6a$var$stopwatch = document.getElementById("counter");
+var $10e34f3fee7743dcab98be0df1923b6a$var$vocabTimer = document.getElementById("vocabTimer");
+var $10e34f3fee7743dcab98be0df1923b6a$var$textbookTimer = document.getElementById("textbookTimer");
+var $10e34f3fee7743dcab98be0df1923b6a$var$readingTimer = document.getElementById("readingTimer");
+//flow time----
+var $10e34f3fee7743dcab98be0df1923b6a$var$todayDate = document.getElementById("todayDate");
+var $10e34f3fee7743dcab98be0df1923b6a$var$currentTime = document.getElementById("currentTime");
+var $10e34f3fee7743dcab98be0df1923b6a$var$vocabFlowTime = document.getElementsByClassName("vocabFlowTime");
+var $10e34f3fee7743dcab98be0df1923b6a$var$textbookFlowTime = document.getElementsByClassName("textbookFlowTime");
+var $10e34f3fee7743dcab98be0df1923b6a$var$readingFlowTime = document.getElementsByClassName("readingFlowTime");
+var $10e34f3fee7743dcab98be0df1923b6a$var$flowTimeTable = document.getElementsByClassName("flowTimeTable");
+///STOPWATCH ----------------------------------------------------
+let $10e34f3fee7743dcab98be0df1923b6a$var$timePassed = 0;
+let $10e34f3fee7743dcab98be0df1923b6a$var$timerInterval = null;
+let $10e34f3fee7743dcab98be0df1923b6a$var$vocab = 0;
+let $10e34f3fee7743dcab98be0df1923b6a$var$textbook = 0;
+let $10e34f3fee7743dcab98be0df1923b6a$var$reading = 0;
+//get data from local storage
+let $10e34f3fee7743dcab98be0df1923b6a$var$timerCounter = JSON.parse(window.localStorage.getItem("timerData"));
+// Initialisation of main stopwatch display
+$10e34f3fee7743dcab98be0df1923b6a$var$stopwatch.innerHTML = "<div>" + $10e34f3fee7743dcab98be0df1923b6a$var$formatTime($10e34f3fee7743dcab98be0df1923b6a$var$timePassed) + "</div>";
+/*
+vocabTimer.innerHTML = "div" + formatTime(timerCounter["Vocab"]) + "</div>"
+textbookTimer.innerHTML = "<div>" + formatTime(timerCounter["Textbook"]) + "</div>"
+readingTimer.innerHTML = "<div>" + formatTime(timerCounter["Reading"]) + "</div>"
+*/ //function for formatting how the time will appear
+//input: time integer ----> output: formatted time
+function $10e34f3fee7743dcab98be0df1923b6a$var$formatTime(time) {
+    let hour = Math.floor(time / 3600);
+    let minutes = Math.floor(time / 60 - hour * 60);
+    let seconds = Math.floor(time % 60);
+    if (seconds < 10) seconds = `0${seconds}`;
+    if (minutes < 10) minutes = `0${minutes}`;
+    if (hour < 10) hour = `0${hour}`;
+    return `${hour}:${minutes}:${seconds}`;
+}
+//Start timer iterates every second and increases variable time passed by 1
+function $10e34f3fee7743dcab98be0df1923b6a$var$startTimer() {
+    $10e34f3fee7743dcab98be0df1923b6a$var$timerInterval = setInterval(()=>{
+        $10e34f3fee7743dcab98be0df1923b6a$var$timePassed += 1;
+        document.getElementById("counter").innerHTML = $10e34f3fee7743dcab98be0df1923b6a$var$formatTime($10e34f3fee7743dcab98be0df1923b6a$var$timePassed);
+        if ($10e34f3fee7743dcab98be0df1923b6a$var$selectStudyTypeInput.value == "Vocab") $10e34f3fee7743dcab98be0df1923b6a$var$vocab += 1;
+        else if ($10e34f3fee7743dcab98be0df1923b6a$var$selectStudyTypeInput.value == "Textbook") $10e34f3fee7743dcab98be0df1923b6a$var$textbook += 1;
+        else if ($10e34f3fee7743dcab98be0df1923b6a$var$selectStudyTypeInput.value == "Reading") $10e34f3fee7743dcab98be0df1923b6a$var$reading += 1;
+    }, 1000);
+}
+//keys for local storage
+var $10e34f3fee7743dcab98be0df1923b6a$var$startKey;
+var $10e34f3fee7743dcab98be0df1923b6a$var$endKey;
+var $10e34f3fee7743dcab98be0df1923b6a$var$breakKey;
+var $10e34f3fee7743dcab98be0df1923b6a$var$today = new Date();
+//When START BUTTON is clicked
+//starts the timer counter and stores start time of study (time button is clicked) to local storage
+//break buttons also become hidden until reset button clicked
+$10e34f3fee7743dcab98be0df1923b6a$var$startCounterButton.addEventListener("click", function(event) {
+    $10e34f3fee7743dcab98be0df1923b6a$var$startCounterButton.disabled = true;
+    $10e34f3fee7743dcab98be0df1923b6a$var$breakContainer.style.display = "none";
+    $10e34f3fee7743dcab98be0df1923b6a$var$startTimer();
+    //get start time for flow time tracker
+    //var time = today.getHours() + ":" + today.getMinutes();
+    var time;
+    if ($10e34f3fee7743dcab98be0df1923b6a$var$today.getMinutes() < 10) time = $10e34f3fee7743dcab98be0df1923b6a$var$today.getHours() + ":0" + $10e34f3fee7743dcab98be0df1923b6a$var$today.getMinutes();
+    else if ($10e34f3fee7743dcab98be0df1923b6a$var$today.getMinutes() >= 10) time = $10e34f3fee7743dcab98be0df1923b6a$var$today.getHours() + ":" + $10e34f3fee7743dcab98be0df1923b6a$var$today.getMinutes();
+    //store start time to local storage using key/value
+    $10e34f3fee7743dcab98be0df1923b6a$var$startKey = "startTime" + ($10e34f3fee7743dcab98be0df1923b6a$var$startTimeIndex + 1).toString();
+    $10e34f3fee7743dcab98be0df1923b6a$var$startTimeIndex = $10e34f3fee7743dcab98be0df1923b6a$var$startTimeIndex + 1;
+    window.localStorage.setItem($10e34f3fee7743dcab98be0df1923b6a$var$startKey, JSON.stringify(time));
+});
+//STOP BUTTON
+//stops the timer & re-renders all latest updates from local storage
+$10e34f3fee7743dcab98be0df1923b6a$var$stopCounterButton.addEventListener("click", (e)=>{
+    clearInterval($10e34f3fee7743dcab98be0df1923b6a$var$timerInterval);
+    $10e34f3fee7743dcab98be0df1923b6a$var$startCounterButton.disabled = false;
+    //store Total study time for flow time tracker
+    const timerData = {
+        Vocab: $10e34f3fee7743dcab98be0df1923b6a$var$vocab,
+        Textbook: $10e34f3fee7743dcab98be0df1923b6a$var$textbook,
+        Reading: $10e34f3fee7743dcab98be0df1923b6a$var$reading
+    };
+    //stores to local storage and updates respective parts of flow time tracker w
+    window.localStorage.setItem("timerData", JSON.stringify(timerData));
+    document.getElementById("vocabTimer").innerHTML = $10e34f3fee7743dcab98be0df1923b6a$var$formatTime(timerData["Vocab"]);
+    document.getElementById("textbookTimer").innerHTML = $10e34f3fee7743dcab98be0df1923b6a$var$formatTime(timerData["Textbook"]);
+    document.getElementById("readingTimer").innerHTML = $10e34f3fee7743dcab98be0df1923b6a$var$formatTime(timerData["Reading"]);
+    //get end time for flow time tracker and store to local storage using key/value
+    var time;
+    if ($10e34f3fee7743dcab98be0df1923b6a$var$today.getMinutes() < 10) time = $10e34f3fee7743dcab98be0df1923b6a$var$today.getHours() + ":0" + $10e34f3fee7743dcab98be0df1923b6a$var$today.getMinutes();
+    else if ($10e34f3fee7743dcab98be0df1923b6a$var$today.getMinutes() >= 10) time = $10e34f3fee7743dcab98be0df1923b6a$var$today.getHours() + ":" + $10e34f3fee7743dcab98be0df1923b6a$var$today.getMinutes();
+    $10e34f3fee7743dcab98be0df1923b6a$var$endKey = "endTime" + ($10e34f3fee7743dcab98be0df1923b6a$var$endTimeIndex + 1).toString();
+    $10e34f3fee7743dcab98be0df1923b6a$var$endTimeIndex = $10e34f3fee7743dcab98be0df1923b6a$var$endTimeIndex + 1;
+    window.localStorage.setItem($10e34f3fee7743dcab98be0df1923b6a$var$endKey, JSON.stringify(time));
+    //calls function to record the start and time in flow time tracker
+    $10e34f3fee7743dcab98be0df1923b6a$var$formatFlowTime();
+});
+//RESET BUTTON
+//resets counter to 0 and displays the break buttons to encourage users to take a study break
+$10e34f3fee7743dcab98be0df1923b6a$var$resetCounterButton.addEventListener("click", (e)=>{
+    $10e34f3fee7743dcab98be0df1923b6a$var$timePassed = 0;
+    clearInterval($10e34f3fee7743dcab98be0df1923b6a$var$timerInterval);
+    $10e34f3fee7743dcab98be0df1923b6a$var$breakContainer.style.display = "block";
+    document.getElementById("counter").innerHTML = $10e34f3fee7743dcab98be0df1923b6a$var$formatTime($10e34f3fee7743dcab98be0df1923b6a$var$timePassed);
+    $10e34f3fee7743dcab98be0df1923b6a$var$startCounterButton.disabled = false;
+});
+//Event listeners for BREAK BUTTONS
+//starts the stopwatch counter when start break button clicked
+$10e34f3fee7743dcab98be0df1923b6a$var$startBreakCounterBtn.addEventListener("click", function(event) {
+    $10e34f3fee7743dcab98be0df1923b6a$var$startBreakCounterBtn.disabled = true;
+    $10e34f3fee7743dcab98be0df1923b6a$var$startTimer();
+});
+//stops the counter and stores break time to local storage
+$10e34f3fee7743dcab98be0df1923b6a$var$stopBreakCounterBtn.addEventListener("click", function(event) {
+    clearInterval($10e34f3fee7743dcab98be0df1923b6a$var$timerInterval);
+    $10e34f3fee7743dcab98be0df1923b6a$var$startBreakCounterBtn.disabled = false;
+    $10e34f3fee7743dcab98be0df1923b6a$var$breakKey = "breakTime" + ($10e34f3fee7743dcab98be0df1923b6a$var$breakTimeIndex + 1).toString();
+    $10e34f3fee7743dcab98be0df1923b6a$var$breakTimeIndex = $10e34f3fee7743dcab98be0df1923b6a$var$breakTimeIndex + 1;
+    window.localStorage.setItem($10e34f3fee7743dcab98be0df1923b6a$var$breakKey, JSON.stringify($10e34f3fee7743dcab98be0df1923b6a$var$timePassed));
+    //updates break time in flow time tracker
+    $10e34f3fee7743dcab98be0df1923b6a$var$formatBreakTime();
+});
+///FLOW TIME TRACKER --------------------------------------------------
+//Show today's date by calling formatDate function
+$10e34f3fee7743dcab98be0df1923b6a$var$todayDate.innerHTML = $10e34f3fee7743dcab98be0df1923b6a$var$formatDate(new Date());
+//formatting the date in a specific way
+function $10e34f3fee7743dcab98be0df1923b6a$var$formatDate(date) {
+    var months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December", 
+    ];
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+    return "<strong>Today: " + day + " " + months[monthIndex] + " " + year + "</strong>";
+}
+//indexes for local storage
+var $10e34f3fee7743dcab98be0df1923b6a$var$startTimeIndex = 0;
+var $10e34f3fee7743dcab98be0df1923b6a$var$endTimeIndex = 0;
+var $10e34f3fee7743dcab98be0df1923b6a$var$breakTimeIndex = 0;
+var $10e34f3fee7743dcab98be0df1923b6a$var$vocabStartTime;
+var $10e34f3fee7743dcab98be0df1923b6a$var$textbookStartTime;
+var $10e34f3fee7743dcab98be0df1923b6a$var$readingStartTime;
+/*
+var vocabBreakTime;
+var textbookBreakTime;
+var readingBreakTime;*/ //format the start and end times into the table
+function $10e34f3fee7743dcab98be0df1923b6a$var$formatFlowTime() {
+    //get time from local storage
+    let startTimeData = JSON.parse(window.localStorage.getItem($10e34f3fee7743dcab98be0df1923b6a$var$startKey));
+    let endTimeData = JSON.parse(window.localStorage.getItem($10e34f3fee7743dcab98be0df1923b6a$var$endKey));
+    //format for Vocab study type
+    if ($10e34f3fee7743dcab98be0df1923b6a$var$selectStudyTypeInput.value == "Vocab") {
+        $10e34f3fee7743dcab98be0df1923b6a$var$vocabStartTime = document.createElement("tr");
+        $10e34f3fee7743dcab98be0df1923b6a$var$vocabStartTime.setAttribute("class", "vocabFlowTime");
+        $10e34f3fee7743dcab98be0df1923b6a$var$vocabStartTime.innerHTML = "<td>" + startTimeData + "</td>";
+        var vocabEndTime = document.createElement("td");
+        vocabEndTime.innerHTML = "<td>" + endTimeData + "</td>";
+        $10e34f3fee7743dcab98be0df1923b6a$var$vocabStartTime.appendChild(vocabEndTime);
+        $10e34f3fee7743dcab98be0df1923b6a$var$vocabFlowTime[$10e34f3fee7743dcab98be0df1923b6a$var$vocabFlowTime.length - 1].parentNode.insertBefore($10e34f3fee7743dcab98be0df1923b6a$var$vocabStartTime, $10e34f3fee7743dcab98be0df1923b6a$var$vocabFlowTime[$10e34f3fee7743dcab98be0df1923b6a$var$vocabFlowTime.length - 1].nextSibling);
+    } else if ($10e34f3fee7743dcab98be0df1923b6a$var$selectStudyTypeInput.value == "Textbook") {
+        $10e34f3fee7743dcab98be0df1923b6a$var$textbookStartTime = document.createElement("tr");
+        $10e34f3fee7743dcab98be0df1923b6a$var$textbookStartTime.innerHTML = "<td>" + startTimeData + "</td>";
+        var textbookEndTime = document.createElement("td");
+        textbookEndTime.innerHTML = "<td>" + endTimeData + "</td>";
+        $10e34f3fee7743dcab98be0df1923b6a$var$textbookStartTime.appendChild(textbookEndTime);
+        $10e34f3fee7743dcab98be0df1923b6a$var$textbookFlowTime[$10e34f3fee7743dcab98be0df1923b6a$var$textbookFlowTime.length - 1].parentNode.insertBefore($10e34f3fee7743dcab98be0df1923b6a$var$textbookStartTime, $10e34f3fee7743dcab98be0df1923b6a$var$textbookFlowTime[$10e34f3fee7743dcab98be0df1923b6a$var$textbookFlowTime.length - 1].nextSibling);
+    } else if ($10e34f3fee7743dcab98be0df1923b6a$var$selectStudyTypeInput.value == "Reading") {
+        $10e34f3fee7743dcab98be0df1923b6a$var$readingStartTime = document.createElement("tr");
+        $10e34f3fee7743dcab98be0df1923b6a$var$readingStartTime.innerHTML = "<p>" + startTimeData + "</p>";
+        var readingEndTime = document.createElement("td");
+        readingEndTime.innerHTML = "<td>" + endTimeData + "</td>";
+        $10e34f3fee7743dcab98be0df1923b6a$var$readingStartTime.appendChild(readingEndTime);
+        $10e34f3fee7743dcab98be0df1923b6a$var$readingFlowTime[$10e34f3fee7743dcab98be0df1923b6a$var$readingFlowTime.length - 1].parentNode.insertBefore($10e34f3fee7743dcab98be0df1923b6a$var$readingStartTime, $10e34f3fee7743dcab98be0df1923b6a$var$readingFlowTime[$10e34f3fee7743dcab98be0df1923b6a$var$readingFlowTime.length - 1].nextSibling);
+    }
+}
+//formatting the break time to the flow tracker based on study type input in stopwatch
+function $10e34f3fee7743dcab98be0df1923b6a$var$formatBreakTime() {
+    let breakTimeData = JSON.parse(window.localStorage.getItem($10e34f3fee7743dcab98be0df1923b6a$var$breakKey));
+    if ($10e34f3fee7743dcab98be0df1923b6a$var$selectStudyTypeInput.value == "Vocab") {
+        let vocabBreakTime = document.createElement("td");
+        vocabBreakTime.innerHTML = "<td>" + breakTimeData + "</td>";
+        let interruptionInput = document.createElement("td");
+        interruptionInput.innerHTML = "<td><input type=checkbox id=interruptCheckboxInput></td>";
+        $10e34f3fee7743dcab98be0df1923b6a$var$vocabStartTime.append(vocabBreakTime, interruptionInput);
+    } else if ($10e34f3fee7743dcab98be0df1923b6a$var$selectStudyTypeInput.value == "Textbook") {
+        let textbookBreakTime = document.createElement("td");
+        textbookBreakTime.innerHTML = "<td>" + breakTimeData + "</td>";
+        let interruptionInput = document.createElement("td");
+        interruptionInput.innerHTML = "<td><input type=checkbox id=interruptCheckboxInput></td>";
+        $10e34f3fee7743dcab98be0df1923b6a$var$textbookStartTime.append(textbookBreakTime, interruptionInput);
+    } else if ($10e34f3fee7743dcab98be0df1923b6a$var$selectStudyTypeInput.value == "Reading") {
+        let readingBreakTime = document.createElement("td");
+        readingBreakTime.innerHTML = "<td>" + breakTimeData + "</td>";
+        let interruptionInput = document.createElement("td");
+        interruptionInput.innerHTML = "<td><input type=checkbox id=interruptCheckboxInput></td>";
+        $10e34f3fee7743dcab98be0df1923b6a$var$readingStartTime.append(readingBreakTime, interruptionInput);
+    }
+}

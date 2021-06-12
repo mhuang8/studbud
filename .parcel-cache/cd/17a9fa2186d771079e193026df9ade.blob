@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>StudBud</title>
+  <link href="56eb84a177caffcd43eab7cd84454bf0" rel="stylesheet" type="text/css">
+  <link rel="icon" href="890bfb02ee6c7db9e009c8f9b8e672b1" type="image/x-icon">
+  <link href="e7bda89d4302105751bca79dfc6e79ec" rel="stylesheet">
+  <link rel="stylesheet" href="26ab4f65dd0b85a062e61905a6930df7">
+</head>
+
+<body>
+  <!-----------------------NAVIGATION---------------------->
+  <!--REFLECTION/ITERATION: A collapsible side nav with a hamburger menu was an iteration to the design. This change was made to allow for a more flexible user experience which allows users to use the tools with the nav open or closed, and still incorporating the intended design aesthetic. This collapsible nav would also facilitate responsive design and help make the mobile size more convenient to use. -->
+  <nav id="horizontal-nav" class="main-nav">
+    <ul class="horizontal-nav-links">
+      <li><button id="hamburgerMenu"><i class="fa fa-bars"></i></button></li>
+      <li><a href="#studbud">Studbud <i class="fas fa-toolbox"></i></a></li>
+      <li><button id="musicBtn"><i class="fa">&#xf001;</i></button></li>
+    </ul>
+  </nav>
+  <nav id="vertical-nav" class="main-nav">
+    <ul class="nav-links">
+      <li><a href="#tasklist" class="active"><i class="fas fa-check-square"></i> Task List</a></li>
+      <li><a href="#kanbanboard"><i class="fas fa-columns"></i> Kanban Board</a></li>
+      <li><a href="#stopwatch"><i class="fas fa-stopwatch"></i> Stopwatch</a></li>
+      <li><a href="#flowtime"><i class="fas fa-history"></i> Flow Time </a></li>
+      <li><a href="#resourcelist"><i class="fas fa-list-ul"></i> Resource List</a></li>
+    </ul>
+  </nav>
+
+  <main id="main">
+    <!----------------MUSIC PLAYER------------------->
+    <!--ITERATION: The music player was developed to be more interesting and unique with the inclusion of the image as a record player that spins as the music plays -->
+    <div id="musicModal" class="modal-box">
+      <div class="modal-content">
+        <div class="music-container">
+          <div class="img-container">
+            <img src="1922a8323a9cf47d2dd588f064760e02" alt="music-cover" id="songCover">
+          </div>
+
+
+          <div class="music-container-right">
+            <div class="music-info">
+              <h4 id="songTitle"> Imagine </h4>
+              <p id="songArtist">BgH Beats</p>
+              <div class="progress-container">
+                <div class="progress-bar"></div>
+              </div>
+            </div>
+
+            <audio src="d151bf839508756bbef74ca04ed80d7b" id="audioTrack"></audio>
+
+            <div class="music-controls">
+              <button id="prevBtn" class="action-btn">
+                <i class="fas fa-backward"></i>
+              </button>
+              <button id="playBtn" class="action-btn action-btn-big">
+                <i class="fas fa-play"></i>
+              </button>
+              <button id="nextBtn" class="action-btn">
+                <i class="fas fa-forward"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!----------------- HOME PAGE ------------------->
+    <section id="studbud" class="page-container">
+      <h1> StudBud <i class="fas fa-toolbox"></i></h1>
+      <h2> Your Personal Study Toolkit </h2>
+      <div>
+        <p id="introduction-text">StudBud is a collection of productivity tools to help language students and learners
+          manage their study and work efficiently. Use these tools to manage your tasks, time and content. Enjoy some
+          calming music as you study to boost your focus and productivity. </p>
+      </div>
+
+      <div id="icon-container">
+        <div class="icon-col">
+          <figure class="icon-box">
+            <img class="icon" src="37a0f6e1809f6b0ce16afe09f8b60713" alt="pencil and notebook icon" width="130px">
+          </figure>
+          <h3>Plan</h3>
+          <p>Use the <span style="a3916c04efac1c4f44f951916f3393f3"><strong>Task List</strong></span> to keep track of your study tasks or
+            set goals. Access the <span style="329dcf3dab90cb1a72a2dbfc549ef739"><strong>Kanban Board</strong></span> to manage these
+            tasks and build a flexible schedule. Embrace organisation and develop positive language study routines.</p>
+        </div>
+
+        <div class="icon-col">
+          <figure class="icon-box">
+            <img class="icon" src="bf7c61e78e1fa20c63b8ee6e7e4b36da" alt="clock icon" width="130px">
+          </figure>
+          <h3>Time</h3>
+          <p>Use the <span style="6c1b8f8b3c96d93bf6abddb17644ca73"><strong>Stopwatch</strong></span> to track your time spent on
+            different categories of language learning. View your total tracked study time in the <span style="e552f2d7211f2966273a532d777ee94a"><strong>Flow Time Tracker</strong></span> and use the results to reflect on your
+            progressive study effort. </p>
+        </div>
+
+        <!--adapted the reading list into a resource list to suit the needs of my users-->
+        <div class="icon-col">
+          <figure class="icon-box">
+            <img class="icon" src="912526102d4afd3f7607d21b34bb201b" alt="list and maginifying glass icon" width="130px">
+          </figure>
+          <h3>Store</h3>
+          <p>Use the <span style="ac44c5294c5414a5a0137247a1b989c8"><strong>Resource List</strong></span> to store and organise your study
+            resources for easy access anytime. Build a library of your favourite online language content for future
+            reference. </p>
+        </div>
+      </div>
+
+
+    </section>
+    <!----------------- TASK LIST ------------------->
+    <section id="tasklist" class="page-container">
+      <h3> Task List </h3>
+      <div id="taskform-box">
+        <form id="taskform">
+          <!-- Task input -->
+          <!-- all input required-->
+          <label for="task"></label>
+          <input placeholder="New Task" type="text" name="task" id="taskInput" required="">
+          <!-- Date input -->
+          <label for="dueDate"></label>
+          <input placeholder="Due Date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="dueDate" id="dueDateInput" required="">
+
+
+          <!-- Time input -->
+          <label for="completionTime"></label>
+          <input placeholder="Completion Time" type="text" onfocus="(this.type='time')" onblur="(this.type='text')" name="completionTime" id="completionTimeInput" required="">
+
+          <label for="estimatedTime"></label>
+          <input placeholder="Mins To Complete" type="text" onfocus="(this.type='number')" onblur="(this.type='text')" name="estimatedTime" id="estimatedTimeInput" required="">
+
+          <!-- Priority -->
+          <label for="priority"></label>
+          <select name="prority" id="priorityInput" required="">
+            <option value="" disabled="" selected="" hidden="">Task Priority</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+
+
+          <button type="submit" id="tasklistButton">+ Task</button>
+        </form>
+
+        <table id="tasklistTable">
+          <tr id="tasklistHeadings">
+            <th class="taskCell" style="27cc269dcdae83f7dfc74f9d0842aeff">To-do</th>
+            <th class="taskCell" style="ae10b40b5e508236eaca80bea7ccacc0">Due Date</th>
+            <th class="taskCell" style="d6cbff6cc1c5cbbe94682e4d5a9a9e5e">Completion Time</th>
+            <th class="taskCell" style="88cf285f5a165bcbc4758d794bcdaf13" id="minsHeading">Mins to Complete</th>
+            <th class="taskCell" style="7530fb861cfc548016b13c29d67f1b64" id="priorityHeading">Task Priority</th>
+            <th class="taskCell" style="ba755e816af2f41b14a5bf0a379e7272" id="spacingHeading"></th>
+          </tr>
+
+        </table>
+
+      </div>
+    </section>
+    <!----------------- KANBAN BOARD------------------->
+    <section id="kanbanboard" class="page-container">
+      <h3> Kanban Board </h3>
+
+      <!-- Board Name Input -->
+      <form id="kanbanForm">
+        <input placeholder="New Board Name" type="text" name="board-name" id="boardNameInput" required="">
+        <button type="submit" id="kanbanBtn">+ Board</button>
+      </form>
+
+      <div id="board-container">
+        <div class="boardColumn" id="toDoColumn">
+          <div class="boardBarDecoration"></div>
+          <h4 contenteditable="true"> To-do </h4>
+        </div>
+        <div class="boardColumn">
+          <div class="boardBarDecoration"></div>
+          <h4 contenteditable="true"> In Progress </h4>
+        </div>
+        <div class="boardColumn">
+          <div class="boardBarDecoration"></div>
+          <h4 contenteditable="true"> Done </h4>
+        </div>
+      </div>
+
+    </section>
+    <!----------------- STOPWATCH------------------->
+    <!--REFLECTION/ITERATION: The stopwatch went through a large development into a tool that works in combination with flow time tracker. Upon reflection, I felt that having the flow time tracker include a stop and start timing function would defeat the purpose of the stopwatch, so the tools were connected. The stopwatch would now allow for users to choose a study type, and the stopwatch times would be tracked and recorded into the Flow Tracker using local storage, allowing for a stronger, more cohesive functionality. -->
+
+    <section id="stopwatch" class="page-container">
+      <h3> Stopwatch </h3>
+      <div id="stopwatch-box">
+        <label for="studyType"><strong>Study Type: </strong></label>
+        <select name="studyType" id="studyTypeInput">
+          <option value="Vocab">Vocab</option>
+          <option value="Textbook">Textbook</option>
+          <option value="Reading">Reading</option>
+        </select>
+        <div id="counter"></div>
+
+        <div class="stopwatchButtonsContainer">
+          <button id="startCounter"> Start <i class="fas fa-play"></i></button>
+          <button id="stopCounter"> Stop <i class="fas fa-pause"></i></button>
+          <button id="resetCounter"> Reset <i class="fas fa-redo-alt"></i></button>
+        </div>
+        <!--The Stopwatch was iterated again to include break buttons that would again connect to the tracked time in Flow Tracker. While the original plan was to have automatically tracked break times, the new change in allowing the users to start and stop their own breaks allows more flexibility and accuracy in the tracking.-->
+        <h4 id="breakBtnHeading">Take a study break!</h4>
+        <div class="stopwatchButtonsContainer break" id="stopwatchBreakButtons">
+          <button id="startBreakCounter"> Break <i class="fas fa-play"></i></button>
+          <button id="stopBreakCounter"> Break <i class="fas fa-pause"></i></button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-----------------FLOW TIME------------------->
+     <!--ITERATION & REFLECTION: After researching more about the Flow Time Tracker method, the tool was iterated to include more study data types to meet the needs of the method.  -->
+    <section id="flowtime" class="page-container">
+      <h3> Flow Time Tracker </h3>
+      <div id="flowtime-box">
+        <div id="todayDate"></div>
+        <div id="currentTime"></div>
+
+        <table class="flowTimeTable" id="vocabTable">
+          <tr class="flowTimeHeading">
+            <th width="20%">Study Type</th>
+            <th width="20%">Total Study Time</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Break Time</th>
+            <th>Interrupted</th>
+          </tr>
+          <tr class="flowTimeTask vocabFlowTime">
+            <td rowspan="10"><strong>Vocab</strong></td>
+            <td rowspan="10" id="vocabTimer"></td>
+
+          </tr>
+        </table>
+
+        <table class="flowTimeTable" id="textbookTable">
+          <!--filler headings for the purpose of alignment-->
+          <tr class="flowTimeFiller">
+            <th width="20%">Study Type</th>
+            <th width="20%">Total Study Time</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Break Time</th>
+            <th>Interrupted</th>
+          </tr>
+          <tr class="flowTimeTask textbookFlowTime">
+            <td rowspan="10"><strong>Textbook Study</strong></td>
+            <td rowspan="10" id="textbookTimer"></td>
+          </tr>
+        </table>
+
+        <table class="flowTimeTable" id="readingTable">
+          <tr class="flowTimeFiller">
+            <th width="20%">Study Type</th>
+            <th width="20%">Total Study Time</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Break Time</th>
+            <th>Interrupted</th>
+          </tr>
+          <tr class="flowTimeTask readingFlowTime">
+            <td rowspan="10"><strong>Reading</strong></td>
+            <td rowspan="10" id="readingTimer"></td>
+          </tr>
+        </table>
+
+        <!--Additional future functionality would be to have the JS of this input form functioning for users to be able to add new study types, which would be added to both the flow time tracker and stopwatch-->
+        <form id="flowTimeForm">
+          <input placeholder="New Study Type" type="text" name="studyType" id="studyTypeInput">
+          <button type="button" id="flowTimeButton">+</button>
+        </form>
+
+        <br>
+        <!--REFLECTION: A feature that I had intended to implement was a visualisation of the flow time data using the Pixela API. However, upon experimentation and reflection, I found that data visualisation using an external API was a little too complex and beyond the scope of my web development abilities thus far - which is why a filler image has been used here. However, this would be a potential future functionality that I would like to implement after developing my understanding of API's. -->
+        <h4>Study Log</h4>
+        <div id="pixela-container">
+          <img src="9bd615847012db4832ff870c4b8db81b" alt="pixel data visualisation" id="pixela-img" width="95%">
+        </div>
+
+      </div>
+    </section>
+    <!--REFLECTION: Upon reflection, there is room for improvement within the flow time tracker tool to get more accurate trackings.-->
+
+    <!-----------------RESOURCE LIST------------------->
+    <section id="resourcelist" class="page-container">
+      <h3> Resource List </h3>
+      <div id="resource-page-container">
+        <nav class="resource-nav">
+          <ul class="nav-links">
+            <li><a href="#read" class="active" id="readLink">Read</a></li>
+            <li><a href="#watch" id="watchLink">Watch</a></li>
+            <li><a href="#listen" id="listenLink">Listen</a></li>
+          </ul>
+        </nav>
+
+        <div id="resourceModal" class="modal-box">
+          <div class="resource-modal-content">
+            <!-- Resource Item Input-->
+            <form id="resourceForm">
+              <h4>New Resource</h4>
+              <input placeholder="Resource Name" type="text" name="resource-name" id="resourceNameInput" required="">
+              <input placeholder="Resource Link" type="url" name="resource-link" id="resourceLinkInput" required="">
+              <textarea placeholder="Description or Notes" name="resource-description" form="resourceForm" id="resourceDescriptionInput" rows="3" required=""></textarea>
+
+              <button type="submit" id="submitResourceBtn">Add</button>
+            </form>
+          </div>
+        </div>
+
+        <div id="read" class="sub-page-container">
+          <div id="button-row">
+            <button type="button" id="addReadResourceBtn">+ New Resource</button>
+            <button type="button" class="openAllLinksBtn" id="readLinksBtn" onclick="openReadLinks()">Open All Read Resources</button>
+          </div>
+          <div class="resourceCardContainer" id="readPage">
+
+          </div>
+        </div>
+
+        <div id="watch" class="sub-page-container">
+          <div id="button-row">
+            <button type="button" id="addWatchResourceBtn">+ New Resource</button>
+            <button type="button" class="openAllLinksBtn" id="watchLinksBtn" onclick="openWatchLinks()">Open All Watch Resources</button>
+          </div>
+
+          <div class="resourceCardContainer" id="watchPage"></div>
+        </div>
+
+        <div id="listen" class="sub-page-container">
+          <div id="button-row">
+            <button type="button" id="addListenResourceBtn">+ New Resource</button>
+            <button type="button" class="openAllLinksBtn" id="listenLinksBtn" onclick="openListenLinks()">Open All Listen Resources</button>
+          </div>
+
+          <div class="resourceCardContainer" id="listenPage"></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+  <script src="1a606c1073155c9f135f542a1c44c524"></script>
+</body>
+
+</html>

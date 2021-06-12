@@ -1,0 +1,271 @@
+///TASK MANAGEMENT TOOLS - Tasklist & Kanban Board (AND BACKUP NON-MODULE NAV)
+//Variables for HTML elements using DOM selection:
+//nav----
+hamburgerMenu = document.getElementById("hamburgerMenu");
+verticalNav = document.getElementById("vertical-nav");
+//tasklist----
+const $aba770e9ce7dbb561d9a46041b248abf$var$form = document.getElementById("taskform");
+const $aba770e9ce7dbb561d9a46041b248abf$var$button = document.querySelector("#taskform > button");
+var $aba770e9ce7dbb561d9a46041b248abf$var$taskInput = document.getElementById("taskInput");
+var $aba770e9ce7dbb561d9a46041b248abf$var$dueDateInput = document.getElementById("dueDateInput");
+var $aba770e9ce7dbb561d9a46041b248abf$var$completionTimeInput = document.getElementById("completionTimeInput");
+var $aba770e9ce7dbb561d9a46041b248abf$var$estimatedTimeInput = document.getElementById("estimatedTimeInput");
+var $aba770e9ce7dbb561d9a46041b248abf$var$priorityInput = document.getElementById("priorityInput");
+var $aba770e9ce7dbb561d9a46041b248abf$var$tasklist = document.getElementById("tasklistTable");
+//kanban----
+var $aba770e9ce7dbb561d9a46041b248abf$var$boardContainer = document.getElementById("board-container");
+var $aba770e9ce7dbb561d9a46041b248abf$var$toDoColumn = document.getElementById("toDoColumn");
+var $aba770e9ce7dbb561d9a46041b248abf$var$boardNameInput = document.getElementById("boardNameInput");
+const $aba770e9ce7dbb561d9a46041b248abf$var$kanbanCard = document.querySelector("#kanbanCard");
+const $aba770e9ce7dbb561d9a46041b248abf$var$boardColumns = document.querySelectorAll(".boardColumn");
+var $aba770e9ce7dbb561d9a46041b248abf$var$kanbanPriority = document.getElementsByClassName("kanbanPriority");
+var $aba770e9ce7dbb561d9a46041b248abf$var$boardBarDecoration = document.querySelectorAll(".boardBarDecoration");
+const $aba770e9ce7dbb561d9a46041b248abf$var$kanbanForm = document.getElementById("kanbanForm");
+///NAVIGATION ---------------------------------------------------
+//-----Uncomment this section if running through Live Server (not through Node server/npm run start)----//
+class $aba770e9ce7dbb561d9a46041b248abf$var$Navigation {
+    constructor(links, pages){
+        this.links = links;
+        this.pages = pages;
+        this.currentPage = null;
+    }
+    getLinks() {
+        console.log(this.links);
+    }
+    setPage(pageId) {
+        this.currentPage = pageId;
+        //console.log(this.currentPage);
+        //change the page within the html
+        this.links.forEach((link)=>{
+            link.classList.remove("active");
+            if (this.getHash(link) === pageId) link.classList.add("active");
+        });
+        this.pages.forEach((page)=>{
+            page.style.display = "none";
+        });
+        document.getElementById(pageId).style.display = "block";
+    }
+    getHash(link) {
+        return link.href.split("#")[1];
+    }
+}
+//---------------------------------
+//----Comment out this line if running through VSCode Live Server (not through Node server/npm run start)----//
+//import Navigation from './components/navigation';
+const $aba770e9ce7dbb561d9a46041b248abf$var$links = document.querySelectorAll(".main-nav > ul > li > a");
+const $aba770e9ce7dbb561d9a46041b248abf$var$pages = document.querySelectorAll(".page-container");
+var $aba770e9ce7dbb561d9a46041b248abf$var$nav = new $aba770e9ce7dbb561d9a46041b248abf$var$Navigation($aba770e9ce7dbb561d9a46041b248abf$var$links, $aba770e9ce7dbb561d9a46041b248abf$var$pages);
+$aba770e9ce7dbb561d9a46041b248abf$var$nav.getLinks();
+$aba770e9ce7dbb561d9a46041b248abf$var$nav.links.forEach(function(link) {
+    link.addEventListener("click", function() {
+        //console.log(nav.getHash(link));
+        let pageId = $aba770e9ce7dbb561d9a46041b248abf$var$nav.getHash(link);
+        $aba770e9ce7dbb561d9a46041b248abf$var$nav.setPage(pageId);
+    });
+});
+//NAV collapse(open & close nav)-------
+function $aba770e9ce7dbb561d9a46041b248abf$var$openNav() {
+    document.getElementById("vertical-nav").style.width = "11.25rem";
+    document.getElementById("main").style.marginLeft = "11.25rem";
+    verticalNav.classList.add("open");
+    hamburgerMenu.querySelector("i.fa").classList.remove("fa-bars");
+    hamburgerMenu.querySelector("i.fa").classList.add("fa-times");
+}
+function $aba770e9ce7dbb561d9a46041b248abf$var$closeNav() {
+    document.getElementById("vertical-nav").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+    verticalNav.classList.remove("open");
+    hamburgerMenu.querySelector("i.fa").classList.remove("fa-times");
+    hamburgerMenu.querySelector("i.fa").classList.add("fa-bars");
+}
+hamburgerMenu.addEventListener("click", ()=>{
+    var isOpen = verticalNav.classList.contains("open");
+    if (isOpen) $aba770e9ce7dbb561d9a46041b248abf$var$closeNav();
+    else $aba770e9ce7dbb561d9a46041b248abf$var$openNav();
+});
+//RESOURCE LIST SUB NAV-----------
+var $aba770e9ce7dbb561d9a46041b248abf$var$resourceNav = new $aba770e9ce7dbb561d9a46041b248abf$var$Navigation(subLinks, subPages);
+$aba770e9ce7dbb561d9a46041b248abf$var$resourceNav.links.forEach((link)=>{
+    link.addEventListener("click", function() {
+        let pageId = $aba770e9ce7dbb561d9a46041b248abf$var$resourceNav.getHash(link);
+        $aba770e9ce7dbb561d9a46041b248abf$var$resourceNav.setPage(pageId);
+    });
+});
+///TASK LIST -------------------------------------------------------
+//event listener for when button clicked
+//OR button.addEventListener("click", function(event) {
+$aba770e9ce7dbb561d9a46041b248abf$var$form.addEventListener("submit", function(event) {
+    //make sure none of the browser function will happen automatically
+    event.preventDefault();
+    //takes the user input
+    let task = $aba770e9ce7dbb561d9a46041b248abf$var$taskInput.value;
+    let dueDate = $aba770e9ce7dbb561d9a46041b248abf$var$dueDateInput.value;
+    let completionTime = $aba770e9ce7dbb561d9a46041b248abf$var$completionTimeInput.value;
+    let estimatedTime = $aba770e9ce7dbb561d9a46041b248abf$var$estimatedTimeInput.value;
+    let priorityRating = $aba770e9ce7dbb561d9a46041b248abf$var$priorityInput.options[$aba770e9ce7dbb561d9a46041b248abf$var$priorityInput.selectedIndex].value;
+    //add it as a task using addTask function
+    $aba770e9ce7dbb561d9a46041b248abf$var$addTask(task, dueDate, completionTime, estimatedTime, priorityRating, false);
+    //console out for debugging
+    console.log($aba770e9ce7dbb561d9a46041b248abf$var$taskListArray);
+});
+//empty array to store tasks
+var $aba770e9ce7dbb561d9a46041b248abf$var$taskListArray = [];
+//The function creates the object & pushes it to an array
+function $aba770e9ce7dbb561d9a46041b248abf$var$addTask(taskDescription, dueDate, completionTime, estimatedTime, priorityRating, completionStatus) {
+    let d = new Date();
+    let dateCreated = d.getFullYear();
+    let task = {
+        taskDescription: taskDescription,
+        dueDate: dueDate,
+        dateCreated: dateCreated,
+        completionTime: completionTime,
+        estimatedTime: estimatedTime,
+        priorityRating: priorityRating,
+        completionStatus: completionStatus
+    };
+    //add the task to the array
+    $aba770e9ce7dbb561d9a46041b248abf$var$taskListArray.push(task);
+    ///return task;
+    $aba770e9ce7dbb561d9a46041b248abf$var$renderTask(task);
+    //calling function for kanban board
+    $aba770e9ce7dbb561d9a46041b248abf$var$renderKanban(task);
+}
+//ADD the task to the screen via HTML
+//pulling the task as a complete object rather than individual parts
+function $aba770e9ce7dbb561d9a46041b248abf$var$renderTask(task) {
+    //create html elements
+    let item = document.createElement("tr");
+    item.setAttribute("class", "newTaskItem");
+    let cell1 = document.createElement("td");
+    cell1.innerHTML += "<label for=taskCheckbox><input type=checkbox name=taskCheckbox class=taskCheckboxInput><strong>" + task.taskDescription + "</strong>" + "</label>";
+    let cell2 = document.createElement("td");
+    cell2.innerHTML += "<p>" + task.dueDate + "</p>";
+    let cell3 = document.createElement("td");
+    cell3.innerHTML += "<p>" + task.completionTime + "</p>";
+    let cell4 = document.createElement("td");
+    cell4.innerHTML += "<p>" + task.estimatedTime + " " + "min" + "</p>";
+    let cell5 = document.createElement("td");
+    cell5.innerHTML += "<p>" + task.priorityRating + "</p>";
+    let cell6 = document.createElement("td");
+    item.append(cell1, cell2, cell3, cell4, cell5, cell6);
+    tasklistTable.appendChild(item);
+    //Extra task DOM elements - further user interaction e.g delete
+    let delButton = document.createElement("button");
+    delButton.setAttribute("class", "taskDelBtn");
+    //create a textNode
+    delButton.innerHTML = "<i class='fas fa-trash'></i>";
+    //get the text appended to button element
+    //append whole button to the item created
+    cell6.appendChild(delButton);
+    //Event Listeners for DOM elements
+    delButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        item.remove();
+    });
+    //Clear the input form
+    $aba770e9ce7dbb561d9a46041b248abf$var$form.reset();
+    //Setting the style colours depending on priority rating
+    var newTaskItem = document.getElementsByClassName("newTaskItem");
+    var taskCheckboxInput = document.getElementsByClassName("taskCheckboxInput");
+    //ITERATION: changed the colours to correlate more appropriately with the priority (pink = high, blue = low, yellow = medium)
+    if (task.priorityRating === "Low") {
+        newTaskItem[newTaskItem.length - 1].style.backgroundColor = "#E2EDF7";
+        taskCheckboxInput[taskCheckboxInput.length - 1].style.border = "solid #8CB7F2";
+    //taskCheckboxInput.addEventListener("click", function(event){
+    //askCheckboxInput.style.backgroundColor = "solid #F7D7E7";
+    } else if (task.priorityRating === "Medium") {
+        newTaskItem[newTaskItem.length - 1].style.backgroundColor = "#FCF4DD";
+        taskCheckboxInput[taskCheckboxInput.length - 1].style.border = "solid #F7D382";
+    } else if (task.priorityRating === "High") {
+        newTaskItem[newTaskItem.length - 1].style.backgroundColor = "#F7D7E7";
+        taskCheckboxInput[taskCheckboxInput.length - 1].style.border = "solid #EAA0D3";
+    }
+}
+///KANBAN BOARD ---------------------------------------------------------
+//render kanban board
+function $aba770e9ce7dbb561d9a46041b248abf$var$renderKanbanBoard(boardName) {
+    let board = document.createElement("div");
+    board.setAttribute("class", "boardColumn");
+    board.innerHTML += "<div class='boardBarDecoration'></div>";
+    board.innerHTML += "<h4 contenteditable='true'>" + boardName + "</h4>";
+    //append the board to the container
+    $aba770e9ce7dbb561d9a46041b248abf$var$boardContainer.appendChild(board);
+    board.addEventListener("dragover", function(event) {
+        event.preventDefault();
+    });
+    board.addEventListener("dragenter", function(event) {
+        event.preventDefault();
+    });
+    board.addEventListener("drop", function(event) {
+        this.append($aba770e9ce7dbb561d9a46041b248abf$var$draggedItem);
+    });
+}
+//render kanban card
+function $aba770e9ce7dbb561d9a46041b248abf$var$renderKanban(task) {
+    let card = document.createElement("div");
+    card.setAttribute("id", "kanbanCard");
+    card.setAttribute("draggable", "true");
+    card.innerHTML = "<div class = kanbanPriority><p>" + task.priorityRating + "</p>" + "<div>";
+    card.innerHTML += "<h4>" + task.taskDescription + "</h4>";
+    card.innerHTML += "<p><i class='far fa-calendar-check'></i> <strong>" + task.dueDate + "<strong>" + " " + "(" + task.completionTime + ")" + "</p>";
+    card.innerHTML += "<p>" + task.estimatedTime + " " + "min" + "</p>";
+    //append the card to the To-Do Board
+    $aba770e9ce7dbb561d9a46041b248abf$var$toDoColumn.appendChild(card);
+    if (task.priorityRating === "Low") $aba770e9ce7dbb561d9a46041b248abf$var$kanbanPriority[$aba770e9ce7dbb561d9a46041b248abf$var$kanbanPriority.length - 1].style.backgroundColor = "#5598F5";
+    else if (task.priorityRating === "Medium") $aba770e9ce7dbb561d9a46041b248abf$var$kanbanPriority[$aba770e9ce7dbb561d9a46041b248abf$var$kanbanPriority.length - 1].style.backgroundColor = "#F8BF53";
+    else if (task.priorityRating === "High") $aba770e9ce7dbb561d9a46041b248abf$var$kanbanPriority[$aba770e9ce7dbb561d9a46041b248abf$var$kanbanPriority.length - 1].style.backgroundColor = "#EB68A9";
+    console.log($aba770e9ce7dbb561d9a46041b248abf$var$kanbanPriority);
+}
+//add a new board when user submits the form
+$aba770e9ce7dbb561d9a46041b248abf$var$kanbanForm.addEventListener("submit", function(event) {
+    let boardName = $aba770e9ce7dbb561d9a46041b248abf$var$boardNameInput.value;
+    event.preventDefault();
+    $aba770e9ce7dbb561d9a46041b248abf$var$renderKanbanBoard(boardName);
+});
+//DRAG AND DROP functionality
+let $aba770e9ce7dbb561d9a46041b248abf$var$draggedItem = null;
+/*for (var i of cardItems){
+  i.addEventListener('dragstart', dragStart);
+}
+
+function dragStart() {
+  console.log('dragstart');
+  draggedItem  = i;
+  setTimeout(function(){
+    i.style.display = 'none';
+  }, 0)
+}*/ /*for (let i = 0; i < cardArray.length; i++){
+const cardItem = cardArray[i];*/ /*for (let i = 0; i < cardArray.length; i++){
+const cardItem = cardArray[i];*/ document.body.addEventListener("dragstart", function(event) {
+    if (event.target.id == "kanbanCard") {
+        $aba770e9ce7dbb561d9a46041b248abf$var$draggedItem = event.target;
+        console.log("dragstart");
+        setTimeout(function() {
+            event.target.style.display = "none";
+        }, 0);
+    }
+});
+document.body.addEventListener("dragend", function(event) {
+    if (event.target.id == "kanbanCard") {
+        console.log("dragend");
+        setTimeout(function() {
+            event.target.style.display = "block";
+            $aba770e9ce7dbb561d9a46041b248abf$var$draggedItem = null;
+        }, 0);
+    }
+});
+for(let j = 0; j < $aba770e9ce7dbb561d9a46041b248abf$var$boardColumns.length; j++){
+    const boardColumn = $aba770e9ce7dbb561d9a46041b248abf$var$boardColumns[j];
+    boardColumn.addEventListener("dragover", function(event) {
+        event.preventDefault();
+    //console.log("dragover");
+    });
+    boardColumn.addEventListener("dragenter", function(event) {
+        event.preventDefault();
+    //console.log("dragenter");
+    });
+    boardColumn.addEventListener("drop", function(event) {
+        //console.log("drop");
+        this.append($aba770e9ce7dbb561d9a46041b248abf$var$draggedItem);
+    });
+}

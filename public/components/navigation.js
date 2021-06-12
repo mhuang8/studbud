@@ -31,4 +31,5 @@ class Navigation{
 
   }
 }
-//export default Navigation;
+//comment out this line if running with Live Server VSCode
+export default Navigation;
